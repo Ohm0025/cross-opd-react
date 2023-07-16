@@ -1,0 +1,58 @@
+.register-header {
+  display: flex;
+  font-weight: 600;
+  color: #5f8d4e;
+  padding: 50px 0 10px 0;
+  font-size: 25px;
+  justify-content: center;
+}
+
+.register-container {
+  display: flex;
+  justify-content: space-around;
+  margin: auto;
+  min-width: 400px;
+  max-width: 800px;
+}
+.register-side {
+  display: flex;
+  padding-top: 30px;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.register-side div {
+  min-width: 300px;
+}
+
+.register-footer {
+  height: 100px;
+  background-color: #285430;
+  position: fixed;
+  bottom: 0;
+}
+
+.register-action {
+  display: flex;
+  margin: 10px auto;
+  min-width: 400px;
+  max-width: 800px;
+  justify-content: space-around;
+  gap: 280px;
+}
+
+.register-button {
+  padding: 10px;
+  width: 150px;
+  height: 65px;
+  border-radius: 10px;
+  color: white;
+  background-color: #285430;
+  font-weight: 600;
+  margin-top: 30px;
+}
+
+.register-button:hover {
+  background-color: #5f8d4e;
+}
