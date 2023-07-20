@@ -53,7 +53,7 @@ function RegisterPage() {
               className={`form-label ${typeaccount ? "" : "is-invalid"}`}>
               {typeaccount === "DOCTOR" ? "MD number" : "Citizen ID"}
             </label>
-            <input type="text" className="form-control" id="numberId" />
+            <input type="number" className="form-control" id="numberId" />
           </div>
           <div>
             <label htmlFor="firstname" className="form-label">

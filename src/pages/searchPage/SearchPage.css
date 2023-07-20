@@ -1,0 +1,85 @@
+.time-box {
+  text-align: center;
+  align-items: center;
+}
+
+.time-box span {
+  display: block;
+}
+.time-box span:nth-child(1) {
+  display: block;
+  font-size: 70px;
+}
+.time-box span:nth-child(1) small {
+  font-size: 20px;
+}
+
+.search-button {
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  color: white;
+  background-color: #285430;
+  font-weight: 600;
+}
+.search-button:hover {
+  background-color: #5f8d4e;
+}
+
+.input-group {
+  max-width: 500px;
+  margin: 15px auto;
+  padding: 3px;
+  border: none;
+}
+
+.input-group input {
+  font-size: 1.5rem;
+  text-align: center;
+  padding: 0;
+  margin: 0;
+  font-weight: 400;
+}
+
+.table-container {
+  padding-top: 35px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.unfinish-table {
+  max-width: 400px;
+  min-width: 300px;
+}
+.unfinish-table tr {
+  font-weight: 300;
+  background-color: #fafafa;
+  color: #c9c9c9;
+  border: solid 1px white;
+  padding: 15px 0;
+  display: flex;
+  justify-content: space-around;
+}
+.unfinish-table tr:not(table tr:nth-child(1), table tr:last-child):hover {
+  background-color: #c9c9c9;
+  color: #fafafa;
+  cursor: pointer;
+}
+
+.unfinish-table tr:nth-child(1) {
+  background-color: #285430;
+  color: white;
+  font-weight: 300;
+  text-align: center;
+  border-radius: 10px 10px 0 0;
+}
+
+.unfinish-table tr:last-child {
+  background-color: #285430;
+  color: white;
+  font-weight: 300;
+  text-align: center;
+  display: flex;
+  justify-content: space-around;
+  border-radius: 0 0 10px 10px;
+}

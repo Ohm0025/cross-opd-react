@@ -1,0 +1,26 @@
+.search-header {
+  height: 68px;
+  background-color: #285430;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 100;
+}
+.header-user {
+  position: fixed;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+.user-tag {
+  color: white;
+  font-size: 15px;
+  display: flex;
+  text-align: end;
+  flex-direction: column;
+}
+
+.outlet-container {
+  margin-top: 68px;
+}
