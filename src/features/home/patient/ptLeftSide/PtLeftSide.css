@@ -1,0 +1,34 @@
+.pt-left-side {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.pt-left-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+  background-color: #c9c9c9;
+  width: 200px;
+  height: 100px;
+  margin: 10px;
+}
+
+.pt-left-item:hover {
+  cursor: pointer;
+  background-color: #5f8d4e;
+  color: white;
+}
+
+.pt-left-item p {
+  margin: auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .pt-left-side {
+    flex-direction: row;
+  }
+}

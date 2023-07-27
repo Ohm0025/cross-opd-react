@@ -1,0 +1,30 @@
+.typeaccount-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.typeaccount-box div {
+  min-width: 300px;
+  min-height: 100px;
+}
+
+.typeaccount-box input {
+  box-shadow: 4px 4px 5px gray;
+}
+
+.typeaccount-box select {
+  box-shadow: 4px 4px 5px gray;
+}
+
+.blind {
+  visibility: hidden;
+}
+@media only screen and (max-width: 768px) {
+  .typeaccount-box {
+    flex-direction: column;
+  }
+  .blind {
+    display: none;
+  }
+}

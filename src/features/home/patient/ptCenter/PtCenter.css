@@ -1,0 +1,15 @@
+.pt-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  flex-grow: 2;
+  max-width: 800px;
+  min-height: 60vh;
+}
+
+@media only screen and (max-width: 768px) {
+  .pt-center {
+    max-width: 500px;
+    margin: auto;
+  }
+}

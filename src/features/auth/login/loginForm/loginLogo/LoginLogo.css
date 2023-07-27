@@ -1,0 +1,14 @@
+.login-logo {
+  text-align: center;
+}
+
+.login-logo img {
+  width: 120px;
+  height: 120px;
+}
+
+@media only screen and (max-width: 768px) {
+  .login-logo {
+    display: none;
+  }
+}

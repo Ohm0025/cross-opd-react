@@ -1,80 +1,15 @@
-.text-primary-color {
-  color: #285430;
-}
-
-.login-container {
+.login-page {
   display: flex;
   justify-content: space-around;
-  padding: 30px;
+  align-items: center;
   margin: auto;
   min-width: 400px;
   max-width: 1230px;
-}
-.login-type-side {
-  display: flex;
-  flex-direction: column;
-}
-.login-input-side {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  flex-grow: 2;
-  align-items: center;
-  max-width: 500px;
-  min-width: 200px;
-}
-.login-footer {
-  height: 100px;
-  background-color: #285430;
-  position: fixed;
-  bottom: 0;
-}
-.icon {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-.login-type-side .icon {
-  margin: 10px 0;
+  padding: 30px;
 }
 
-.login-type-side .icon :hover {
-  border: solid 2px #5f8d4e;
-  cursor: pointer;
-}
-.login-type-side .icon small {
-  border: none !important;
-  z-index: -12;
-}
-
-.login-input-side .icon img {
-  width: 120px;
-  height: 120px;
-}
-.login-input {
-  min-width: 200px;
-  margin: 10px;
-  max-width: 440px;
-  box-shadow: 4px 4px 5px gray;
-  font-size: 22px;
-  text-align: center;
-}
-
-.login-button {
-  display: flex;
-  align-items: center;
-  gap: 60px;
-  margin: 10px;
-}
-.login-button button {
-  padding: 10px;
-  width: 150px;
-  height: 65px;
-  border-radius: 10px;
-  color: white;
-  background-color: #285430;
-  font-weight: 600;
-}
-.eye-icon {
-  position: relative;
+@media only screen and (max-width: 768px) {
+  .login-page {
+    flex-direction: column;
+  }
 }

@@ -1,4 +1,8 @@
-.register-header {
+.registerpage {
+  overflow: scroll;
+}
+
+/* .register-header {
   display: flex;
   font-weight: 600;
   color: #5f8d4e;
@@ -54,4 +58,4 @@
 
 .register-button:hover {
   background-color: #5f8d4e;
-}
+} */

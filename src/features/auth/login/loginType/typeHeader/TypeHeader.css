@@ -1,0 +1,9 @@
+.login-type-header {
+  padding: 10px;
+  margin: 10px;
+  text-align: center;
+}
+
+.login-type-header b {
+  color: #285430;
+}

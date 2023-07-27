@@ -1,0 +1,32 @@
+.login-type-side {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.login-type-side img {
+  width: 200px;
+  height: 200px;
+}
+
+.login-type-side img:hover {
+  cursor: pointer;
+  border: 1px solid #5f8d4e;
+}
+
+.login-type-side.activated img {
+  border: 1px solid #285430;
+}
+
+@media only screen and (max-width: 768px) {
+  .login-type-side {
+    margin: 20px;
+    gap: 0;
+  }
+  .login-type-side img {
+    width: 100px;
+    height: 100px;
+  }
+}

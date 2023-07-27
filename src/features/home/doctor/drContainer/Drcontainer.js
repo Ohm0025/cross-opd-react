@@ -1,8 +1,12 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import "./SearchPage.css";
+import "./DrContainer.css";
+import { useCaseDoctor } from "../../../../contexts/CaseDoctorContext";
+import { useState } from "react";
 
-function SearchPage() {
+function DrContainer() {
+  const { getCard, unfinishList } = useCaseDoctor();
+  const [patientId, setPatientId] = useState("");
   return (
     <div>
       <div className="search-container">
@@ -17,8 +21,10 @@ function SearchPage() {
             type="number"
             className="form-control"
             placeholder="insert patient id"
+            value={patientId}
+            onChange={(e) => setPatientId(e.target.value)}
           />
-          <button className="search-button">
+          <button className="search-button" onClick={() => getCard(+patientId)}>
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </button>
         </div>
@@ -26,10 +32,9 @@ function SearchPage() {
       <div className="table-container">
         <table className="unfinish-table">
           <tr>Unfinish Case</tr>
-          <tr>123456</tr>
-          <tr>123456</tr>
-          <tr>123456</tr>
-          <tr>123456</tr>
+          {unfinishList.map((item, index) => {
+            return <tr key={index}>{item.id}</tr>;
+          })}
           <tr>
             <span>page</span>
             <span>{"< 1 >"}</span>
@@ -51,4 +56,4 @@ function SearchPage() {
   );
 }
 
-export default SearchPage;
+export default DrContainer;
