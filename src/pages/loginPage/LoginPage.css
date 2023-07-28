@@ -3,9 +3,9 @@
   justify-content: space-around;
   align-items: center;
   margin: auto;
-  min-width: 400px;
-  max-width: 1230px;
-  padding: 30px;
+  min-width: 25rem;
+  max-width: 76.875rem;
+  padding: 1.875rem;
 }
 
 @media only screen and (max-width: 768px) {

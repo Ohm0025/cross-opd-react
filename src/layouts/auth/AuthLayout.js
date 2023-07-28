@@ -5,7 +5,7 @@ function AuthLayout() {
   return (
     <>
       <Outlet />
-      <div className="auth-footer container-fluid"></div>;
+      <div className="auth-footer container-fluid"></div>
     </>
   );
 }

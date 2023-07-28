@@ -7,21 +7,21 @@
 .databox-side {
   display: flex;
   flex-direction: column;
-  margin: 10px;
-  padding: 10px;
+  margin: 0.625rem;
+  padding: 0.625rem;
 }
 
 .databox-side div {
-  min-width: 300px;
-  min-height: 100px;
+  min-width: 18.75rem;
+  min-height: 6.25rem;
 }
 
 .databox-side input {
-  box-shadow: 4px 4px 5px gray;
+  box-shadow: 0.25rem 0.25rem 0.313rem gray;
 }
 
 .databox-side select {
-  box-shadow: 4px 4px 5px gray;
+  box-shadow: 0.25rem 0.25rem 0.313rem gray;
 }
 
 @media only screen and (max-width: 768px) {

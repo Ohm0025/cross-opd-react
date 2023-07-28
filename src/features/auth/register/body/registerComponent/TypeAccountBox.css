@@ -5,16 +5,16 @@
 }
 
 .typeaccount-box div {
-  min-width: 300px;
-  min-height: 100px;
+  min-width: 18.75rem;
+  min-height: 6.25rem;
 }
 
 .typeaccount-box input {
-  box-shadow: 4px 4px 5px gray;
+  box-shadow: 0.25rem 0.25rem 0.313rem gray;
 }
 
 .typeaccount-box select {
-  box-shadow: 4px 4px 5px gray;
+  box-shadow: 0.25rem 0.25rem 0.313rem gray;
 }
 
 .blind {

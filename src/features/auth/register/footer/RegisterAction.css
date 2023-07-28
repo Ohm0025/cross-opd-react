@@ -1,19 +1,19 @@
 .register-action {
   display: flex;
-  margin: 10px auto;
-  min-width: 400px;
-  max-width: 800px;
+  margin: 0.625rem auto;
+  min-width: 25rem;
+  max-width: 50rem;
   justify-content: space-around;
 }
 
 .registeraction-button {
-  width: 150px;
-  height: 65px;
-  border-radius: 10px;
+  width: 9.375rem;
+  height: 4.063rem;
+  border-radius: 0.625rem;
   color: white;
   background-color: #285430;
   font-weight: 600;
-  margin-top: 30px;
+  margin-top: 1.875rem;
 }
 
 .registeraction-button:hover {
@@ -25,9 +25,9 @@
     flex-direction: column-reverse;
 
     align-items: center;
-    padding-bottom: 80px;
+    padding-bottom: 5rem;
   }
   .registeraction-button {
-    min-width: 300px;
+    min-width: 18.75rem;
   }
 }
