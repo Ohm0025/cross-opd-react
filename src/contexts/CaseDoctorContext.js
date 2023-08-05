@@ -1,33 +1,57 @@
 import { createContext, useEffect, useState, useContext } from "react";
 import { useLoading } from "../contexts/LoadingContext";
-import * as opdService from "../api/opdApi";
+import * as examService from "../api/examApi";
 
 const CaseDoctorContext = createContext();
 
 function CaseDoctorContextProvider({ children }) {
-  const [finishList, setFinishList] = useState([]);
-  const [unfinishList, setUnfinishList] = useState([]);
   const { startLoading, stopLoading } = useLoading();
-
-  useEffect(() => {
-    const fectchCase = async () => await opdService.getOpdCard();
-  });
-
-  const getCard = async (patientId) => {
+  const [finishCaseList, setFinishCaseList] = useState([]);
+  const [unfinishCaseList, setUnfinishCaseList] = useState([]);
+  const handleSearchCard = async (patientId) => {
     try {
       startLoading();
-      const res = await opdService.getOpdCard(patientId);
-      setUnfinishList((prev) => {
-        return [...prev, res.data.userPt];
-      });
+      const newCase = await examService.activateCard(patientId);
     } catch (err) {
       console.log(err);
     } finally {
       stopLoading();
     }
   };
+
+  useEffect(() => {
+    const fetchFinish = async () => {
+      try {
+        startLoading();
+        const res = await examService.fetchFinishCase();
+        setFinishCaseList(res.data?.finishCase);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        stopLoading();
+      }
+    };
+    fetchFinish();
+  }, [startLoading, stopLoading]);
+
+  useEffect(() => {
+    const fetchUnfinish = async () => {
+      try {
+        startLoading();
+        const res = await examService.fetchUnfinishCase();
+        setUnfinishCaseList(res.data?.unfinishCase);
+      } catch (err) {
+        console.log(err);
+      } finally {
+        stopLoading();
+      }
+    };
+    fetchUnfinish();
+  }, [startLoading, stopLoading]);
   return (
-    <CaseDoctorContext.Provider value={{ finishList, unfinishList, getCard }}>
+    <CaseDoctorContext.Provider
+      value={{ handleSearchCard, finishCaseList, unfinishCaseList }}
+    >
       {children}
     </CaseDoctorContext.Provider>
   );

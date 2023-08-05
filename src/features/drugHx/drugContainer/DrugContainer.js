@@ -1,5 +1,6 @@
 import DrugCenter from "../drugCenter/DrugCenter";
 import DrugRight from "../drugRight/DrugRight";
+import "./DrugContainer.css";
 
 function DrugContainer() {
   return (

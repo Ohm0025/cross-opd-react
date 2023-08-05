@@ -5,7 +5,7 @@ import "./DrHomePage.css";
 function DrHomePage() {
   return (
     <CaseDoctorContextProvider>
-      <DrContainer />;
+      <DrContainer />
     </CaseDoctorContextProvider>
   );
 }

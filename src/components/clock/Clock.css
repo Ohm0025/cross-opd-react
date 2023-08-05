@@ -1,0 +1,17 @@
+.clock-box {
+  display: flex;
+  flex-direction: column;
+  position: fixed;
+  left: 5.5rem;
+}
+.clock-item {
+  font-size: 0.98rem;
+  text-align: center;
+  color: white;
+}
+
+@media only screen and (max-width: 768px) {
+  .clock-item {
+    font-size: 0.75rem;
+  }
+}

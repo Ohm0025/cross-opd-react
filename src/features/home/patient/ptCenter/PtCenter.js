@@ -2,7 +2,8 @@ import { useHomePt } from "../../../../contexts/HomePtContext";
 import "./PtCenter.css";
 
 function PtCenter() {
-  const { input, openCard, handleChangeInput } = useHomePt();
+  const { input, openCard, handleChangeInput, isEdit, sendEditCard, waitCase } =
+    useHomePt();
 
   return (
     <div className="pt-center">
@@ -35,17 +36,24 @@ function PtCenter() {
 
       <div>
         <label htmlFor="location">{"สถานที่ที่เข้าตรวจ"}</label>
-        <input
+        <textarea
           value={input.location}
-          type="text"
-          id="location"
-          name="location"
+          // defaultValue={isEdit ? waitCase.location : ""}
           className="form-control"
+          id="locatioin"
+          name="location"
           onChange={handleChangeInput}
+          cols="50"
+          rows="1"
         />
       </div>
 
-      <button onClick={openCard}>{"เริ่มเปิดบัตร"}</button>
+      <button
+        className="pt-center-button"
+        onClick={isEdit ? sendEditCard : openCard}
+      >
+        {isEdit ? "แก้ไขบัตร" : "เริ่มเปิดบัตร"}
+      </button>
     </div>
   );
 }

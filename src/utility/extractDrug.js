@@ -11,6 +11,7 @@ export const extractList = (date, list) => {
         element.drugSize,
         element.drugUse,
         element.diagnosis,
+        element.drugAmount,
       ]);
     }
   });
@@ -19,11 +20,12 @@ export const extractList = (date, list) => {
 
 export const extractDiag = (list) => {
   const diag_arr = [];
-  list.forEach((item) => {
-    if (!diag_arr.includes(item.diagnosis)) {
-      diag_arr.push(item.diagnosis);
+  list.forEach((item, index) => {
+    if (!diag_arr.includes(item[3])) {
+      diag_arr.push(item[3]);
     }
   });
+
   return diag_arr;
 };
 

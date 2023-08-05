@@ -1,26 +1,45 @@
 .home-header {
-  height: 68px;
+  height: 4.25rem;
   background-color: #285430;
   position: fixed;
   top: 0;
   width: 100%;
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .header-user {
   position: fixed;
-  right: 10px;
+  right: 0.625rem;
   display: flex;
   align-items: center;
-  gap: 15px;
+  gap: 0.938rem;
 }
 .user-tag {
   color: white;
-  font-size: 15px;
+  font-size: 0.938rem;
   display: flex;
   text-align: end;
   flex-direction: column;
 }
 
 .home-container {
-  margin-top: 100px;
+  margin-top: 4.25rem;
+}
+.home-dropdown {
+  position: fixed;
+  top: 4rem;
+  right: 10.25rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .home-header {
+    height: 3.25rem;
+  }
+  .home-dropdown {
+    top: 3.1rem;
+  }
+  .user-tag {
+    font-size: 0.75rem;
+  }
 }

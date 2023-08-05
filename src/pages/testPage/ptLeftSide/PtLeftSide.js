@@ -1,5 +1,5 @@
 import "./PtLeftSide.css";
-import { useHomePt } from "../../../../contexts/HomePtContext";
+import { useHomePt } from "../../../contexts/HomePtContext";
 
 function PtLeftSide() {
   const { navigate } = useHomePt();

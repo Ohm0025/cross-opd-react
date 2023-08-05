@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { useLoading } from "./LoadingContext";
 import { useAuth } from "./AuthContext";
 import { PATIENT } from "../config/constant";
@@ -10,14 +16,58 @@ const HomePtContext = createContext();
 function HomePtContextProvider({ children }) {
   const { startLoading, stopLoading } = useLoading();
   const { typeaccount, user } = useAuth();
+  const [isWait, setIsWait] = useState(false);
+  const [isEdit, setIsEdit] = useState(false);
+  const [waitCase, setWaitCase] = useState({});
+
   const [input, setInput] = useState({
-    chiefComplaintFirst: "",
-    presentIllnessFirst: "",
-    location: "",
+    chiefComplaintFirst: waitCase.chiefComplaintFirst || "",
+    presentIllnessFirst: waitCase.presentIllnessFirst || "",
+    location: waitCase.location || "",
     patientId: user.id,
   });
-  const [isWait, setIsWait] = useState(false);
-  const [waitCase, setWaitCase] = useState({});
+
+  const fetchInput = useCallback(async () => {
+    try {
+      setInput({
+        chiefComplaintFirst: waitCase.chiefComplaintFirst || "",
+        presentIllnessFirst: waitCase.presentIllnessFirst || "",
+        location: waitCase.location || "",
+        patientId: user.id,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  }, [
+    waitCase.chiefComplaintFirst,
+    waitCase.presentIllnessFirst,
+    waitCase.location,
+    user.id,
+  ]);
+
+  useEffect(() => {
+    const fetchCard = async () => {
+      try {
+        startLoading();
+        const res = await opdService.fetchOpdCard(user.id);
+
+        if (res.data?.waitCase) {
+          setWaitCase((prev) => {
+            return { ...prev, ...res.data?.waitCase };
+          });
+          await fetchInput();
+          setIsWait(true);
+        }
+        return;
+      } catch (err) {
+        console.log(err);
+      } finally {
+        stopLoading();
+      }
+    };
+    fetchCard();
+  }, [startLoading, stopLoading, user.id, fetchInput]);
+
   const navigate = useNavigate();
 
   const openCard = async () => {
@@ -32,12 +82,12 @@ function HomePtContextProvider({ children }) {
       } else {
         throw new Error("your account not allow");
       }
-      setInput({
-        chiefComplaintFirst: "",
-        presentIllnessFirst: "",
-        location: "",
-        patientId: user.id,
-      });
+      // setInput({
+      //   chiefComplaintFirst: "",
+      //   presentIllnessFirst: "",
+      //   location: "",
+      //   patientId: user.id,
+      // });
     } catch (err) {
       console.log(err);
     } finally {
@@ -49,40 +99,65 @@ function HomePtContextProvider({ children }) {
     setInput({ ...input, [e.target.name]: e.target.value });
   };
 
-  //   const cancelCard = async () => {};
+  const editOpdCard = () => {
+    setIsWait(false);
+    setTimeout(() => {
+      setIsEdit(true);
+    }, 10);
+  };
 
-  //   const updateCard = async () => {};
+  const sendEditCard = async () => {
+    try {
+      startLoading();
+      const updateInput = {
+        chiefComplaintFirst: input.chiefComplaintFirst,
+        presentIllnessFirst: input.presentIllnessFirst,
+        location: input.location,
+      };
 
-  useEffect(() => {
-    const fetchCard = async () => {
-      try {
-        startLoading();
-        const res = await opdService.fetchOpdCard(user.id);
+      await opdService.editOpdCard(updateInput, waitCase.id);
+      setIsWait(true);
+      setTimeout(() => {
+        setIsEdit(true);
+      }, 10);
+    } catch (err) {
+      console.log(err);
+    } finally {
+      stopLoading();
+    }
+  };
 
-        if (res.data?.waitCase) {
-          setWaitCase((prev) => {
-            return { ...prev, ...res.data?.waitCase };
-          });
-          setIsWait(true);
-        }
-        return;
-      } catch (err) {
-        console.log(err);
-      } finally {
-        stopLoading();
-      }
-    };
-    fetchCard();
-  }, [startLoading, stopLoading, user.id]);
+  const cancelCard = async (id) => {
+    await opdService.deleteOpdCard(id);
+    setIsWait(false);
+    setInput({
+      chiefComplaintFirst: "",
+      presentIllnessFirst: "",
+      location: "",
+      patientId: user.id,
+    });
+  };
 
   return (
     <HomePtContext.Provider
-      value={{ waitCase, isWait, input, openCard, handleChangeInput, navigate }}
+      value={{
+        waitCase,
+        isWait,
+        input,
+        openCard,
+        handleChangeInput,
+        isEdit,
+        editOpdCard,
+        cancelCard,
+        sendEditCard,
+        navigate,
+      }}
     >
       {children}
     </HomePtContext.Provider>
   );
 }
+
 export const useHomePt = () => {
   return useContext(HomePtContext);
 };

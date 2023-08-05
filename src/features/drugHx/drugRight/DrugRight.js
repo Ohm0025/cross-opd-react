@@ -1,12 +1,13 @@
 import DrugFilter from "./drugFilter/DrugFilter";
 import DrugAllergy from "./drugAllergy/DrugAllergy";
+import "./DrugRight.css";
 
 function DrugRight() {
   return (
-    <div>
+    <nav className="nav flex-column drug-right">
       <DrugFilter />
       <DrugAllergy />
-    </div>
+    </nav>
   );
 }
 

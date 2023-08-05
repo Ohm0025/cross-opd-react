@@ -1,0 +1,55 @@
+.pt-waitpage {
+  margin-top: 3.5rem;
+}
+.pt-show-item {
+  background-color: #c9c9c9;
+  border-radius: 0.4rem;
+  color: white;
+  text-align: center;
+  padding: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
+  flex-direction: column;
+  min-width: 50vw;
+  min-height: 25vh;
+  font-size: 2rem;
+  margin-bottom: 1vh;
+}
+.pt-show-item:nth-child(2) {
+  min-height: 10vh;
+  padding: 1rem;
+}
+
+.pt-waitaction {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.pt-waitaction button {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 0.6rem;
+  border: none;
+  border-radius: 0.4rem;
+  background-color: #285430;
+  color: white;
+  margin-top: 1.2rem;
+}
+
+.pt-waitaction button:hover {
+  background-color: #5f8d4e;
+}
+
+@media only screen and (max-width: 768px) {
+  .pt-waitaction {
+    flex-direction: column;
+    gap: 0;
+  }
+  .pt-show-item {
+    font-size: 1.5rem;
+  }
+}

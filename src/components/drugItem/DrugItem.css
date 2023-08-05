@@ -1,0 +1,29 @@
+.drug-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.drug-item-header {
+  background-color: #5f8d4e;
+  width: 10vw;
+  min-width: 150px;
+  color: white;
+  margin: 1rem;
+  text-align: center;
+  padding: 1rem;
+}
+
+.drug-body {
+  font-size: 1.5rem;
+}
+
+.drug-list {
+  margin-left: 5vw;
+  background-color: #f4fff3;
+}
+
+@media only screen and (max-width: 768px) {
+  .drug-body {
+    font-size: 1rem;
+  }
+}

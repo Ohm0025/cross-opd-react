@@ -16,23 +16,34 @@ input::-webkit-inner-spin-button {
   margin: 0;
 }
 
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
 /* width */
 ::-webkit-scrollbar {
-  width: 0.25rem;
+  width: 0.2rem;
+  height: 0.2rem;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-  background: #ffffff;
+  background-color: #ffffff;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-  background: #dadada;
+  background-color: #dadada;
   border-radius: 0.625rem;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
   background: #c9c9c9;
+}
+
+@media only screen and (max-width: 768px) {
+  body {
+    font-size: 1rem;
+  }
 }

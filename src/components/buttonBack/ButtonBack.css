@@ -1,0 +1,24 @@
+.button-back {
+  border: none;
+  border-radius: 50%;
+  width: 3.125rem;
+  height: 3.125rem;
+
+  background-color: #5f8d4e;
+  color: white;
+
+  position: fixed;
+  left: 0.625rem;
+}
+
+.button-back:hover {
+  background-color: #c9c9c9;
+}
+
+@media only screen and (max-width: 768px) {
+  .button-back {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
+}

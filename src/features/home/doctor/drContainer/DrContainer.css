@@ -83,3 +83,32 @@
   justify-content: space-around;
   border-radius: 0 0 10px 10px;
 }
+
+.unfinish-table .amount-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  position: relative;
+}
+
+.unfinish-table .amount-box button {
+  background: none;
+  border: none;
+  color: white;
+}
+
+.unfinish-table .amount-box .amount-rangeBox {
+  background-color: #f4fff3;
+  border: none;
+  position: absolute;
+  top: 2rem;
+}
+
+.page-left-arrow {
+  cursor: pointer;
+}
+
+.page-right-arrow {
+  cursor: pointer;
+}

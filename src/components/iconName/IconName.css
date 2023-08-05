@@ -7,9 +7,14 @@
   display: inline-block;
   text-align: center;
   font-size: 1.125rem;
-  background-color: gray;
+  background-color: #5f8d4e;
   color: white;
   position: relative;
+}
+
+.header-icon:hover {
+  background-color: #c9c9c9;
+  cursor: pointer;
 }
 
 .header-icon b {
@@ -17,4 +22,12 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
+}
+
+@media only screen and (max-width: 768px) {
+  .header-icon {
+    width: 2.5rem;
+    height: 2.5rem;
+    font-size: 1rem;
+  }
 }
