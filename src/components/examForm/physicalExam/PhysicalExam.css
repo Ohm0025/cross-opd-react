@@ -1,0 +1,19 @@
+.pe-button {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 0.625rem;
+}
+
+.pe-button button {
+  background-color: #285430;
+  color: white;
+  padding: 0.625rem;
+  width: 9.375rem;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  border: none;
+}
+
+.pe-button button:hover {
+  background-color: #5f8d4e;
+}

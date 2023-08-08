@@ -1,0 +1,25 @@
+.tx-modal > span {
+  background-color: #5f8d4e;
+}
+
+.tx-modal-type {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tx-modal-type > div > button {
+  width: 12.5rem;
+  background-color: #f4fff3;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.tx-modal-type li {
+  width: 12.5rem;
+  text-align: center;
+}
+.tx-modal-type li:hover {
+  background-color: #5f8d4e;
+  color: white;
+  cursor: pointer;
+}

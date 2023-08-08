@@ -1,0 +1,20 @@
+.image-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.image-box > button {
+  border: none;
+  color: white;
+  background-color: #285430;
+  font-weight: 600;
+}
+
+.image-box > button:hover {
+  background-color: #5f8d4e;
+}
+
+.image-list-item {
+  display: flex;
+  justify-content: space-around;
+}

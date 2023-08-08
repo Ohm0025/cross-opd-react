@@ -2,6 +2,7 @@ import { useLoading } from "./contexts/LoadingContext";
 import Router from "./route/Router";
 import Spinner from "./components/Spinner";
 import { useAuth } from "./contexts/AuthContext";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const { loading } = useLoading();
@@ -12,6 +13,11 @@ function App() {
     <>
       {loading && <Spinner />}
       <Router />
+      <ToastContainer
+        autoClose="2000"
+        theme="colored"
+        position="bottom-center"
+      />
     </>
   );
 }

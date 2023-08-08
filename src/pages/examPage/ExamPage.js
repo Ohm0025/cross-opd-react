@@ -2,11 +2,15 @@ import IconName from "../../components/iconName/IconName";
 import "./ExamPage.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
-import ChiefComplaint from "./chiefComplaint/ChiefComplaint";
-import PresentIllness from "./presentIllness/PresentIllness";
-import PhysicalExam from "./physicalExam/PhysicalExam";
-import Laboratory from "./laboratory/Laboratory";
-import Imaging from "./imaging/Imaging";
+import ChiefComplaint from "../../components/examForm/chiefComplaint/ChiefComplaint";
+import PresentIllness from "../../components/examForm/presentIllness/PresentIllness";
+import PhysicalExam from "../../components/examForm/physicalExam/PhysicalExam";
+import Laboratory from "../../components/examForm/laboratory/Laboratory";
+import Imaging from "../../components/examForm/imaging/Imaging";
+import Diagnosis from "../../components/examForm/diagnosis/Diagnosis";
+import Treatment from "../../components/examForm/treatment/Treatment";
+import Advice from "../../components/examForm/advice/Advice";
+import FollowUp from "../../components/examForm/followUp/FollowUp";
 
 function ExamPage() {
   return (
@@ -36,14 +40,10 @@ function ExamPage() {
           <Imaging />
         </div>
         <div className="exam-right">
-          <div className="diag-box">
-            <button>+Add Image</button>
-            <table>
-              <tr>
-                <span>Dyspepsia</span>
-              </tr>
-            </table>
-          </div>
+          <Diagnosis />
+          <Treatment />
+          <Advice />
+          <FollowUp />
         </div>
       </div>
     </div>

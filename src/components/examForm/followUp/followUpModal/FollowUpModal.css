@@ -1,0 +1,56 @@
+.fu-modal {
+  font-size: 0.95rem;
+}
+
+.fu-modal input {
+  font-size: 0.94rem;
+  text-align: center;
+}
+
+.fu-modal-top {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.calendar-section {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.date-section {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+}
+
+.location-hospital {
+  min-width: 18rem;
+}
+.location-department {
+  margin-top: 0.5rem;
+}
+.location-detail {
+  margin-top: 0.5rem;
+}
+.location-button {
+  display: flex;
+  margin-top: 1rem;
+  justify-content: center;
+}
+.location-button button {
+  width: 100%;
+}
+.fu-modal-buttom {
+  margin-top: 1rem;
+}
+@media only screen and (max-width: 995px) {
+  .calendar-section {
+    align-items: center;
+  }
+
+  .fu-modal-top {
+    flex-direction: column;
+  }
+}

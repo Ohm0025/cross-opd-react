@@ -11,3 +11,8 @@ export const formatCreatedAt = (dateInput) => {
     formatDateTime(date.getFullYear()).slice(1);
   return date_member;
 };
+
+export const diffDate = (dateStart, dateEnd) => {
+  const diffTime = dateEnd.getTime() - dateStart.getTime();
+  return diffTime / (1000 * 3600 * 24);
+};

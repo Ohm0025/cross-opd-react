@@ -1,0 +1,14 @@
+.fu-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.625rem;
+}
+.fu-list {
+  margin-top: 0.625rem;
+}
+.fu-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

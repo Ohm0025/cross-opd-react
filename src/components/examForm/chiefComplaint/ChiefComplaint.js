@@ -3,7 +3,7 @@ import "./ChiefComplaint.css";
 function ChiefComplaint() {
   return (
     <div className="cc-box">
-      <label for="cc_text" className="form-label">
+      <label htmlFor="cc_text" className="form-label">
         Chief Complaint
       </label>
       <textarea

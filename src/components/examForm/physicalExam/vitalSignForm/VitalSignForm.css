@@ -1,0 +1,11 @@
+.vitalsign {
+  display: flex;
+  font-size: 1rem;
+  justify-content: space-between;
+}
+
+[class^="vitalsign"] input {
+  border: none;
+  border-bottom: solid black 0.0025rem;
+  text-align: center;
+}

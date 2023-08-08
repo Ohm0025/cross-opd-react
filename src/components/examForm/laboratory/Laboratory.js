@@ -5,17 +5,17 @@ function Laboratory() {
     <div className="lab-box">
       <label className="form-label">Laboratory</label>
       <button>+Add Lab</button>
-      <table>
-        <tr>
-          <span>CBC</span>
-        </tr>
-        <tr>
+      <div className="lab-list">
+        <div className="lab-list-item">
+          <div>CBC</div>
           <small>status : pending</small>
-          <button>Add</button>
-          <button>Cancel</button>
-          <button>View</button>
-        </tr>
-      </table>
+          <div>
+            <button>Add</button>
+            <button>Cancel</button>
+            <button>View</button>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

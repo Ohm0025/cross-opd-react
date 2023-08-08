@@ -1,0 +1,20 @@
+.lab-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.lab-box > button {
+  background-color: #285430;
+  border: none;
+  color: white;
+  font-weight: 600;
+}
+
+.lab-box > button:hover {
+  background-color: #5f8d4e;
+}
+
+.lab-list-item {
+  display: flex;
+  justify-content: space-around;
+}

@@ -1,0 +1,5 @@
+.advice-text {
+  overflow-y: scroll;
+  max-height: 18.75rem;
+  cursor: auto;
+}

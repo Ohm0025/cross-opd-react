@@ -1,6 +1,10 @@
 import "./PhysicalExam.css";
+import Modal from "../../../components/Modal";
+import { useState } from "react";
+import PhysicalExamModal from "./PhysicalExamModal";
 
 function PhysicalExam() {
+  const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="pe-box">
       <label for="pe_text" className="form-label">
@@ -13,9 +17,16 @@ function PhysicalExam() {
         rows="3"
       ></textarea>
       <div className="pe-button">
-        <button>template</button>
+        <button onClick={() => setIsOpen(true)}>template</button>
         <button>image</button>
       </div>
+      <Modal
+        title="Physical Examination"
+        isOpen={isOpen}
+        onClose={() => setIsOpen(false)}
+      >
+        <PhysicalExamModal />
+      </Modal>
     </div>
   );
 }

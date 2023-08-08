@@ -1,0 +1,32 @@
+.diag-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.diag-box input {
+  font-size: 1rem;
+  text-align: center;
+}
+.diag-input {
+  margin: 0;
+}
+
+.diag-list {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem;
+}
+
+.diag-list-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.diag-list-item button {
+  background: none;
+  border: none;
+}
+
+.diag-list-item button:hover {
+  color: red;
+}

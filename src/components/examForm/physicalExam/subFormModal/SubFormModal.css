@@ -1,0 +1,26 @@
+.modalForm {
+  margin-top: 1rem;
+  padding-left: 2rem;
+  display: flex;
+  justify-content: flex-start;
+  gap: 2rem;
+  align-items: center;
+  font-size: 1rem;
+}
+
+.modalForm .input-group {
+  width: 30vw;
+
+  margin: 0;
+}
+
+.modalForm .input-group input {
+  font-size: 1rem;
+  height: 3vh;
+}
+
+.modalForm .input-group button {
+  height: 3vh;
+  padding: 0;
+  width: 2rem;
+}
