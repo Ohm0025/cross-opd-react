@@ -2,7 +2,7 @@ import { useHomePt } from "../../../../contexts/HomePtContext";
 import "./PtCenter.css";
 
 function PtCenter() {
-  const { input, openCard, handleChangeInput, isEdit, sendEditCard, waitCase } =
+  const { input, openCard, handleChangeInput, isEdit, sendEditCard } =
     useHomePt();
 
   return (

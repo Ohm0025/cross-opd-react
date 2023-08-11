@@ -1,0 +1,21 @@
+.search-container {
+  width: 28rem;
+  margin: auto;
+  margin-top: 5rem;
+}
+
+.search-container input {
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.search-button {
+  width: 3.8rem;
+  color: white;
+  background-color: #285430;
+  font-weight: 600;
+}
+
+.search-button:hover {
+  background-color: #5f8d4e;
+}

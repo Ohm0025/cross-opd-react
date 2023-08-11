@@ -6,3 +6,5 @@ export const activateCard = (patientId) =>
 export const fetchFinishCase = () => axios.get("/exam/finish");
 
 export const fetchUnfinishCase = () => axios.get("/exam/unfinish");
+
+export const fetchCurrentPt = (caseId) => axios.post("/exam/" + caseId);
