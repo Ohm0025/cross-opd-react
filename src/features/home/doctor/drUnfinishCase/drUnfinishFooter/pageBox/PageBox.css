@@ -1,0 +1,16 @@
+.page-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.page-box button {
+  border: none;
+  background: none;
+  color: white;
+}
+
+.page-box button:hover {
+  cursor: pointer;
+}

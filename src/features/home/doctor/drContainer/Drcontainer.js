@@ -3,6 +3,7 @@ import { useCaseDoctor } from "../../../../contexts/CaseDoctorContext";
 
 import DrSearchBox from "../drSearchBox/DrSearchBox";
 import DrUnfinishCase from "../drUnfinishCase/DrUnfinishCase";
+import DrFinishCase from "../drFinishCase/DrFinishCase";
 
 function DrContainer() {
   const { handleSearchCard, finishCaseList, unfinishCaseList } =
@@ -13,7 +14,8 @@ function DrContainer() {
       <DrSearchBox handleSearchCard={handleSearchCard} />
       <div className="table-container">
         <DrUnfinishCase unfinishCaseList={unfinishCaseList} />
-        <table className="unfinish-table">
+        <DrFinishCase finishCaseList={finishCaseList} />
+        {/* <table className="unfinish-table">
           <tr>Finish Case</tr>
           {finishCaseList.map((item, index) => (
             <tr key={index + "finishCase"}>{item.patientId}</tr>
@@ -22,7 +24,7 @@ function DrContainer() {
             <span>page</span>
             <span></span>
           </tr>
-        </table>
+        </table> */}
       </div>
     </div>
   );

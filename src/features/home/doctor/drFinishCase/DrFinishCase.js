@@ -1,34 +1,34 @@
-import "./DrUnfinishCase.css";
+import "./DrFinishCase.css";
 
-import { paginateIndex } from "../../../../utility/pagination";
 import { useState } from "react";
-import DrUnfinishHeader from "./drUnfinishHeader/DrUnfinishHeader";
-import DrUnFinishItem from "./drUnfinishItem/DrUnfinishItem";
-import DrUnfinishFooter from "./drUnfinishFooter/DrUnfinishFooter";
+import { paginateIndex } from "../../../../utility/pagination";
 
-function DrUnfinishCase({ unfinishCaseList }) {
+import DrFinishHeader from "./drFinishHeader/DrFinishHeader";
+import DrFinishFooter from "./drFinishFooter/DrFinishFooter";
+import DrUnFinishItem from "../drUnfinishCase/drUnfinishItem/DrUnfinishItem";
+
+function DrFinishCase({ finishCaseList }) {
   const [amount, setAmount] = useState(5);
+  const [page, setPage] = useState(finishCaseList.length ? 1 : 0);
   const [displayAmount, setDisplayAmount] = useState(5);
-  const [page, setPage] = useState(unfinishCaseList.length ? 1 : 0);
 
-  const finalUnfinishCaseList = unfinishCaseList
+  const finalFinishCaseList = finishCaseList
     .sort((a, b) => a.updatedAt < b.updatedAt)
     .slice(
       paginateIndex(amount, page).startIndex,
       paginateIndex(amount, page).endIndex
     );
-
   return (
-    <div className="unfinish-table">
-      <DrUnfinishHeader
+    <div className="finish-table">
+      <DrFinishHeader
         page={page}
-        length={unfinishCaseList.length}
+        length={finishCaseList.length}
         amount={amount}
       />
-      {unfinishCaseList.length ? (
-        finalUnfinishCaseList.map((item, index) => (
+      {finishCaseList.length ? (
+        finalFinishCaseList.map((item, index) => (
           <DrUnFinishItem
-            keyItem={index + "unfinishCase"}
+            keyItem={index + "finishCase"}
             itemId={item.patientId}
             itemTime={item.updatedAt}
           />
@@ -38,19 +38,18 @@ function DrUnfinishCase({ unfinishCaseList }) {
           ยังไม่มีเคสที่ตรวจไปแล้ว
         </b>
       )}
-
-      <DrUnfinishFooter
+      <DrFinishFooter
         displayAmount={displayAmount}
         changeDisplayAmount={(e) => setDisplayAmount(e.target.value)}
         changeAmount={(value) => setAmount(value)}
         nextPage={() => setPage((prev) => prev + 1)}
         prevPage={() => setPage((prev) => prev && prev - 1)}
         page={page}
-        length={unfinishCaseList.length}
+        length={finishCaseList.length}
         amount={amount}
       />
     </div>
   );
 }
 
-export default DrUnfinishCase;
+export default DrFinishCase;

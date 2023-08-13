@@ -1,0 +1,9 @@
+.finish-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem;
+  background-color: green;
+  color: white;
+  gap: 1rem;
+}

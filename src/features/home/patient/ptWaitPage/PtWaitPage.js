@@ -19,7 +19,7 @@ function PtWaitPage() {
   };
 
   useEffect(() => {
-    setSocket(io("http://localhost:8008"));
+    setSocket(io("http://localhost:8080"));
   }, []);
 
   useEffect(() => {

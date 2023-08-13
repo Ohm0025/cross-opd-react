@@ -1,0 +1,20 @@
+.amount-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  position: relative;
+  gap: 1rem;
+}
+
+.amount-box button {
+  background: none;
+  border: none;
+  color: white;
+}
+.amount-box .amount-rangeBox {
+  background-color: #f4fff3;
+  border: none;
+  position: absolute;
+  top: 2rem;
+}

@@ -1,0 +1,8 @@
+.finish-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: green;
+  color: white;
+  padding: 1rem;
+}
