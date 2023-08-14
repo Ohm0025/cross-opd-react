@@ -17,16 +17,7 @@
   padding: 0.5rem;
 }
 
-.diag-list-item {
-  display: flex;
-  justify-content: space-between;
-}
-
-.diag-list-item button {
-  background: none;
-  border: none;
-}
-
-.diag-list-item button:hover {
-  color: red;
+.diag-list-empty {
+  text-align: center;
+  margin: 0.5rem 0 0.5rem 0;
 }

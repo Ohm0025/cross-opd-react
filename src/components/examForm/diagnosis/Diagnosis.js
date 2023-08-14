@@ -1,6 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./Diagnosis.css";
-import { faPlus, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import DiagItem from "./diagItem/DiagItem";
 
 function Diagnosis() {
   return (
@@ -19,25 +20,25 @@ function Diagnosis() {
           <FontAwesomeIcon icon={faPlus} />
         </button>
       </div>
-      <div className="diag-list">
-        <ul className="list-group">
-          <li className="list-group-item diag-list-item">
-            <span>diag01</span>
-            <button className="">
-              <FontAwesomeIcon icon={faXmark} />
-            </button>
-          </li>
-          <li className="list-group-item">diag2</li>
-        </ul>
-      </div>
-      <textarea
-        placeholder="for more detail or diff diag"
-        className="form-control"
-        name=""
-        id=""
-        cols="30"
-        rows="2"
-      ></textarea>
+      {false ? (
+        <>
+          <div className="diag-list">
+            <ul className="list-group">
+              <DiagItem />
+            </ul>
+          </div>
+          <textarea
+            placeholder="for more detail or diff diag"
+            className="form-control"
+            name=""
+            id=""
+            cols="30"
+            rows="2"
+          ></textarea>
+        </>
+      ) : (
+        <span className="diag-list-empty">ยังไม่มีรายการวินิจฉัย</span>
+      )}
     </div>
   );
 }

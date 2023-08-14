@@ -12,6 +12,9 @@ function ChiefComplaint() {
       return currentCase?.ChiefComplaint?.title;
     });
   }, [currentCase?.ChiefComplaint?.title]);
+
+  console.log(currentCase);
+
   return (
     <div className="cc-box">
       <label htmlFor="cc_text" className="form-label">
@@ -19,6 +22,7 @@ function ChiefComplaint() {
       </label>
       <textarea
         value={title}
+        placeholder="add patient's chief complaint"
         onChange={(e) => setTitle(e.target.value)}
         className="form-control"
         name="cc_text"

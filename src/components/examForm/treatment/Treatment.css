@@ -2,12 +2,6 @@
   margin-top: 0.625rem;
 }
 
-.tx-list-item {
-  justify-content: space-between;
-  display: flex;
-  align-items: center;
-}
-
 .tx-btn-group {
   width: 9.375rem;
 }
@@ -20,4 +14,10 @@
 
 .tx-btn {
   width: 9.375rem;
+}
+
+.tx-list-empty {
+  text-align: center;
+  display: block;
+  margin: 0.5rem 0 0.5rem 0;
 }

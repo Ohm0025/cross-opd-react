@@ -2,6 +2,7 @@ import "./FollowUp.css";
 import Modal from "../../Modal";
 import FollowUpModal from "./followUpModal/FollowUpModal";
 import { useState } from "react";
+import FollowUpItem from "./followUpItem/FollowUpItem";
 
 function FollowUp() {
   const [isOpen, setIsOpen] = useState(false);
@@ -17,15 +18,13 @@ function FollowUp() {
         </button>
       </div>
       <div className="fu-list">
-        <ul className="list-group">
-          <li className="list-group-item fu-list-item">
-            <span>15/08/66</span>
-            <div className="btn-group">
-              <button className="btn btn-secondary">edit</button>
-              <button className="btn btn-secondary">delete</button>
-            </div>
-          </li>
-        </ul>
+        {false ? (
+          <ul className="list-group">
+            <FollowUpItem />
+          </ul>
+        ) : (
+          <span className="fu-list-empty">ไม่มีการนัดตรวจติดตามอาการ</span>
+        )}
       </div>
       <Modal title="FollowUp" isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <FollowUpModal />

@@ -6,12 +6,12 @@ function VitalSignForm() {
       <label htmlFor="">vital sign : </label>
       <div className="vitalsign-bp">
         <label htmlFor="bp">BP:</label>
-        <input type="text" name="bp" id="bp" size={4} maxlength="7" />
+        <input type="text" name="bp" id="bp" size={4} maxLength="7" />
         <label htmlFor="bp">mmHg</label>
       </div>
       <div className="vitalsign-hr">
         <label htmlFor="hr">PR:</label>
-        <input type="text" name="hr" id="hr" size={2} maxlength="3" />
+        <input type="text" name="hr" id="hr" size={2} maxLength="3" />
         <label htmlFor="hr">bpm</label>
       </div>
       <div className="vitalsign-rr">

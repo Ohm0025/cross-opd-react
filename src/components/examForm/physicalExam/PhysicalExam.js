@@ -7,10 +7,11 @@ function PhysicalExam() {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="pe-box">
-      <label for="pe_text" className="form-label">
+      <label htmlFor="pe_text" className="form-label">
         Physical Examination
       </label>
       <textarea
+        placeholder="add patient's physical exam by manual or template or take picture"
         className="form-control"
         name="pe_text"
         id="pe_text"

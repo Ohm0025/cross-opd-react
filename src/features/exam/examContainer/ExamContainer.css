@@ -1,0 +1,7 @@
+.exam-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  padding: 1rem;
+  gap: 1rem;
+}

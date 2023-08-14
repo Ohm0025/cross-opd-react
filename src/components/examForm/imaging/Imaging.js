@@ -1,21 +1,19 @@
 import "./Imaging.css";
 
+import ImgItem from "./imgItem/ImgItem";
+
 function Imaging() {
   return (
     <div className="image-box">
       <label className="form-label">Imaging</label>
       <button>+Add Image</button>
-      <div className="image-list">
-        <div className="image-list-item">
-          <div>film acute abdomen</div>
-          <small>status : pending</small>
-          <div>
-            <button>Add</button>
-            <button>Cancel</button>
-            <button>View</button>
-          </div>
+      {false ? (
+        <div className="image-list">
+          <ImgItem />
         </div>
-      </div>
+      ) : (
+        <span className="image-list-empty">ไม่มีรายการสั่ง Imaging</span>
+      )}
     </div>
   );
 }

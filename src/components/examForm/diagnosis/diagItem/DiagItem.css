@@ -1,0 +1,13 @@
+.diag-list-item {
+  display: flex;
+  justify-content: space-between;
+}
+
+.diag-list-item button {
+  background: none;
+  border: none;
+}
+
+.diag-list-item button:hover {
+  color: red;
+}

@@ -13,11 +13,12 @@ function PresentIllness() {
   // },[])
   return (
     <div className="pi-box">
-      <label for="pi_text" className="form-label">
+      <label htmlFor="pi_text" className="form-label">
         Present Illness
       </label>
       <textarea
         value={title}
+        placeholder="add patient's presentillness"
         onChange={(e) => setTitle(e.target.value)}
         className="form-control"
         name="pi_text"

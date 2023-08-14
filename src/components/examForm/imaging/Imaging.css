@@ -14,7 +14,7 @@
   background-color: #5f8d4e;
 }
 
-.image-list-item {
-  display: flex;
-  justify-content: space-around;
+.image-list-empty {
+  text-align: center;
+  margin: 0.5rem 0 0.5rem 0;
 }

@@ -10,7 +10,7 @@ function DrSearchBox({ handleSearchCard }) {
   const [socket, setSocket] = useState(null);
 
   useEffect(() => {
-    setSocket(io("http://localhost:8080"));
+    setSocket(io("http://localhost:8008"));
   }, []);
 
   return (

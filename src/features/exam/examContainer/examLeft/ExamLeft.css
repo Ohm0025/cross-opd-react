@@ -1,0 +1,17 @@
+.exam-left {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-basis: 0px;
+}
+
+.exam-left div[class$="-box"] {
+  margin-top: 0.625rem;
+}
+
+.exam-left div[class$="-box"] textarea {
+  overflow-y: scroll;
+  max-height: 18.75rem;
+  cursor: auto;
+  /* resize: none; Remove this if you want the user to resize the textarea */
+}

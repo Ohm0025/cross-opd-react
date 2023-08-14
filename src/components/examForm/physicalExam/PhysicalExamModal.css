@@ -1,0 +1,49 @@
+.subPE-input {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+.subPE-input-right textarea {
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+.sub-PE-right-textarea {
+  display: inline-block;
+  position: relative;
+}
+
+.sub-PE-right-textarea button {
+  position: absolute;
+  bottom: 0.625rem;
+  right: 0.625rem;
+}
+
+.sub-PE-right-textarea textarea {
+  display: block;
+}
+
+.sub-PE-right-textarea button {
+  border: none;
+  background: none;
+}
+
+.sub-PE-right-textarea button:hover {
+  color: #5f8d4e;
+}
+
+.button-addPeTemp {
+  display: block;
+  border: none;
+  color: white;
+  background-color: #285430;
+  padding: 0.4rem;
+  width: 8rem;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  margin: 1rem auto 0 auto;
+}
+
+.PE-template-conclude {
+  border: none;
+}

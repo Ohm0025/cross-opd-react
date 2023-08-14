@@ -15,16 +15,6 @@ function DrContainer() {
       <div className="table-container">
         <DrUnfinishCase unfinishCaseList={unfinishCaseList} />
         <DrFinishCase finishCaseList={finishCaseList} />
-        {/* <table className="unfinish-table">
-          <tr>Finish Case</tr>
-          {finishCaseList.map((item, index) => (
-            <tr key={index + "finishCase"}>{item.patientId}</tr>
-          ))}
-          <tr>
-            <span>page</span>
-            <span></span>
-          </tr>
-        </table> */}
       </div>
     </div>
   );

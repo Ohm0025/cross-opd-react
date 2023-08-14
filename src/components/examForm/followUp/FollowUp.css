@@ -7,8 +7,9 @@
 .fu-list {
   margin-top: 0.625rem;
 }
-.fu-list-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+
+.fu-list-empty {
+  text-align: center;
+  display: block;
+  margin: 0.5rem 0 0.5rem 0;
 }
