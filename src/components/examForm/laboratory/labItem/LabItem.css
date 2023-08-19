@@ -1,4 +1,30 @@
 .lab-list-item {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.7rem;
+}
+
+.lab-list-item-name {
+  width: 4.5rem;
+}
+
+/* .lab-list-item-status {
+} */
+
+.lab-list-item button {
+  border: none;
+  background: none;
+  background-color: #285430;
+  color: white;
+  width: 2rem;
+  padding: 0.4rem;
+  font-size: 1rem;
+}
+.lab-list-item button:hover {
+  background-color: #5f8d4e;
+  transition-duration: 300ms;
+}
+.lab-list-item button:focus {
+  background-color: #285430;
 }

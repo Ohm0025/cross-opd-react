@@ -38,7 +38,7 @@
   color: white;
   background-color: #285430;
   padding: 0.4rem;
-  width: 8rem;
+  width: 10rem;
   border-radius: 0.25rem;
   font-size: 1rem;
   margin: 1rem auto 0 auto;
@@ -46,4 +46,8 @@
 
 .PE-template-conclude {
   border: none;
+}
+
+.PE-template-action {
+  display: flex;
 }

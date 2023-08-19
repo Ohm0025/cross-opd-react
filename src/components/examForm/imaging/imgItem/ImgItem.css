@@ -1,4 +1,30 @@
-.image-list-item {
+.img-list-item {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.7rem;
+}
+
+.img-list-item-name {
+  width: 4.5rem;
+}
+
+/* .lab-list-item-status {
+} */
+
+.img-list-item button {
+  border: none;
+  background: none;
+  background-color: #285430;
+  color: white;
+  width: 2rem;
+  padding: 0.4rem;
+  font-size: 1rem;
+}
+.img-list-item button:hover {
+  background-color: #5f8d4e;
+  transition-duration: 300ms;
+}
+.img-list-item button:focus {
+  background-color: #285430;
 }

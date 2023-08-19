@@ -6,14 +6,21 @@ import PhysicalExam from "../../../../components/examForm/physicalExam/PhysicalE
 import Laboratory from "../../../../components/examForm/laboratory/Laboratory";
 import Imaging from "../../../../components/examForm/imaging/Imaging";
 
+import LabContextProvider from "../../../../contexts/LabContext";
+import ImagingContextProvider from "../../../../contexts/ImagingContext";
+
 function ExamLeft() {
   return (
     <div className="exam-left">
       <ChiefComplaint />
       <PresentIllness />
       <PhysicalExam />
-      <Laboratory />
-      <Imaging />
+      <LabContextProvider>
+        <Laboratory />
+      </LabContextProvider>
+      <ImagingContextProvider>
+        <Imaging />
+      </ImagingContextProvider>
     </div>
   );
 }

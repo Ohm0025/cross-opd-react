@@ -4,9 +4,13 @@ import SubFormModal from "./subFormModal/SubFormModal";
 import VitalSignForm from "./vitalSignForm/VitalSignForm";
 import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { convertToListString } from "../../../utility/selectPEitem";
+import {
+  convertToListItem,
+  convertToListString,
+  convertVitalSign,
+} from "../../../utility/selectPEitem";
 
-function PhysicalExamModal() {
+function PhysicalExamModal({ updateRecord }) {
   const [isRightOpen, setIsRightOpen] = useState(false);
   const [listPE, setListPE] = useState({
     HEENT: [],
@@ -19,6 +23,15 @@ function PhysicalExamModal() {
 
   const [whichIs, setWhichIs] = useState("");
 
+  const [vitalRecord, setVitalRecord] = useState({
+    BP: "",
+    PR: "",
+    RR: "",
+    Temp: "",
+  });
+
+  const [recordMore, setRecordMore] = useState("");
+
   const OpenIsRight = (e) => {
     setWhichIs((prev) => e.target.name);
     if (whichIs === e.target.name) {
@@ -27,12 +40,15 @@ function PhysicalExamModal() {
     } else {
       setIsRightOpen(true);
     }
+    setRecordMore("");
   };
 
   const addPEList = (newValue, typePE) => {
-    setListPE((prev) => {
-      return { ...prev, [typePE]: [...prev[typePE], newValue] };
-    });
+    if (!listPE[typePE].includes(newValue)) {
+      setListPE((prev) => {
+        return { ...prev, [typePE]: [...prev[typePE], newValue] };
+      });
+    }
   };
 
   const dropPEList = (typePE, removeValue) => {
@@ -46,7 +62,13 @@ function PhysicalExamModal() {
 
   return (
     <div className="subPE-container">
-      <VitalSignForm />
+      <VitalSignForm
+        changeVitalRecord={(e) =>
+          setVitalRecord((prev) => {
+            return { ...prev, [e.target.name]: e.target.value };
+          })
+        }
+      />
       <div className="subPE-input">
         <div className="subPE-input-left">
           <SubFormModal
@@ -107,8 +129,21 @@ function PhysicalExamModal() {
         <div className="subPE-input-right">
           {isRightOpen ? (
             <div className="sub-PE-right-textarea">
-              <textarea autoFocus name="" id="" cols="35" rows="5"></textarea>
-              <button>
+              <textarea
+                value={recordMore}
+                onChange={(e) => setRecordMore(e.target.value)}
+                autoFocus
+                name=""
+                id=""
+                cols="35"
+                rows="5"
+              ></textarea>
+              <button
+                onClick={() => {
+                  addPEList(recordMore, whichIs);
+                  setRecordMore("");
+                }}
+              >
                 <FontAwesomeIcon icon={faPlus} />
               </button>
             </div>
@@ -117,17 +152,37 @@ function PhysicalExamModal() {
           )}
         </div>
       </div>
-      {/* <textarea
-        value={convertToListString(listPE)}
-        name=""
-        id=""
-        rows="5"
-        className="form-control"
-      ></textarea> */}
+
       <div className="PE-template-conclude">
-        {convertToListString(listPE, dropPEList)}
+        {convertToListItem(listPE, dropPEList)}
       </div>
-      <button className="button-addPeTemp">Finish Record</button>
+      <div className="PE-template-action">
+        <button
+          className="button-addPeTemp"
+          onClick={() =>
+            updateRecord(
+              convertVitalSign(vitalRecord) + "\n" + convertToListString(listPE)
+            )
+          }
+        >
+          Finish Record
+        </button>
+        <button
+          className="button-addPeTemp"
+          onClick={() =>
+            setListPE({
+              HEENT: [],
+              Lung: [],
+              Heart: [],
+              Abdomen: [],
+              Extremities: [],
+              Neuro: [],
+            })
+          }
+        >
+          Clear Record
+        </button>
+      </div>
     </div>
   );
 }

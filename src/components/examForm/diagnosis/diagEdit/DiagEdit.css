@@ -1,0 +1,10 @@
+.diag-item-edit button {
+  background-color: #285430;
+  color: white;
+}
+.diag-item-edit button:hover {
+  background-color: #5f8d4e;
+}
+.diag-item-edit button:focus {
+  background-color: #285430;
+}

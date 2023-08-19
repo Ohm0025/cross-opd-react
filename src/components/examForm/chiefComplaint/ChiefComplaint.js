@@ -1,19 +1,8 @@
 import { useExam } from "../../../contexts/ExamContext";
 import "./ChiefComplaint.css";
-import { useEffect, useState } from "react";
 
 function ChiefComplaint() {
-  const { currentCase } = useExam();
-
-  const [title, setTitle] = useState("");
-
-  useEffect(() => {
-    setTitle((pre) => {
-      return currentCase?.ChiefComplaint?.title;
-    });
-  }, [currentCase?.ChiefComplaint?.title]);
-
-  console.log(currentCase);
+  const { recordObj, updateRecordObj } = useExam();
 
   return (
     <div className="cc-box">
@@ -21,9 +10,9 @@ function ChiefComplaint() {
         Chief Complaint
       </label>
       <textarea
-        value={title}
+        value={recordObj?.cc?.title}
         placeholder="add patient's chief complaint"
-        onChange={(e) => setTitle(e.target.value)}
+        onChange={(e) => updateRecordObj("cc", { title: e.target.value })}
         className="form-control"
         name="cc_text"
         id="cc_text"

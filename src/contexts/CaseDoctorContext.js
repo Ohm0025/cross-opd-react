@@ -17,11 +17,12 @@ function CaseDoctorContextProvider({ children }) {
     try {
       startLoading();
       const res = await examService.activateCard(patientId);
+
       if (!res.data.newCase) {
         console.log("data not found");
       }
       const caseId = res.data?.newCase?.id;
-      changeId(+caseId);
+      changeId(+patientId);
       navigate("/exam/" + caseId);
     } catch (err) {
       console.log(err);

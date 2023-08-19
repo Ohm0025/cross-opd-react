@@ -1,6 +1,11 @@
 .diag-list-item {
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  padding: 0.25rem;
+  width: 70%;
+  margin: auto;
 }
 
 .diag-list-item button {
@@ -10,4 +15,13 @@
 
 .diag-list-item button:hover {
   color: red;
+}
+
+.diag-list-item span:hover {
+  color: #a4a4a4;
+}
+
+.diag-list-empty {
+  font-size: 1rem;
+  color: #a7a7a7;
 }

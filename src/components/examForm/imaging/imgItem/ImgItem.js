@@ -1,14 +1,28 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faAdd,
+  faMagnifyingGlass,
+  faTrash,
+} from "@fortawesome/free-solid-svg-icons";
 import "./ImgItem.css";
 
-function ImgItem() {
+function ImgItem({ item }) {
   return (
-    <div className="image-list-item">
-      <div>film acute abdomen</div>
-      <small>status : pending</small>
-      <div>
-        <button>Add</button>
-        <button>Cancel</button>
-        <button>View</button>
+    <div className="img-list-item">
+      <div className="img-list-item-name">{item.name}</div>
+      <div className="img-list-item-status">
+        <small>status : {item.status}</small>
+      </div>
+      <div className="btn-group">
+        <button className="btn">
+          <FontAwesomeIcon icon={faAdd} />
+        </button>
+        <button className="btn">
+          <FontAwesomeIcon icon={faTrash} />
+        </button>
+        <button className="btn">
+          <FontAwesomeIcon icon={faMagnifyingGlass} />
+        </button>
       </div>
     </div>
   );

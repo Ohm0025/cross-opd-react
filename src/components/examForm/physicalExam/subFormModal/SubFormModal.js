@@ -1,5 +1,6 @@
-import { useEffect, useState, useRef } from "react";
+import { useState, useCallback } from "react";
 import "./SubFormModal.css";
+import { useClickOutside } from "../../../../hooks/useClickOutside";
 
 function SubFormModal({
   typePe,
@@ -10,17 +11,8 @@ function SubFormModal({
 }) {
   const [isOpen, setIsOpen] = useState(false);
 
-  const dropdownEl = useRef();
-
-  useEffect(() => {
-    const handleClickOutSide = (e) => {
-      if (!dropdownEl.current.contains(e.target)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutSide);
-    return () => document.removeEventListener("mousedown", handleClickOutSide);
-  });
+  const closeDropdown = useCallback(() => setIsOpen(false), []);
+  const dropdownEl = useClickOutside(closeDropdown);
 
   return (
     <div className="modalForm-top">
@@ -39,7 +31,10 @@ function SubFormModal({
               return (
                 <li
                   className="template-item"
-                  onClick={() => addPEList(item, typePe)}
+                  onClick={() => {
+                    addPEList(item, typePe);
+                    setIsOpen(false);
+                  }}
                   key={"listTemplate" + typePe + index}
                 >
                   {item}
@@ -48,7 +43,12 @@ function SubFormModal({
             })}
           </ul>
         </div>
-        <button className="button-addMore" onClick={OpenIsRight} name={typePe}>
+
+        <button
+          className={`${whichIs === typePe ? "isSelected" : ""} button-addMore`}
+          onClick={OpenIsRight}
+          name={typePe}
+        >
           {whichIs === typePe ? "Cancel" : "Add More"}
         </button>
       </div>

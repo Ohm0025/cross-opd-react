@@ -1,6 +1,6 @@
 import ListPEconclude from "../components/listPEconclude/ListPEconclude";
 
-export const convertToListString = (objList, dropPEList) => {
+export const convertToListItem = (objList, dropPEList) => {
   const objKey = Object.keys(objList);
 
   return (
@@ -29,4 +29,26 @@ export const convertToListString = (objList, dropPEList) => {
       })}
     </>
   );
+};
+
+export const convertToListString = (objList) => {
+  let result = "";
+  const objKey = Object.keys(objList);
+  for (let i1 = 0; i1 < objKey.length; i1++) {
+    if (objList[objKey[i1]].length === 0) continue;
+    result += objKey[i1] + " : ";
+    for (let i2 = 0; i2 < objList[objKey[i1]].length; i2++) {
+      result += objList[objKey[i1]][i2] + ",";
+    }
+    result += "\n";
+  }
+  return result;
+};
+
+export const convertVitalSign = (objVital) => {
+  return `vital sign : ${objVital.BP ? "BP " + objVital.BP + " mmHg" : ""} ${
+    objVital.PR ? "PR " + objVital.PR + " bpm" : ""
+  } ${objVital.RR ? "RR " + objVital.RR + " /min" : ""} ${
+    objVital.Temp ? "Body Temp " + objVital.Temp + " celsius" : ""
+  }`;
 };

@@ -18,10 +18,17 @@ function Modal({ title, isOpen, onClose, children }) {
   }, [isOpen, modal]);
 
   return (
-    <div className="modal fade" tabIndex="-1" ref={modalEl} onClick={onClose}>
+    <div
+      className="modal fade"
+      tabIndex="-1"
+      ref={modalEl}
+      onClick={onClose}
+      onContextMenu={onClose}
+    >
       <div
         className="modal-dialog modal-dialog-centered modal-lg"
         onClick={(e) => e.stopPropagation()} //เมื่อมีการ click ใน child element นี้จะหยุด propagate ที่ element นี้
+        onContextMenu={(e) => e.stopPropagation()}
       >
         <div className="modal-content">
           <div className="modal-header">

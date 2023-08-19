@@ -23,7 +23,7 @@ function FollowUp() {
             <FollowUpItem />
           </ul>
         ) : (
-          <span className="fu-list-empty">ไม่มีการนัดตรวจติดตามอาการ</span>
+          <span className="fu-list-empty">- ไม่มีการนัดตรวจติดตามอาการ -</span>
         )}
       </div>
       <Modal title="FollowUp" isOpen={isOpen} onClose={() => setIsOpen(false)}>

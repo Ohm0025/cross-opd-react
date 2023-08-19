@@ -6,9 +6,34 @@ import * as examService from "../api/examApi";
 const ExamContext = createContext();
 
 function ExamContextProvider({ children }) {
-  const [currentId, setCurrentId] = useState(0);
+  const [currentId, setCurrentId] = useState(0); //ptId
   const [currentCase, setCurrentCase] = useState(null);
   const { caseId } = useParams();
+
+  const [recordObj, setRecordObj] = useState({
+    cc: { title: "" },
+    pi: { title: "" },
+    pe: {
+      examManual: "",
+      examTemplate: "",
+      examImg: "",
+    },
+    detailDx: {
+      detail: "",
+    },
+    diag: [],
+    img: [],
+    lab: [],
+    ad: {
+      detail: "",
+    },
+    fu: {
+      fuHos: "",
+      fuOPD: "",
+      fuDetail: "",
+      fuDate: "",
+    },
+  });
 
   const updateCase = (obj) => {
     setCurrentCase((prev) => {
@@ -16,19 +41,27 @@ function ExamContextProvider({ children }) {
     });
   };
   const changeId = (id) => {
-    setCurrentId(id);
+    setCurrentId(+id);
+  };
+
+  const updateRecordObj = (inputType, inputObj) => {
+    setRecordObj((prev) => {
+      return { ...prev, [inputType]: { ...prev.inputType, ...inputObj } };
+    });
   };
 
   useEffect(() => {
     const fetchCurrentCase = async () => {
       try {
-        if (currentId) {
-          const res1 = await examService.fetchCurrentPt(currentId);
-          updateCase(res1.data.currentCase);
-        } else if (caseId) {
-          const res2 = await examService.fetchCurrentPt(caseId);
-          updateCase(res2.data.currentCase);
-        }
+        const res = await examService.fetchCurrentPt(caseId, currentId);
+        updateCase(res.data.currentCase);
+        changeId(res.data.currentCase.patientId);
+        updateRecordObj("cc", {
+          title: res.data.currentCase.ChiefComplaint?.title,
+        });
+        updateRecordObj("pi", {
+          title: res.data.currentCase.PresentIll?.title,
+        });
       } catch (err) {
         console.log(err);
       }
@@ -36,8 +69,23 @@ function ExamContextProvider({ children }) {
     fetchCurrentCase();
   }, [currentId, caseId]);
 
+  const handleRecord = async () => {
+    try {
+      await examService.recordExam(caseId, currentId, recordObj);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <ExamContext.Provider value={{ changeId, currentCase }}>
+    <ExamContext.Provider
+      value={{
+        changeId,
+        recordObj,
+        updateRecordObj,
+        handleRecord,
+      }}
+    >
       <Outlet />
     </ExamContext.Provider>
   );

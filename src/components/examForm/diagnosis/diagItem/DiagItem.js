@@ -3,14 +3,16 @@ import "./DiagItem.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faXmark } from "@fortawesome/free-solid-svg-icons";
 
-function DiagItem() {
+function DiagItem({ item, number, removeDiag, editDiag }) {
   return (
-    <li className="list-group-item diag-list-item">
-      <span>diag01</span>
-      <button className="">
+    <div className="list-group-item diag-list-item">
+      <span role="button" onClick={() => editDiag(item)}>
+        {number + 1 + " . " + item}
+      </span>
+      <button className="" onClick={() => removeDiag(item)}>
         <FontAwesomeIcon icon={faXmark} />
       </button>
-    </li>
+    </div>
   );
 }
 

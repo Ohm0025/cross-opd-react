@@ -1,0 +1,29 @@
+.img-pic-item {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 1.2rem;
+  align-items: center;
+  font-size: 1.3rem;
+}
+.img-pic-item small {
+  font-size: 0.8rem;
+}
+
+.img-pic-xmark {
+  position: absolute;
+  top: -0.4rem;
+  right: -0.2rem;
+  border: none;
+  background-color: red;
+  border-radius: 50%;
+  width: 0.7rem;
+  height: 0.85rem;
+  color: white;
+  font-size: 0.7rem;
+  text-align: center;
+}
+.img-pic-icon:hover {
+  cursor: pointer;
+  color: gray;
+}
