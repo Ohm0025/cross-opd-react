@@ -38,11 +38,16 @@ export const convertToListString = (objList) => {
     if (objList[objKey[i1]].length === 0) continue;
     result += objKey[i1] + " : ";
     for (let i2 = 0; i2 < objList[objKey[i1]].length; i2++) {
-      result += objList[objKey[i1]][i2] + ",";
+      result += objList[objKey[i1]][i2];
+      if (i2 !== objList[objKey[i1]].length - 1) {
+        result += ",";
+      }
     }
+
     result += "\n";
   }
-  return result;
+
+  return result.slice(0, result.length - 1);
 };
 
 export const convertVitalSign = (objVital) => {

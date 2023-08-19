@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useState,
+} from "react";
 import { Outlet, useParams } from "react-router-dom";
 
 import * as examService from "../api/examApi";
@@ -44,11 +50,23 @@ function ExamContextProvider({ children }) {
     setCurrentId(+id);
   };
 
-  const updateRecordObj = (inputType, inputObj) => {
+  const updateRecordObj = (inputType, inputkey, inputvalue) => {
     setRecordObj((prev) => {
-      return { ...prev, [inputType]: { ...prev.inputType, ...inputObj } };
+      return {
+        ...prev,
+        [inputType]: { ...recordObj[inputType], [inputkey]: inputvalue },
+      };
     });
   };
+
+  // const updateRecordObj = useCallback(
+  //   (inputType, inputObj) => {
+  //     setRecordObj((prev) => {
+  //       return { ...prev, [inputType]: { ...prev.inputType, ...inputObj } };
+  //     });
+  //   },
+  //   [recordObj]
+  // );
 
   useEffect(() => {
     const fetchCurrentCase = async () => {
@@ -56,12 +74,12 @@ function ExamContextProvider({ children }) {
         const res = await examService.fetchCurrentPt(caseId, currentId);
         updateCase(res.data.currentCase);
         changeId(res.data.currentCase.patientId);
-        updateRecordObj("cc", {
-          title: res.data.currentCase.ChiefComplaint?.title,
-        });
-        updateRecordObj("pi", {
-          title: res.data.currentCase.PresentIll?.title,
-        });
+        updateRecordObj(
+          "cc",
+          "title",
+          res.data.currentCase.ChiefComplaint?.title
+        );
+        updateRecordObj("pi", "title", res.data.currentCase.PresentIll?.title);
       } catch (err) {
         console.log(err);
       }

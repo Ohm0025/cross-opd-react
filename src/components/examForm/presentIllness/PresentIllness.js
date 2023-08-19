@@ -12,7 +12,7 @@ function PresentIllness() {
       <textarea
         value={recordObj?.pi?.title}
         placeholder="add patient's presentillness"
-        onChange={(e) => updateRecordObj("pi", { title: e.target.value })}
+        onChange={(e) => updateRecordObj("pi", "title", e.target.value)}
         className="form-control"
         name="pi_text"
         id="pi_text"

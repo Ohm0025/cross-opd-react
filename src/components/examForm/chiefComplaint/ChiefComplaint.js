@@ -12,7 +12,7 @@ function ChiefComplaint() {
       <textarea
         value={recordObj?.cc?.title}
         placeholder="add patient's chief complaint"
-        onChange={(e) => updateRecordObj("cc", { title: e.target.value })}
+        onChange={(e) => updateRecordObj("cc", "title", e.target.value)}
         className="form-control"
         name="cc_text"
         id="cc_text"

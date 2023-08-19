@@ -17,3 +17,16 @@
 .pe-button button:hover {
   background-color: #5f8d4e;
 }
+
+.pe-show-text {
+  border: 1px solid #ced4da;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+}
+
+.pe-show-text textarea {
+  border: none;
+}
+.pe-show-text textarea:focus {
+  box-shadow: none;
+}

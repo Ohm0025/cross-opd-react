@@ -5,3 +5,13 @@ export const formatNamePicFile = (labName) => {
   }
   return reName[0];
 };
+
+export const formatListToString = (listArr) => {
+  let result = listArr
+    .reverse()
+    .reduce(
+      (accumulator, currentValue) => currentValue + "," + accumulator,
+      ""
+    );
+  return result;
+};
