@@ -40,7 +40,7 @@ function Diagnosis() {
           onChange={(e) => setDiagTitle(e.target.value)}
           className="form-control"
           id="diag_text"
-          placeholder="put diagnosis for this case"
+          placeholder="diagnosis"
         />
         <button className="btn btn-secondary" onClick={addDiag}>
           <FontAwesomeIcon icon={faPlus} />

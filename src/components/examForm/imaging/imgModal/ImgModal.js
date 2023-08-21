@@ -5,16 +5,16 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import ImgPicItem from "./imgPicItem/ImgPicItem";
 
-function ImgModal({ onClose }) {
+function ImgModal({ onClose, imgname, imgstatus, imgdes, imgimg, editImg }) {
   const { createNewImgItem } = useImg();
   const [openPic, setOpenPic] = useState({
     switch: false,
     picSrc: "",
   });
-  const [imgName, setImgName] = useState("");
-  const [imgStatus, setImgStatus] = useState("pending");
-  const [imgDes, setImgDes] = useState("");
-  const [listPic, setListPic] = useState([]);
+  const [imgName, setImgName] = useState(imgname || "");
+  const [imgStatus, setImgStatus] = useState(imgstatus || "pending");
+  const [imgDes, setImgDes] = useState(imgdes || "");
+  const [listPic, setListPic] = useState(imgimg || []);
 
   const fileEl = useRef();
   return openPic.switch ? (
@@ -23,7 +23,9 @@ function ImgModal({ onClose }) {
         <small>{"close"}</small>
         <FontAwesomeIcon icon={faArrowRightFromBracket} />
       </button>
-      <img src={URL.createObjectURL(openPic.picSrc)} alt="" />
+      <div className="img-home-img-div">
+        <img src={URL.createObjectURL(openPic.picSrc)} alt="" />
+      </div>
     </div>
   ) : (
     <div className="img-modal">
@@ -111,21 +113,33 @@ function ImgModal({ onClose }) {
       )}
       <div className="img-action">
         <button
-          onClick={() => {
-            createNewImgItem({
-              name: imgName,
-              status: imgStatus,
-              des: imgDes,
-              img: listPic,
-            });
-            if (listPic.length > 0) {
-              setListPic([]);
-              fileEl.current.value = "";
-            }
-            onClose();
-          }}
+          onClick={
+            editImg
+              ? () => {
+                  editImg({
+                    name: imgName,
+                    status: imgStatus,
+                    des: imgDes,
+                    img: listPic,
+                  });
+                  onClose();
+                }
+              : () => {
+                  createNewImgItem({
+                    name: imgName,
+                    status: imgStatus,
+                    des: imgDes,
+                    img: listPic,
+                  });
+                  if (listPic.length > 0) {
+                    setListPic([]);
+                    fileEl.current.value = "";
+                  }
+                  onClose();
+                }
+          }
         >
-          Add
+          {editImg ? "Edit" : "Add"}
         </button>
         <button>Clear</button>
       </div>

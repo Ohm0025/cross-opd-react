@@ -16,7 +16,7 @@ function PePicIcon({ peFile, openPic, deletePic }) {
         onClick={() => openPic(peFile)}
       />
 
-      <small>{formatNamePicFile(peFile.name)}</small>
+      <small>{formatNamePicFile(peFile?.name)}</small>
     </div>
   );
 }

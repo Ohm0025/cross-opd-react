@@ -3,12 +3,13 @@ import Modal from "../../../components/Modal";
 import { useState } from "react";
 import PhysicalExamModal from "./PhysicalExamModal";
 import { useExam } from "../../../contexts/ExamContext";
-import ModalCamera from "./modalCamera/ModalCamera";
+
 import ModalPic from "./modalPic/ModalPic";
 
 function PhysicalExam() {
   const [isOpen, setIsOpen] = useState(false);
-  const [isCam, setIsCam] = useState(false);
+  const [isPhoto, setIsPhoto] = useState(false); //open add photo modal
+
   const { recordObj, updateRecordObj } = useExam();
 
   return (
@@ -38,7 +39,7 @@ function PhysicalExam() {
       </div>
       <div className="pe-button">
         <button onClick={() => setIsOpen(true)}>template</button>
-        <button onClick={() => setIsCam(true)}>image</button>
+        <button onClick={() => setIsPhoto(true)}>image</button>
       </div>
       <Modal
         title="Physical Examination"
@@ -54,8 +55,8 @@ function PhysicalExam() {
       </Modal>
       <Modal
         title={"Physical Exam : Photo"}
-        isOpen={isCam}
-        onClose={() => setIsCam(false)}
+        isOpen={isPhoto}
+        onClose={() => setIsPhoto(false)}
       >
         <ModalPic
           updateRecord={(updatedValue) => {

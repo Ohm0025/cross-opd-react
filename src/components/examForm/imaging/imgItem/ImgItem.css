@@ -28,3 +28,6 @@
 .img-list-item button:focus {
   background-color: #285430;
 }
+.img-list-item .btn-group {
+  width: 7rem;
+}

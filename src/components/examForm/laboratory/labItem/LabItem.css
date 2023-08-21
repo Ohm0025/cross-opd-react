@@ -28,3 +28,7 @@
 .lab-list-item button:focus {
   background-color: #285430;
 }
+
+.lab-list-item .btn-group {
+  width: 7rem;
+}

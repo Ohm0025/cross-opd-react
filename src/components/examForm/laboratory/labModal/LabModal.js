@@ -6,7 +6,7 @@ import { useLab } from "../../../../contexts/LabContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
-function LabModal({ onClose }) {
+function LabModal({ onClose, labname, labstatus, labdes, labimg, editLab }) {
   const { createNewLabItem } = useLab();
 
   const [openPic, setOpenPic] = useState({
@@ -14,10 +14,10 @@ function LabModal({ onClose }) {
     picSrc: "",
   });
 
-  const [listPic, setListPic] = useState([]);
-  const [labName, setLabName] = useState("");
-  const [labStatus, setLabStatus] = useState("pending");
-  const [labDes, setLabDes] = useState("");
+  const [listPic, setListPic] = useState(labimg || []);
+  const [labName, setLabName] = useState(labname || "");
+  const [labStatus, setLabStatus] = useState(labstatus || "pending");
+  const [labDes, setLabDes] = useState(labdes || "");
 
   const fileEl = useRef();
 
@@ -27,7 +27,9 @@ function LabModal({ onClose }) {
         <small>{"close"}</small>
         <FontAwesomeIcon icon={faArrowRightFromBracket} />
       </button>
-      <img alt="" src={URL.createObjectURL(openPic.picSrc)} />
+      <div className="lab-home-img-div">
+        <img alt="" src={URL.createObjectURL(openPic.picSrc)} />
+      </div>
     </div>
   ) : (
     <div className="lab-modal">
@@ -115,21 +117,33 @@ function LabModal({ onClose }) {
       )}
       <div className="lab-action">
         <button
-          onClick={() => {
-            createNewLabItem({
-              name: labName,
-              status: labStatus,
-              des: labDes,
-              img: listPic,
-            });
-            if (listPic.length > 0) {
-              setListPic([]);
-              fileEl.current.value = "";
-            }
-            onClose();
-          }}
+          onClick={
+            editLab
+              ? () => {
+                  editLab({
+                    name: labName,
+                    status: labStatus,
+                    des: labDes,
+                    img: listPic,
+                  });
+                  onClose();
+                }
+              : () => {
+                  createNewLabItem({
+                    name: labName,
+                    status: labStatus,
+                    des: labDes,
+                    img: listPic,
+                  });
+                  if (listPic.length > 0) {
+                    setListPic([]);
+                    fileEl.current.value = "";
+                  }
+                  onClose();
+                }
+          }
         >
-          Add
+          {editLab ? "Edit" : "Add"}
         </button>
         <button>Clear</button>
       </div>

@@ -23,3 +23,27 @@
 .pe-pic-action button:hover {
   background-color: #5f8d4e;
 }
+.pe-home-img {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pe-home-img-div {
+  margin: 5rem auto 5rem;
+}
+.pe-home-img-div img {
+  max-width: 48rem;
+}
+
+.pe-home-img button {
+  display: flex;
+  align-items: center;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: none;
+  color: #285430;
+  border: none;
+  border-radius: 0.25rem;
+}

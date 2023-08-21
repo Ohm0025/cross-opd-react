@@ -17,8 +17,20 @@ function LabContextProvider({ children }) {
       return [...prev, newLabObj];
     });
   };
+
+  const editLab = (editLab, newValue) => {
+    setListLab((prev) =>
+      prev.map((item) => (item === editLab ? { ...item, ...newValue } : item))
+    );
+  };
+
+  const deletedLab = (deleteLab) => {
+    setListLab((prev) => prev.filter((item) => item !== deleteLab));
+  };
   return (
-    <LabContext.Provider value={{ listLab, createNewLabItem }}>
+    <LabContext.Provider
+      value={{ listLab, createNewLabItem, deletedLab, editLab }}
+    >
       {children}
     </LabContext.Provider>
   );

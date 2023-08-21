@@ -1,5 +1,7 @@
 export const formatNamePicFile = (labName) => {
-  const reName = labName.split(".");
+  const reName = labName?.split(".");
+  if (!reName) return;
+
   if (reName[0].length > 4) {
     return reName[0].slice(0, 4) + "...";
   }

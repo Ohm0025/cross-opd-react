@@ -1,22 +1,33 @@
-import { useState, useRef, useEffect, useCallback } from "react";
+import { useState, useRef, useEffect } from "react";
 import PePicIcon from "./pePicIcon/PePicIcon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import ModalCamera from "./modalCamera/ModalCamera";
 
 import "./ModalPic.css";
-import { formatListToString } from "../../../../utility/formatString";
 
 function ModalPic({ updateRecord, initialList }) {
-  const [listPic, setListPic] = useState([...(initialList || [])]);
+  const [listPic, setListPic] = useState(initialList);
   const [picSrc, setPicSrc] = useState("");
+
+  const [isCam, setIsCam] = useState(false);
 
   const fileEl = useRef();
 
   useEffect(() => {
-    updateRecord(formatListToString(listPic));
+    updateRecord(listPic);
   }, [listPic]);
-  console.log(listPic);
-  return !picSrc ? (
+
+  return isCam ? (
+    <ModalCamera
+      updateListPic={(value) =>
+        setListPic((prev) => {
+          return [...prev, value];
+        })
+      }
+      closeCam={() => setIsCam(false)}
+    />
+  ) : !picSrc ? (
     <div className="pe-pic-container">
       <div className="pe-pic-list">
         {listPic.length > 0 ? (
@@ -55,7 +66,7 @@ function ModalPic({ updateRecord, initialList }) {
             }
           }}
         />
-        <button>Take Photo</button>
+        <button onClick={() => setIsCam(true)}>Take Photo</button>
       </div>
     </div>
   ) : (
@@ -64,7 +75,9 @@ function ModalPic({ updateRecord, initialList }) {
         <small>{"close"}</small>
         <FontAwesomeIcon icon={faArrowRightFromBracket} />
       </button>
-      <img src={URL.createObjectURL(picSrc)} alt="" />
+      <div className="pe-home-img-div">
+        <img src={URL.createObjectURL(picSrc)} alt="" />
+      </div>
     </div>
   );
 }

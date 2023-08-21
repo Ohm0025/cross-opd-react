@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { Modal as BsModal } from "bootstrap";
+import "./Modal.css";
 
 function Modal({ title, isOpen, onClose, children }) {
   const modalEl = useRef(); //{current : <div ...>...</div>}

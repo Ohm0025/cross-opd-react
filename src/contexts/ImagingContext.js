@@ -17,8 +17,20 @@ function ImagingContextProvider({ children }) {
       return [...prev, newImgObj];
     });
   };
+
+  const editImg = (editImg, newValue) => {
+    setListImg((prev) =>
+      prev.map((item) => (item === editImg ? { ...item, ...newValue } : item))
+    );
+  };
+
+  const deletedImg = (deleteImg) => {
+    setListImg((prev) => prev.filter((item) => item !== deleteImg));
+  };
   return (
-    <ImagingContext.Provider value={{ listImg, createNewImgItem }}>
+    <ImagingContext.Provider
+      value={{ listImg, createNewImgItem, editImg, deletedImg }}
+    >
       {children}
     </ImagingContext.Provider>
   );

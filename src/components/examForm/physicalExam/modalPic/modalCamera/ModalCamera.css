@@ -1,0 +1,57 @@
+.pe-webcam {
+  background-color: azure;
+  text-align: center;
+  margin: auto;
+  position: relative;
+}
+
+.pe-cam-xmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border: none;
+  background: none;
+  font-size: 1rem;
+  color: #285430;
+}
+
+.pe-cam-xmark:hover {
+  color: #5f8d4e;
+}
+
+.pe-cam-button {
+  display: flex;
+  justify-content: center;
+
+  margin-top: 1rem;
+}
+.pe-cam-button button {
+  background-color: #285430;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  width: 8rem;
+}
+
+.pe-cam-button button:hover {
+  background-color: #5f8d4e;
+}
+
+.pe-screenImg {
+  text-align: center;
+}
+
+.pe-screenImg-action {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 1rem;
+}
+.pe-screenImg-action button {
+  background-color: #285430;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0.5rem;
+  width: 8rem;
+}

@@ -8,6 +8,7 @@ import {
 import { Outlet, useParams } from "react-router-dom";
 
 import * as examService from "../api/examApi";
+import * as testService from "../api/testApi";
 
 const ExamContext = createContext();
 
@@ -22,7 +23,7 @@ function ExamContextProvider({ children }) {
     pe: {
       examManual: "",
       examTemplate: "",
-      examImg: "",
+      examImg: [],
     },
     detailDx: {
       detail: "",
@@ -89,7 +90,8 @@ function ExamContextProvider({ children }) {
 
   const handleRecord = async () => {
     try {
-      await examService.recordExam(caseId, currentId, recordObj);
+      // await examService.recordExam(caseId, currentId, recordObj);
+      await testService.testupload(recordObj);
     } catch (err) {
       console.log(err);
     }

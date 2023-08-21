@@ -91,9 +91,11 @@
   position: relative;
 }
 
-.lab-home-img img {
-  width: 30rem;
-  height: 30rem;
+.lab-home-img-div {
+  margin: 5rem auto 5rem;
+}
+.lab-home-img-div img {
+  max-width: 48rem;
 }
 
 .lab-home-img button {
