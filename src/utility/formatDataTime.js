@@ -16,3 +16,8 @@ export const diffDate = (dateStart, dateEnd) => {
   const diffTime = dateEnd.getTime() - dateStart.getTime();
   return diffTime / (1000 * 3600 * 24);
 };
+
+export const caldiffDate = (date1, date2) => {
+  const diffInTime = Math.abs(date1.getTime() - date2.getTime());
+  return Math.ceil(diffInTime / (1000 * 3600 * 24));
+};

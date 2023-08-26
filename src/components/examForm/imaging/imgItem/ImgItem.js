@@ -28,6 +28,7 @@ function ImgItem({ item }) {
       <Modal title="Imaging" isOpen={isEdit} onClose={() => setIsEdit(false)}>
         <ImgModal
           onClose={() => setIsEdit(false)}
+          imgItem={item}
           imgname={item.name}
           imgstatus={item.status}
           imgdes={item.des}

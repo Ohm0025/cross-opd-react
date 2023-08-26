@@ -33,6 +33,7 @@ function LabItem({ item }) {
       >
         <LabModal
           onClose={() => setIsEdit(false)}
+          labItem={item}
           labname={item.name}
           labstatus={item.status}
           labdes={item.des}

@@ -1,19 +1,19 @@
 import "./Treatment.css";
-import TreatmentModal from "./treatmentModal/TreatmentModal";
-import Modal from "../../Modal";
-import { useState } from "react";
 import TreatmentItem from "./treatmentItem/TreatmentItem";
+import { useDiag } from "../../../contexts/DiagContext";
 
 function Treatment() {
-  const [isOpen, setIsOpen] = useState(false);
+  const { diagList } = useDiag();
   return (
     <div className="tx-box">
       <label htmlFor="tx_btn">Treatment</label>
 
       <div className="tx-action">
-        {false ? (
+        {diagList.length > 0 ? (
           <ul className="list-group">
-            <TreatmentItem changeModal={() => setIsOpen((prev) => !prev)} />
+            {diagList.map((item, index) => (
+              <TreatmentItem diagTitle={item} key={"txitem" + index} />
+            ))}
           </ul>
         ) : (
           <span className="tx-list-empty">
@@ -21,9 +21,6 @@ function Treatment() {
           </span>
         )}
       </div>
-      <Modal title="Treatment" isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <TreatmentModal />
-      </Modal>
     </div>
   );
 }

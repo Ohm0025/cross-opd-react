@@ -16,14 +16,16 @@ function CaseDoctorContextProvider({ children }) {
   const handleSearchCard = async (patientId) => {
     try {
       startLoading();
-      const res = await examService.activateCard(patientId);
+      if (patientId) {
+        const res = await examService.activateCard(patientId);
 
-      if (!res.data.newCase) {
-        console.log("data not found");
+        if (!res.data.newCase) {
+          return console.log("data not found");
+        }
+        const caseId = res.data?.newCase?.id;
+        changeId(+patientId);
+        navigate("/exam/" + caseId);
       }
-      const caseId = res.data?.newCase?.id;
-      changeId(+patientId);
-      navigate("/exam/" + caseId);
     } catch (err) {
       console.log(err);
     } finally {

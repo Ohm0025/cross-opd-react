@@ -5,7 +5,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import ImgPicItem from "./imgPicItem/ImgPicItem";
 
-function ImgModal({ onClose, imgname, imgstatus, imgdes, imgimg, editImg }) {
+function ImgModal({
+  onClose,
+  imgname,
+  imgstatus,
+  imgdes,
+  imgimg,
+  editImg,
+  imgItem,
+}) {
   const { createNewImgItem } = useImg();
   const [openPic, setOpenPic] = useState({
     switch: false,
@@ -24,7 +32,11 @@ function ImgModal({ onClose, imgname, imgstatus, imgdes, imgimg, editImg }) {
         <FontAwesomeIcon icon={faArrowRightFromBracket} />
       </button>
       <div className="img-home-img-div">
-        <img src={URL.createObjectURL(openPic.picSrc)} alt="" />
+        <img
+          src={URL.createObjectURL(openPic.picSrc)}
+          alt=""
+          className="img-fluid"
+        />
       </div>
     </div>
   ) : (
@@ -116,7 +128,7 @@ function ImgModal({ onClose, imgname, imgstatus, imgdes, imgimg, editImg }) {
           onClick={
             editImg
               ? () => {
-                  editImg({
+                  editImg(imgItem, {
                     name: imgName,
                     status: imgStatus,
                     des: imgDes,

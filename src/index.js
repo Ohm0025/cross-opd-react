@@ -10,15 +10,13 @@ import LoadingContextProvider from "./contexts/LoadingContext";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <LoadingContextProvider>
-        <AuthContextProvider>
-          <App />
-        </AuthContextProvider>
-      </LoadingContextProvider>
-    </BrowserRouter>
-  </React.StrictMode>
+  <BrowserRouter>
+    <LoadingContextProvider>
+      <AuthContextProvider>
+        <App />
+      </AuthContextProvider>
+    </LoadingContextProvider>
+  </BrowserRouter>
 );
 
 // If you want to start measuring performance in your app, pass a function

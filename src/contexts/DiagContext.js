@@ -1,22 +1,48 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext } from "react";
+import { useExam } from "./ExamContext";
 
 const DiagContext = createContext();
 
 function DiagContextProvider({ children }) {
-  const [diagList, setDiagList] = useState([]);
-  const addDiagList = (newDiagArr) => {
-    setDiagList((prev) => {
-      newDiagArr.forEach((item) => {
-        if (!prev.includes(item)) {
-          prev.push(item);
-        }
-      });
-      return prev;
-    });
+  const {
+    recordObj: {
+      diag: diagList,
+      detailDx: { detail },
+    },
+    updateList,
+    editList,
+    deleteList,
+    updateRecordObj,
+  } = useExam();
+
+  const addDiagList = (newDiag) => {
+    if (!diagList.includes(newDiag)) {
+      updateList("diag", newDiag);
+    }
   };
 
+  const editDiagList = (selectDiag, newValue) => {
+    editList(selectDiag, newValue, "diag");
+  };
+
+  const removeDiag = (selectDiag) => {
+    deleteList(selectDiag, "diag");
+  };
+
+  const changeDDX = (newvalue) => {
+    updateRecordObj("detailDx", "detail", newvalue);
+  };
   return (
-    <DiagContext.Provider value={{ diagList, addDiagList }}>
+    <DiagContext.Provider
+      value={{
+        diagList,
+        addDiagList,
+        editDiagList,
+        removeDiag,
+        detail,
+        changeDDX,
+      }}
+    >
       {children}
     </DiagContext.Provider>
   );

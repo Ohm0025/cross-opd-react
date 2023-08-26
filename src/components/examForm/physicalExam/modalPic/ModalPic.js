@@ -76,7 +76,7 @@ function ModalPic({ updateRecord, initialList }) {
         <FontAwesomeIcon icon={faArrowRightFromBracket} />
       </button>
       <div className="pe-home-img-div">
-        <img src={URL.createObjectURL(picSrc)} alt="" />
+        <img src={URL.createObjectURL(picSrc)} alt="" className="img-fluid" />
       </div>
     </div>
   );

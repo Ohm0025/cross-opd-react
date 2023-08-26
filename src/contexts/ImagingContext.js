@@ -1,9 +1,10 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useContext } from "react";
+import { useExam } from "./ExamContext";
 
 const ImagingContext = createContext();
 
 function ImagingContextProvider({ children }) {
-  const [listImg, setListImg] = useState([]);
+  const { recordObj, updateList, editList, deleteList } = useExam();
 
   //ImgObj = {name , status , des , img}
   const createNewImgItem = (input) => {
@@ -13,23 +14,19 @@ function ImagingContextProvider({ children }) {
       des: input.des ?? "",
       img: input.img ?? [],
     };
-    setListImg((prev) => {
-      return [...prev, newImgObj];
-    });
+    updateList("img", newImgObj);
   };
 
   const editImg = (editImg, newValue) => {
-    setListImg((prev) =>
-      prev.map((item) => (item === editImg ? { ...item, ...newValue } : item))
-    );
+    editList(editImg, newValue, "img");
   };
 
   const deletedImg = (deleteImg) => {
-    setListImg((prev) => prev.filter((item) => item !== deleteImg));
+    deleteList(deletedImg, "img");
   };
   return (
     <ImagingContext.Provider
-      value={{ listImg, createNewImgItem, editImg, deletedImg }}
+      value={{ listImg: recordObj.img, createNewImgItem, editImg, deletedImg }}
     >
       {children}
     </ImagingContext.Provider>

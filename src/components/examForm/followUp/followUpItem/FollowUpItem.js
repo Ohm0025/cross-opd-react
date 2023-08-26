@@ -1,14 +1,17 @@
 import "./FollowUpItem.css";
+import { formatCreatedAt } from "../../../../utility/formatDataTime";
 
-function FollowUpItem() {
+function FollowUpItem({ item }) {
   return (
-    <li className="list-group-item fu-list-item">
-      <span>15/08/66</span>
-      <div className="btn-group">
-        <button className="btn btn-secondary">edit</button>
-        <button className="btn btn-secondary">delete</button>
+    <div>
+      <div className="fu-list-item">
+        <span>
+          {item.fuHos} &nbsp; &nbsp; &nbsp; {item.fuOPD}
+        </span>
+        <span>{formatCreatedAt(item.fuDate)}</span>
       </div>
-    </li>
+      <div className="fu-list-detail">{item.fuDetail}</div>
+    </div>
   );
 }
 

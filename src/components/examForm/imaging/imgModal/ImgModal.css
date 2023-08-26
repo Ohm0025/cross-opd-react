@@ -87,11 +87,6 @@
   position: relative;
 }
 
-.img-home-img img {
-  width: 30rem;
-  height: 30rem;
-}
-
 .img-home-img button {
   display: flex;
   align-items: center;

@@ -6,7 +6,15 @@ import { useLab } from "../../../../contexts/LabContext";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
-function LabModal({ onClose, labname, labstatus, labdes, labimg, editLab }) {
+function LabModal({
+  onClose,
+  labname,
+  labstatus,
+  labdes,
+  labimg,
+  editLab,
+  labItem,
+}) {
   const { createNewLabItem } = useLab();
 
   const [openPic, setOpenPic] = useState({
@@ -28,7 +36,11 @@ function LabModal({ onClose, labname, labstatus, labdes, labimg, editLab }) {
         <FontAwesomeIcon icon={faArrowRightFromBracket} />
       </button>
       <div className="lab-home-img-div">
-        <img alt="" src={URL.createObjectURL(openPic.picSrc)} />
+        <img
+          alt=""
+          src={URL.createObjectURL(openPic.picSrc)}
+          className="img-fluid"
+        />
       </div>
     </div>
   ) : (
@@ -120,7 +132,7 @@ function LabModal({ onClose, labname, labstatus, labdes, labimg, editLab }) {
           onClick={
             editLab
               ? () => {
-                  editLab({
+                  editLab(labItem, {
                     name: labName,
                     status: labStatus,
                     des: labDes,

@@ -9,7 +9,7 @@ import DrUnfinishFooter from "./drUnfinishFooter/DrUnfinishFooter";
 function DrUnfinishCase({ unfinishCaseList }) {
   const [amount, setAmount] = useState(5);
   const [displayAmount, setDisplayAmount] = useState(5);
-  const [page, setPage] = useState(unfinishCaseList.length ? 1 : 0);
+  const [page, setPage] = useState(1);
 
   const finalUnfinishCaseList = unfinishCaseList
     .sort((a, b) => a.updatedAt < b.updatedAt)
@@ -31,9 +31,18 @@ function DrUnfinishCase({ unfinishCaseList }) {
             keyItem={index + "unfinishCase"}
             itemId={item.patientId}
             itemTime={item.updatedAt}
+            key={"unfinishCase" + index}
           />
         ))
       ) : (
+        // unfinishCaseList.map((item, index) => (
+        //   <DrUnFinishItem
+        //     keyItem={index + "unfinishCase"}
+        //     itemId={item.patientId}
+        //     itemTime={item.updatedAt}
+        //     key={"unfinishCase" + index}
+        //   />
+        // ))
         <b style={{ textAlign: "center", fontSize: "1.4rem", padding: "1rem" }}>
           ยังไม่มีเคสที่ตรวจไปแล้ว
         </b>

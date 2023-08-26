@@ -1,10 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import { createContext, useContext, useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
 
 import * as examService from "../api/examApi";
@@ -14,7 +8,7 @@ const ExamContext = createContext();
 
 function ExamContextProvider({ children }) {
   const [currentId, setCurrentId] = useState(0); //ptId
-  const [currentCase, setCurrentCase] = useState(null);
+
   const { caseId } = useParams();
 
   const [recordObj, setRecordObj] = useState({
@@ -42,11 +36,20 @@ function ExamContextProvider({ children }) {
     },
   });
 
-  const updateCase = (obj) => {
-    setCurrentCase((prev) => {
-      return { ...prev, ...obj };
-    });
+  const [detailDrug, setDetailDrug] = useState([]);
+  const [detailProcedure, setDetailProcedure] = useState([]);
+
+  const updateDetailDrug = ({ title, use, amount, diagTitle }) => {
+    setDetailDrug((prev) => [...prev, { title, use, amount, diagTitle }]);
   };
+
+  const updateDetailProceduce = ({ proceduce, procedist, diagTitle }) => {
+    setDetailProcedure((prev) => [
+      ...prev,
+      { proceduce, procedist, diagTitle },
+    ]);
+  };
+
   const changeId = (id) => {
     setCurrentId(+id);
   };
@@ -60,20 +63,40 @@ function ExamContextProvider({ children }) {
     });
   };
 
-  // const updateRecordObj = useCallback(
-  //   (inputType, inputObj) => {
-  //     setRecordObj((prev) => {
-  //       return { ...prev, [inputType]: { ...prev.inputType, ...inputObj } };
-  //     });
-  //   },
-  //   [recordObj]
-  // );
+  const updateList = (inputType, newObj) => {
+    setRecordObj((prev) => {
+      return {
+        ...prev,
+        [inputType]: [...recordObj[inputType], newObj],
+      };
+    });
+  };
+
+  const editList = (selectItem, newValue, inputType) => {
+    setRecordObj((prev) => {
+      return {
+        ...prev,
+        [inputType]: recordObj[inputType].map((item) => {
+          return item === selectItem ? newValue : item;
+        }),
+      };
+    });
+  };
+
+  const deleteList = (selectItem, inputType) => {
+    setRecordObj((prev) => {
+      return {
+        ...prev,
+        [inputType]: recordObj[inputType].filter((item) => item !== selectItem),
+      };
+    });
+  };
 
   useEffect(() => {
     const fetchCurrentCase = async () => {
       try {
         const res = await examService.fetchCurrentPt(caseId, currentId);
-        updateCase(res.data.currentCase);
+
         changeId(res.data.currentCase.patientId);
         updateRecordObj(
           "cc",
@@ -81,17 +104,23 @@ function ExamContextProvider({ children }) {
           res.data.currentCase.ChiefComplaint?.title
         );
         updateRecordObj("pi", "title", res.data.currentCase.PresentIll?.title);
+        updateRecordObj("fu", "fuHos", res.data.currentCase.location);
       } catch (err) {
         console.log(err);
       }
     };
-    fetchCurrentCase();
+    caseId && fetchCurrentCase();
   }, [currentId, caseId]);
 
   const handleRecord = async () => {
     try {
-      // await examService.recordExam(caseId, currentId, recordObj);
-      await testService.testupload(recordObj);
+      await examService.recordExam(
+        caseId,
+        currentId,
+        recordObj,
+        detailDrug,
+        detailProcedure
+      );
     } catch (err) {
       console.log(err);
     }
@@ -102,8 +131,15 @@ function ExamContextProvider({ children }) {
       value={{
         changeId,
         recordObj,
+        updateList,
         updateRecordObj,
         handleRecord,
+        editList,
+        deleteList,
+        detailDrug,
+        detailProcedure,
+        updateDetailDrug,
+        updateDetailProceduce,
       }}
     >
       <Outlet />

@@ -1,9 +1,10 @@
-import { createContext, useState, useContext } from "react";
+import { createContext, useContext } from "react";
+import { useExam } from "./ExamContext";
 
 const LabContext = createContext();
 
 function LabContextProvider({ children }) {
-  const [listLab, setListLab] = useState([]);
+  const { recordObj, updateList, editList, deleteList } = useExam();
 
   // labobj = {name , status , des , img}
   const createNewLabItem = (input) => {
@@ -13,23 +14,24 @@ function LabContextProvider({ children }) {
       des: input.des ?? "",
       img: input.img ?? [],
     };
-    setListLab((prev) => {
-      return [...prev, newLabObj];
-    });
+    updateList("lab", newLabObj);
   };
-
-  const editLab = (editLab, newValue) => {
-    setListLab((prev) =>
-      prev.map((item) => (item === editLab ? { ...item, ...newValue } : item))
-    );
+  //selectItem, newValue, inputType
+  const editLab = (selectItem, newValue) => {
+    editList(selectItem, newValue, "lab");
   };
 
   const deletedLab = (deleteLab) => {
-    setListLab((prev) => prev.filter((item) => item !== deleteLab));
+    deleteList(deleteLab, "lab");
   };
   return (
     <LabContext.Provider
-      value={{ listLab, createNewLabItem, deletedLab, editLab }}
+      value={{
+        listLab: recordObj.lab,
+        createNewLabItem,
+        deletedLab,
+        editLab,
+      }}
     >
       {children}
     </LabContext.Provider>

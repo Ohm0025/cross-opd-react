@@ -3,9 +3,11 @@ import Modal from "../../Modal";
 import FollowUpModal from "./followUpModal/FollowUpModal";
 import { useState } from "react";
 import FollowUpItem from "./followUpItem/FollowUpItem";
+import { useExam } from "../../../contexts/ExamContext";
 
 function FollowUp() {
   const [isOpen, setIsOpen] = useState(false);
+  const { recordObj, updateRecordObj } = useExam();
   return (
     <div className="fu-box">
       <div className="fu-action">
@@ -14,20 +16,32 @@ function FollowUp() {
           className="btn btn-secondary"
           onClick={() => setIsOpen((prev) => !prev)}
         >
-          Add Follow Up
+          {recordObj.fu.fuDate ? "Edit Follow Up" : "Add Follow Up"}
         </button>
       </div>
       <div className="fu-list">
         {false ? (
-          <ul className="list-group">
-            <FollowUpItem />
-          </ul>
+          <FollowUpItem />
         ) : (
-          <span className="fu-list-empty">- ไม่มีการนัดตรวจติดตามอาการ -</span>
+          <>
+            {recordObj.fu.fuDate ? (
+              <FollowUpItem item={recordObj.fu} />
+            ) : (
+              <span className="fu-list-empty">
+                - ไม่มีการนัดตรวจติดตามอาการ -
+              </span>
+            )}
+          </>
         )}
       </div>
       <Modal title="FollowUp" isOpen={isOpen} onClose={() => setIsOpen(false)}>
-        <FollowUpModal />
+        <FollowUpModal
+          item={recordObj.fu}
+          updateFu={(fuSection, newValue) =>
+            updateRecordObj("fu", fuSection, newValue)
+          }
+          closeModal={() => setIsOpen(false)}
+        />
       </Modal>
     </div>
   );

@@ -2,4 +2,14 @@
   justify-content: space-between;
   display: flex;
   align-items: center;
+  border: none;
+  font-size: 1rem;
+  padding: 0 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.tx-btn {
+  font-size: 1rem;
+  background-color: #285430;
+  padding: 0.25rem;
 }

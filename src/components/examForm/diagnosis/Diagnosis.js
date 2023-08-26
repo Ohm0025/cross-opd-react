@@ -4,30 +4,16 @@ import { faPlus } from "@fortawesome/free-solid-svg-icons";
 import DiagItem from "./diagItem/DiagItem";
 import { useState } from "react";
 import DiagEdit from "./diagEdit/DiagEdit";
+import { useDiag } from "../../../contexts/DiagContext";
 
 function Diagnosis() {
+  const { diagList, addDiagList, editDiagList, removeDiag, detail, changeDDX } =
+    useDiag();
+
   const [diagTitle, setDiagTitle] = useState("");
-  const [diagList, setDiagList] = useState([]);
-  const [difDiag, setDifDiag] = useState("");
 
   const [isEdit, setIsEdit] = useState("");
 
-  const addDiag = () => {
-    setDiagList((prev) => {
-      return [...prev, diagTitle];
-    });
-    setDiagTitle("");
-  };
-
-  const removeDiag = (deletedDiag) => {
-    setDiagList((prev) => {
-      return prev.filter((item) => item !== deletedDiag);
-    });
-  };
-
-  const editDiag = (selectedDiag) => {
-    setIsEdit(selectedDiag);
-  };
   return (
     <div className="diag-box">
       <label htmlFor="diag_text" className="form-label">
@@ -42,7 +28,13 @@ function Diagnosis() {
           id="diag_text"
           placeholder="diagnosis"
         />
-        <button className="btn btn-secondary" onClick={addDiag}>
+        <button
+          className="btn btn-secondary"
+          onClick={() => {
+            addDiagList(diagTitle);
+            setDiagTitle("");
+          }}
+        >
           <FontAwesomeIcon icon={faPlus} />
         </button>
       </div>
@@ -53,12 +45,8 @@ function Diagnosis() {
               return isEdit === item ? (
                 <DiagEdit
                   item={item}
-                  updateDiag={(newItem) => {
-                    setDiagList((prev) => {
-                      return prev.map((item2) =>
-                        item2 === item ? newItem : item2
-                      );
-                    });
+                  updateDiag={(updateDiag) => {
+                    editDiagList(item, updateDiag);
                     setIsEdit("");
                   }}
                   closeEdit={() => setIsEdit("")}
@@ -69,7 +57,7 @@ function Diagnosis() {
                   item={item}
                   number={index}
                   removeDiag={removeDiag}
-                  editDiag={editDiag}
+                  openEdit={(diagname) => setIsEdit(diagname)}
                 />
               );
             })}
@@ -81,8 +69,8 @@ function Diagnosis() {
             id=""
             cols="30"
             rows="2"
-            value={difDiag}
-            onChange={(e) => setDifDiag(e.target.value)}
+            value={detail}
+            onChange={(e) => changeDDX(e.target.value)}
           ></textarea>
         </>
       ) : (
