@@ -15,6 +15,7 @@ import ExamPage from "../pages/examPage/ExamPage";
 import NotFoundPage from "../pages/notFoundPage/NotFoundPage";
 import CaseDoctorContextProvider from "../contexts/CaseDoctorContext";
 import ExamContextProvider from "../contexts/ExamContext";
+import PastHxPage from "../pages/pastHxPage/PastHxPage";
 
 function Router() {
   const { user, typeaccount } = useAuth();
@@ -30,6 +31,7 @@ function Router() {
             <>
               <Route path="/" element={<PtHomePage />}></Route>
               <Route path="drug" element={<DrugHxPage />}></Route>
+              <Route path="pastHistory" element={<PastHxPage />}></Route>
             </>
           ) : typeaccount === DOCTOR ? (
             <Route element={<ExamContextProvider />}>

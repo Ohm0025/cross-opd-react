@@ -1,0 +1,10 @@
+.ph-page {
+  display: flex;
+}
+
+.ph-page-container {
+  display: flex;
+  flex-direction: column;
+
+  margin: 2rem auto;
+}

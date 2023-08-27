@@ -21,7 +21,13 @@ function DropDownPt({ closeDropDown }) {
         <hr className="dropdown-divider mx-2 border-1" />
       </li>
       <li>
-        <button className="dropdown-item p-2 d-flex align-items-center gap-3 hover-bg-neutral-100 hover-rounded-lg">
+        <button
+          className="dropdown-item p-2 d-flex align-items-center gap-3 hover-bg-neutral-100 hover-rounded-lg"
+          onClick={() => {
+            navigate("/pastHistory");
+            closeDropDown();
+          }}
+        >
           <small>ประวัติการรักษา</small>
         </button>
       </li>

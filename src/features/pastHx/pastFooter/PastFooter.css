@@ -1,0 +1,8 @@
+.ph-footer {
+  text-align: end;
+  margin: 1rem;
+  padding: 1rem;
+  background-color: #5f8d4e;
+  color: white;
+  align-self: flex-end;
+}
