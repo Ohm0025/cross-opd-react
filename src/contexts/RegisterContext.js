@@ -2,6 +2,12 @@ import { createContext, useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { useLoading } from "./LoadingContext";
 import { useAuth } from "./AuthContext";
+import {
+  checkError,
+  getOtherObj,
+  validateInputObj,
+} from "../utility/validate/validateAuth";
+import { toast } from "react-toastify";
 
 const RegisterContext = createContext();
 
@@ -23,6 +29,8 @@ function RegisterContextProvider({ children }) {
     birthDate: "",
   });
 
+  const [errorObj, setErrorObj] = useState(null);
+
   const changeType = (e) => {
     setTypeaccount(e.target.value);
   };
@@ -33,11 +41,18 @@ function RegisterContextProvider({ children }) {
 
   const handleSubmitForm = async (e) => {
     e.preventDefault();
+    const validateResult = validateInputObj(input, typeaccount);
     try {
       startLoading();
-      await register(typeaccount, input);
-      navigate("/");
+      setErrorObj((prev) => validateResult);
+      checkError(validateResult) &&
+        (await register(typeaccount, input).then(() => {
+          toast.success("register success");
+          navigate("/");
+        }));
     } catch (err) {
+      toast.error(err.response.data.message);
+      getOtherObj(err, setErrorObj);
       console.log(err);
     } finally {
       stopLoading();
@@ -47,6 +62,7 @@ function RegisterContextProvider({ children }) {
   return (
     <RegisterContext.Provider
       value={{
+        errorObj,
         input,
         typeaccount,
         changeType,

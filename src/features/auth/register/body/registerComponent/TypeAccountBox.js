@@ -1,9 +1,12 @@
 import { useRegister } from "../../../../../contexts/RegisterContext";
 import "./TypeAccountBox.css";
 import { DOCTOR, PATIENT } from "../../../../../config/constant";
+import { isEmpty } from "lodash";
 
 function TypeAccountBox() {
-  const { typeaccount, changeType, input, handleChangeInput } = useRegister();
+  const { typeaccount, changeType, input, handleChangeInput, errorObj } =
+    useRegister();
+
   return (
     <div className="typeaccount-box">
       <div>
@@ -12,7 +15,9 @@ function TypeAccountBox() {
         </label>
         <select
           value={typeaccount}
-          className="form-select"
+          className={`form-select ${
+            !isEmpty(errorObj?.typeaccount) ? "input-error" : ""
+          }`}
           id="userType"
           onChange={changeType}
         >
@@ -20,6 +25,13 @@ function TypeAccountBox() {
           <option value={DOCTOR}>Doctor</option>
           <option value={PATIENT}>Patient</option>
         </select>
+        <small
+          className={`error-message ${
+            isEmpty(errorObj?.typeaccount) ? "d-none" : ""
+          }`}
+        >
+          {errorObj?.typeaccount.required || errorObj?.typeaccount.valid}
+        </small>
       </div>
       <div className={`${typeaccount ? "" : "blind"}`}>
         <label htmlFor="numberId" className={`form-label`}>
@@ -27,12 +39,19 @@ function TypeAccountBox() {
         </label>
         <input
           type="number"
-          className={`form-control ${typeaccount ? "" : "is-invalid"}`}
+          className={`form-control ${typeaccount ? "" : "is-invalid"} ${
+            !isEmpty(errorObj?.id) ? "input-error" : ""
+          }`}
           value={typeaccount === "DOCTOR" ? input.mdId : input.citizenId}
           id="numberId"
           name={typeaccount === "DOCTOR" ? "mdId" : "citizenId"}
           onChange={handleChangeInput}
         />
+        <small
+          className={`error-message ${isEmpty(errorObj?.id) ? "d-none" : ""}`}
+        >
+          {errorObj?.id.required || errorObj?.id.valid || errorObj?.id.other}
+        </small>
       </div>
     </div>
   );

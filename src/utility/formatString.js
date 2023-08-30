@@ -17,3 +17,8 @@ export const formatListToString = (listArr) => {
     );
   return result;
 };
+
+export const formatStringToArr = (str, spliter) => {
+  let result = str?.split(spliter);
+  return result?.slice(0, result.length - 1);
+};

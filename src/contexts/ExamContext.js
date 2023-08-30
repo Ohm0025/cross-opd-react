@@ -2,7 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
 
 import * as examService from "../api/examApi";
-import * as testService from "../api/testApi";
+// import * as testService from "../api/testApi";
 
 const ExamContext = createContext();
 
@@ -98,13 +98,19 @@ function ExamContextProvider({ children }) {
         const res = await examService.fetchCurrentPt(caseId, currentId);
 
         changeId(res.data.currentCase.patientId);
-        updateRecordObj(
-          "cc",
-          "title",
-          res.data.currentCase.ChiefComplaint?.title
-        );
-        updateRecordObj("pi", "title", res.data.currentCase.PresentIll?.title);
-        updateRecordObj("fu", "fuHos", res.data.currentCase.location);
+
+        setRecordObj((prev) => {
+          return {
+            ...prev,
+            cc: res.data.currentCase.ChiefComplaint,
+            pi: res.data.currentCase.PresentIll,
+            pe: res.data.currentCase.PhysicalExam,
+            detailDx: res.data.currentCase.DetailDiag,
+            diag: res.data.currentCase.Diagnoses.map((item) => item.diagName),
+            ad: res.data.currentCase.Advice,
+            fu: res.data.currentCase.FollowUp || res.data.currentCase.location,
+          };
+        });
       } catch (err) {
         console.log(err);
       }

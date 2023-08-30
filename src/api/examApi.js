@@ -40,14 +40,20 @@ export const recordExam = async (
     });
   });
 
-  const res = await axios.post(`/exam/${caseId}/createRecord`, {
-    patientId,
-    inputData,
-    detailDrug,
-    detailProcedure,
+  // const res = await axios.post(`/exam/${caseId}/createRecord`, {
+  //   patientId,
+  //   inputData,
+  //   detailDrug,
+  //   detailProcedure,
+  // });
+
+  await axios({
+    method: "post",
+    url: `/exam/${caseId}/uppicture`,
+    data: formData,
+    headers: { "Content-Type": "multipart/form-data" },
   });
 
-  console.log(res.data);
   //axios.post(`/exam/${caseId}/complete`, { patientId, inputData });
   //axios.post(`/exam/${caseId}/complete`, { patientId, inputData });
 };

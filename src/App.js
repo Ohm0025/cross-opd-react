@@ -1,8 +1,8 @@
 import { useLoading } from "./contexts/LoadingContext";
 import Router from "./route/Router";
+import { ToastContainer } from "react-toastify";
 import Spinner from "./components/Spinner";
 import { useAuth } from "./contexts/AuthContext";
-import { ToastContainer } from "react-toastify";
 
 function App() {
   const { loading } = useLoading();

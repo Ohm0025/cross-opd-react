@@ -2,6 +2,12 @@ import { createContext, useState, useContext } from "react";
 import { useLoading } from "./LoadingContext";
 import { useAuth } from "./AuthContext";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import {
+  checkError,
+  validateLogin,
+  getOtherObj,
+} from "../utility/validate/validateAuth";
 
 const LoginContext = createContext();
 
@@ -12,6 +18,9 @@ function LoginContextProvider({ children }) {
     email: "",
     password: "",
   });
+
+  const [errorObj, setErrorObj] = useState(null);
+
   const { startLoading, stopLoading } = useLoading();
   const { login } = useAuth();
 
@@ -27,10 +36,17 @@ function LoginContextProvider({ children }) {
 
   const handleClickLogin = async (event) => {
     event.preventDefault();
+    const validateResult = validateLogin(input, typeLoginAccount);
     try {
       startLoading();
-      await login(typeLoginAccount, input);
+      setErrorObj((pre) => validateResult);
+      checkError(validateResult) &&
+        (await login(typeLoginAccount, input).then(() =>
+          toast.success("success login")
+        ));
     } catch (err) {
+      toast.error(err.response.data.message);
+      getOtherObj(err, setErrorObj);
       console.log(err);
     } finally {
       stopLoading();
@@ -40,6 +56,7 @@ function LoginContextProvider({ children }) {
   return (
     <LoginContext.Provider
       value={{
+        errorObj,
         input,
         handleClickLogin,
         handleInputLogin,
