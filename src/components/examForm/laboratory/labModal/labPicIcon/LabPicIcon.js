@@ -15,7 +15,10 @@ function LabPicIcon({ labFile, openPic, deletePic }) {
       <FontAwesomeIcon
         className="lab-pic-icon"
         icon={faFile}
-        onClick={() => openPic(labFile)}
+        onClick={() => {
+          openPic(labFile);
+          console.log(labFile);
+        }}
       />
 
       <small>{formatNamePicFile(labFile.name)}</small>

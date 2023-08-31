@@ -2,6 +2,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
 
 import * as examService from "../api/examApi";
+import { formatStringToArr } from "../utility/formatString";
 // import * as testService from "../api/testApi";
 
 const ExamContext = createContext();
@@ -97,18 +98,27 @@ function ExamContextProvider({ children }) {
       try {
         const res = await examService.fetchCurrentPt(caseId, currentId);
 
-        changeId(res.data.currentCase.patientId);
+        //changeId(res.data.currentCase.patientId);
 
         setRecordObj((prev) => {
           return {
             ...prev,
-            cc: res.data.currentCase.ChiefComplaint,
-            pi: res.data.currentCase.PresentIll,
-            pe: res.data.currentCase.PhysicalExam,
-            detailDx: res.data.currentCase.DetailDiag,
-            diag: res.data.currentCase.Diagnoses.map((item) => item.diagName),
-            ad: res.data.currentCase.Advice,
-            fu: res.data.currentCase.FollowUp || res.data.currentCase.location,
+            cc: { ...prev.cc, ...res.data.currentCase.ChiefComplaint },
+            pi: { ...prev.pi, ...res.data.currentCase.PresentIll },
+            pe: {
+              ...prev.pe,
+              ...res.data.currentCase.PhysicalExam,
+              examImg: formatStringToArr(
+                res.data.currentCase.PhysicalExam.examImg,
+                " "
+              ),
+            },
+            detailDx: { ...prev.detailDx, ...res.data.currentCase.DetailDiag },
+            diag: res.data.currentCase.Diagnoses.map((item) =>
+              item.diagName ? item.diagName : ""
+            ),
+            ad: { ...prev.ad, ...res.data.currentCase.Advice },
+            fu: { ...prev.fu, ...res.data.currentCase.FollowUp },
           };
         });
       } catch (err) {
@@ -146,8 +156,7 @@ function ExamContextProvider({ children }) {
         detailProcedure,
         updateDetailDrug,
         updateDetailProceduce,
-      }}
-    >
+      }}>
       <Outlet />
     </ExamContext.Provider>
   );

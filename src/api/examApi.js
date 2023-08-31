@@ -21,9 +21,22 @@ export const recordExam = async (
 
   const formData = new FormData();
 
+  formData.append("inputData", JSON.stringify(inputData));
+  formData.append("patientId", patientId);
+  formData.append("detailDrug", detailDrug);
+  formData.append("detailProceduce", detailProcedure);
+
+  let oldPhotoString = "";
+
   inputData.pe.examImg.forEach((item) => {
-    formData.append("pePic", item);
+    if (typeof item === "string") {
+      oldPhotoString += item + " ";
+    } else {
+      formData.append("pePic", item);
+    }
   });
+
+  formData.append("oldPePic", oldPhotoString);
 
   // {
   //   lab: [{ labName: "", labStatus: "", lasbDesc: "", labImg: [] }];

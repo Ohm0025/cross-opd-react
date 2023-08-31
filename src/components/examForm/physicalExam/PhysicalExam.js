@@ -19,14 +19,15 @@ function PhysicalExam() {
       </label>
       <div className="pe-show-text ">
         <textarea
-          value={recordObj.pe.examManual}
+          value={recordObj.pe.examManual || ""}
           placeholder="add patient's physical exam by manual or template or take picture"
           className="form-control"
           name="pe_text"
           id="pe_text"
           rows="3"
-          onChange={(e) => updateRecordObj("pe", "examManual", e.target.value)}
-        ></textarea>
+          onChange={(e) =>
+            updateRecordObj("pe", "examManual", e.target.value)
+          }></textarea>
         <hr style={{ width: "80%", margin: "auto" }} />
         <textarea
           readOnly
@@ -34,8 +35,7 @@ function PhysicalExam() {
           id=""
           rows="3"
           className="form-control"
-          value={recordObj.pe.examTemplate}
-        ></textarea>
+          value={recordObj.pe.examTemplate || ""}></textarea>
       </div>
       <div className="pe-button">
         <button onClick={() => setIsOpen(true)}>template</button>
@@ -44,8 +44,7 @@ function PhysicalExam() {
       <Modal
         title="Physical Examination"
         isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-      >
+        onClose={() => setIsOpen(false)}>
         <PhysicalExamModal
           updateRecord={(updatedValue) => {
             updateRecordObj("pe", "examTemplate", updatedValue);
@@ -56,8 +55,7 @@ function PhysicalExam() {
       <Modal
         title={"Physical Exam : Photo"}
         isOpen={isPhoto}
-        onClose={() => setIsPhoto(false)}
-      >
+        onClose={() => setIsPhoto(false)}>
         <ModalPic
           updateRecord={(updatedValue) => {
             updateRecordObj("pe", "examImg", updatedValue);

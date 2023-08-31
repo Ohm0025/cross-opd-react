@@ -14,9 +14,10 @@ function Advice() {
         id="adv_text"
         cols="30"
         rows="3"
-        value={recordObj.ad.detail}
-        onChange={(e) => updateRecordObj("ad", "detail", e.target.value)}
-      ></textarea>
+        value={recordObj.ad.detail || ""}
+        onChange={(e) =>
+          updateRecordObj("ad", "detail", e.target.value)
+        }></textarea>
     </div>
   );
 }

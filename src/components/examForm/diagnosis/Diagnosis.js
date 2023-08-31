@@ -33,8 +33,7 @@ function Diagnosis() {
           onClick={() => {
             addDiagList(diagTitle);
             setDiagTitle("");
-          }}
-        >
+          }}>
           <FontAwesomeIcon icon={faPlus} />
         </button>
       </div>
@@ -44,6 +43,7 @@ function Diagnosis() {
             {diagList.map((item, index) => {
               return isEdit === item ? (
                 <DiagEdit
+                  key={"diagedit" + index}
                   item={item}
                   updateDiag={(updateDiag) => {
                     editDiagList(item, updateDiag);
@@ -69,9 +69,8 @@ function Diagnosis() {
             id=""
             cols="30"
             rows="2"
-            value={detail}
-            onChange={(e) => changeDDX(e.target.value)}
-          ></textarea>
+            value={detail || ""}
+            onChange={(e) => changeDDX(e.target.value)}></textarea>
         </>
       ) : (
         <span className="diag-list-empty">- ยังไม่มีรายการวินิจฉัย -</span>

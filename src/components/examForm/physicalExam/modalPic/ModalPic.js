@@ -7,32 +7,28 @@ import ModalCamera from "./modalCamera/ModalCamera";
 import "./ModalPic.css";
 
 function ModalPic({ updateRecord, initialList }) {
-  const [listPic, setListPic] = useState(initialList);
+  // const [listPic, setListPic] = useState([]);
   const [picSrc, setPicSrc] = useState("");
 
   const [isCam, setIsCam] = useState(false);
 
   const fileEl = useRef();
 
-  useEffect(() => {
-    updateRecord(listPic);
-  }, [listPic]);
+  // useEffect(() => {
+  //   updateRecord(listPic);
+  // }, [listPic]);
 
   return isCam ? (
     <ModalCamera
-      updateListPic={(value) =>
-        setListPic((prev) => {
-          return [...prev, value];
-        })
-      }
+      updateListPic={(value) => updateRecord([...initialList, value])}
       closeCam={() => setIsCam(false)}
     />
   ) : !picSrc ? (
     <div className="pe-pic-container">
       <div className="pe-pic-list">
-        {listPic.length > 0 ? (
+        {initialList.length > 0 ? (
           <>
-            {listPic?.map((item, index) => {
+            {/* {listPic?.map((item, index) => {
               return (
                 <PePicIcon
                   peFile={item}
@@ -43,6 +39,22 @@ function ModalPic({ updateRecord, initialList }) {
                       prev.filter((item) => item !== deletedPic)
                     )
                   }
+                />
+              );
+            })} */}
+
+            {initialList?.map((item, index) => {
+              return (
+                <PePicIcon
+                  peFile={item}
+                  key={"picicon" + index}
+                  openPic={(file) => setPicSrc(file)}
+                  deletePic={(deletedPic) => {
+                    const newList = initialList.filter(
+                      (item) => item !== deletedPic
+                    );
+                    updateRecord(newList);
+                  }}
                 />
               );
             })}
@@ -60,9 +72,8 @@ function ModalPic({ updateRecord, initialList }) {
           ref={fileEl}
           onChange={(e) => {
             if (e.target.files?.length > 0) {
-              setListPic((prev) => {
-                return [...prev, ...e.target.files];
-              });
+              const objlist = Object.values(e.target.files);
+              updateRecord([...initialList, ...objlist.map((item) => item)]);
             }
           }}
         />
@@ -76,7 +87,15 @@ function ModalPic({ updateRecord, initialList }) {
         <FontAwesomeIcon icon={faArrowRightFromBracket} />
       </button>
       <div className="pe-home-img-div">
-        <img src={URL.createObjectURL(picSrc)} alt="" className="img-fluid" />
+        <img
+          src={
+            typeof picSrc === "object"
+              ? URL.createObjectURL(picSrc)
+              : "http://localhost:8008/images/" + picSrc
+          }
+          alt=""
+          className="img-fluid"
+        />
       </div>
     </div>
   );

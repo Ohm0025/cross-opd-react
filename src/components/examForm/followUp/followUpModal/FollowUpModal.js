@@ -33,7 +33,7 @@ function FollowUpModal({ item, updateFu, closeModal }) {
             <input
               type="text"
               className="form-control"
-              value={item.fuHos}
+              value={item.fuHos || ""}
               onChange={(e) => updateFu("fuHos", e.target.value)}
             />
           </div>
@@ -42,7 +42,7 @@ function FollowUpModal({ item, updateFu, closeModal }) {
             <input
               type="text"
               className="form-control"
-              value={item.fuOPD}
+              value={item.fuOPD || ""}
               onChange={(e) => updateFu("fuOPD", e.target.value)}
             />
           </div>
@@ -54,9 +54,8 @@ function FollowUpModal({ item, updateFu, closeModal }) {
               cols="10"
               rows="3"
               className="form-control"
-              value={item.fuDetail}
-              onChange={(e) => updateFu("fuDetail", e.target.value)}
-            ></textarea>
+              value={item.fuDetail || ""}
+              onChange={(e) => updateFu("fuDetail", e.target.value)}></textarea>
           </div>
           <div className="location-button">
             <button
@@ -64,8 +63,7 @@ function FollowUpModal({ item, updateFu, closeModal }) {
               onClick={() => {
                 closeModal();
                 updateFu("fuDate", date);
-              }}
-            >
+              }}>
               ENTER
             </button>
           </div>

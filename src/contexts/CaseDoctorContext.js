@@ -56,8 +56,7 @@ function CaseDoctorContextProvider({ children }) {
         handleSearchCard,
         finishCaseList,
         unfinishCaseList,
-      }}
-    >
+      }}>
       <Outlet />
     </CaseDoctorContext.Provider>
   );
