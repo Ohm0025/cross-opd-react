@@ -33,7 +33,11 @@ function ImgModal({
       </button>
       <div className="img-home-img-div">
         <img
-          src={URL.createObjectURL(openPic.picSrc)}
+          src={
+            typeof openPic.picSrc === "object"
+              ? URL.createObjectURL(openPic.picSrc)
+              : "http://localhost:8008/images/" + openPic.picSrc
+          }
           alt=""
           className="img-fluid"
         />
@@ -58,8 +62,7 @@ function ImgModal({
           id="img-status"
           className="form-select"
           value={imgStatus}
-          onChange={(e) => setImgStatus(e.target.value)}
-        >
+          onChange={(e) => setImgStatus(e.target.value)}>
           <option className="lab-status-option" value="pending">
             Pending
           </option>
@@ -77,8 +80,7 @@ function ImgModal({
               cols="40"
               rows="5"
               value={imgDes}
-              onChange={(e) => setImgDes(e.target.value)}
-            ></textarea>
+              onChange={(e) => setImgDes(e.target.value)}></textarea>
             <div className="img-pic-list">
               {listPic.length > 0 && (
                 <>
@@ -149,8 +151,7 @@ function ImgModal({
                   }
                   onClose();
                 }
-          }
-        >
+          }>
           {editImg ? "Edit" : "Add"}
         </button>
         <button>Clear</button>

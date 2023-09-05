@@ -44,6 +44,9 @@
   background-color: #5f8d4e;
 }
 
+.pt-waitaction button:disabled {
+  background-color: rgb(227, 226, 226);
+}
 @media only screen and (max-width: 768px) {
   .pt-waitaction {
     flex-direction: column;

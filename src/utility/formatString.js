@@ -19,6 +19,12 @@ export const formatListToString = (listArr) => {
 };
 
 export const formatStringToArr = (str, spliter) => {
-  let result = str?.split(spliter);
-  return result?.slice(0, result.length - 1);
+  if (typeof str === "object") {
+    return str;
+  }
+  if (str?.trim() === "") {
+    return [];
+  }
+  let result = str?.trim().split(spliter);
+  return result;
 };

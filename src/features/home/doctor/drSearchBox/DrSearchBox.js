@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 
 import { io } from "socket.io-client";
 
-function DrSearchBox({ handleSearchCard }) {
+function DrSearchBox({ handleSearchCard, errorObj }) {
   const [patientId, setPatientId] = useState("");
   const [socket, setSocket] = useState(null);
 
@@ -18,7 +18,7 @@ function DrSearchBox({ handleSearchCard }) {
       <div className="input-group">
         <input
           type="number"
-          className="form-control"
+          className={`form-control ${errorObj?.searchBar ? "input-error" : ""}`}
           placeholder="insert patient id"
           value={patientId}
           onChange={(e) => setPatientId(e.target.value)}
@@ -28,11 +28,15 @@ function DrSearchBox({ handleSearchCard }) {
           onClick={() => {
             handleSearchCard(+patientId);
             socket?.emit("activatedOpd", patientId);
-          }}
-        >
+          }}>
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
       </div>
+      <small className={`error-message ${errorObj?.searchBar ? "" : "d-none"}`}>
+        {errorObj?.searchBar.required ||
+          errorObj?.searchBar.notNumber ||
+          errorObj?.searchBar.other}
+      </small>
     </div>
   );
 }

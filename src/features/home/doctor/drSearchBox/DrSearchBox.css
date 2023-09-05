@@ -19,3 +19,10 @@
 .search-button:hover {
   background-color: #5f8d4e;
 }
+.input-error {
+  border: solid 1px red;
+}
+
+.error-message {
+  color: red;
+}

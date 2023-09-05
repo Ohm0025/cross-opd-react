@@ -17,7 +17,7 @@ function Laboratory() {
       <label className="form-label">Laboratory</label>
       <button onClick={() => setIsOpen(true)}>+Add Lab</button>
 
-      {listLab.length > 0 ? (
+      {listLab?.length > 0 ? (
         <div className="lab-list">
           {listLab.map((item, index) => {
             return <LabItem key={"labitem" + index} item={item} />;
@@ -29,8 +29,7 @@ function Laboratory() {
       <Modal
         title="Laboratory"
         isOpen={isOpen}
-        onClose={() => setIsOpen(false)}
-      >
+        onClose={() => setIsOpen(false)}>
         <LabModal onClose={() => setIsOpen(false)} />
       </Modal>
     </div>

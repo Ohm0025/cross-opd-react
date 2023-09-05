@@ -17,7 +17,6 @@ function LabPicIcon({ labFile, openPic, deletePic }) {
         icon={faFile}
         onClick={() => {
           openPic(labFile);
-          console.log(labFile);
         }}
       />
 

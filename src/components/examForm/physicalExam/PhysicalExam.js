@@ -60,7 +60,7 @@ function PhysicalExam() {
           updateRecord={(updatedValue) => {
             updateRecordObj("pe", "examImg", updatedValue);
           }}
-          initialList={recordObj.pe.examImg}
+          initialList={recordObj?.pe?.examImg || []}
         />
       </Modal>
     </div>

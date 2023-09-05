@@ -3,9 +3,7 @@ import axios from "../config/axios";
 export const activateCard = (patientId) =>
   axios.post("/exam/activate", { patientId });
 
-export const fetchFinishCase = () => axios.get("/exam/finish");
-
-export const fetchUnfinishCase = () => axios.get("/exam/unfinish");
+export const fetchMyCase = () => axios.get("/exam/myCase");
 
 export const fetchCurrentPt = (caseId, patientId) =>
   axios.post("/exam/" + caseId, { patientId });
@@ -20,6 +18,8 @@ export const recordExam = async (
   //check correct case correct doctor correct patient
 
   const formData = new FormData();
+
+  console.log(inputData);
 
   formData.append("inputData", JSON.stringify(inputData));
   formData.append("patientId", patientId);
@@ -38,31 +38,40 @@ export const recordExam = async (
 
   formData.append("oldPePic", oldPhotoString);
 
-  // {
-  //   lab: [{ labName: "", labStatus: "", lasbDesc: "", labImg: [] }];
-  // }
-  inputData.lab.forEach((item, index) => {
-    item.img.forEach((subItem) => {
-      formData.append(`labPic`, subItem, item.name);
+  let listLabImg = [];
+  inputData?.lab?.forEach((item1, index1) => {
+    // listLabImg.push({ ...item1, img: [] });
+    listLabImg = [...listLabImg, { ...item1, img: [] }];
+    //console.log(item1.img);
+    item1?.img &&
+      item1?.img?.forEach((item2) => {
+        if (typeof item2 === "string") {
+          listLabImg[index1].img.push(item2);
+        } else {
+          formData.append("labPic", item2, item1.name);
+        }
+      });
+  });
+
+  formData.append("oldLabPic", JSON.stringify(listLabImg));
+
+  let listImgImg = [];
+  inputData.img.forEach((item1, index1) => {
+    listImgImg = [...listImgImg, { ...item1, img: [] }];
+    item1?.img.forEach((item2) => {
+      if (typeof item2 === "string") {
+        listImgImg[index1].img.push(item2);
+      } else {
+        formData.append("imgPic", item2, item1.name);
+      }
     });
   });
 
-  inputData.img.forEach((item, index) => {
-    item.img.forEach((subItem) => {
-      formData.append(`imgPic`, subItem, item.name);
-    });
-  });
-
-  // const res = await axios.post(`/exam/${caseId}/createRecord`, {
-  //   patientId,
-  //   inputData,
-  //   detailDrug,
-  //   detailProcedure,
-  // });
+  formData.append("oldImgPic", JSON.stringify(listImgImg));
 
   await axios({
     method: "post",
-    url: `/exam/${caseId}/uppicture`,
+    url: `/exam/${caseId}/createRecord`,
     data: formData,
     headers: { "Content-Type": "multipart/form-data" },
   });

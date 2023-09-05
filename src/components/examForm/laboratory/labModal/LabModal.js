@@ -2,30 +2,41 @@ import { useRef, useState } from "react";
 import "./LabModal.css";
 import LabPicIcon from "./labPicIcon/LabPicIcon";
 import { useLab } from "../../../../contexts/LabContext";
-
+import { formatStringToArr } from "../../../../utility/formatString";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 
-function LabModal({
-  onClose,
-  labname,
-  labstatus,
-  labdes,
-  labimg,
-  editLab,
-  labItem,
-}) {
+function LabModal({ onClose, editLab, labItem }) {
   const { createNewLabItem } = useLab();
+
+  console.log(editLab);
+
+  const [labObj, setLabObj] = useState({
+    name: editLab ? labItem?.name : "",
+    status: editLab ? labItem?.status : "pending",
+    des: editLab ? labItem?.des : "",
+    img: editLab ? formatStringToArr(labItem?.img, " ") : "",
+  });
+
+  const resetLabObj = () => {
+    setLabObj({
+      name: "",
+      status: "pending",
+      des: "",
+      img: "",
+    });
+  };
+
+  const changeLabObj = (key, value) => {
+    setLabObj((prev) => {
+      return { ...prev, [key]: value };
+    });
+  };
 
   const [openPic, setOpenPic] = useState({
     switch: false,
     picSrc: "",
   });
-
-  const [listPic, setListPic] = useState(labimg || []);
-  const [labName, setLabName] = useState(labname || "");
-  const [labStatus, setLabStatus] = useState(labstatus || "pending");
-  const [labDes, setLabDes] = useState(labdes || "");
 
   const fileEl = useRef();
 
@@ -37,8 +48,12 @@ function LabModal({
       </button>
       <div className="lab-home-img-div">
         <img
-          alt=""
-          src={URL.createObjectURL(openPic.picSrc)}
+          alt="openPic.picSrc"
+          src={
+            typeof openPic.picSrc === "object"
+              ? URL.createObjectURL(openPic.picSrc)
+              : "http://localhost:8008/images/" + openPic.picSrc
+          }
           className="img-fluid"
         />
       </div>
@@ -51,8 +66,8 @@ function LabModal({
           type="text"
           className="form-control"
           id="lab-name"
-          value={labName}
-          onChange={(e) => setLabName(e.target.value)}
+          value={labObj.name}
+          onChange={(e) => changeLabObj("name", e.target.value)}
         />
       </div>
       <div className="lab-status input-group">
@@ -61,9 +76,8 @@ function LabModal({
           name=""
           id="lab-status"
           className="form-select"
-          value={labStatus}
-          onChange={(e) => setLabStatus(e.target.value)}
-        >
+          value={labObj.status}
+          onChange={(e) => changeLabObj("status", e.target.value)}>
           <option className="lab-status-option" value="pending">
             Pending
           </option>
@@ -72,7 +86,7 @@ function LabModal({
           </option>
         </select>
       </div>
-      {labStatus === "complete" && (
+      {labObj.status === "complete" && (
         <div className="lab-result">
           <div className="lab-result-input">
             <textarea
@@ -80,13 +94,13 @@ function LabModal({
               className="form-control"
               rows={5}
               cols={40}
-              value={labDes}
-              onChange={(e) => setLabDes(e.target.value)}
+              value={labObj.des}
+              onChange={(e) => changeLabObj("des", e.target.value)}
             />
             <div className="lab-pic-list">
-              {listPic.length > 0 ? (
+              {labObj.img.length > 0 ? (
                 <>
-                  {listPic.map((item, index) => (
+                  {labObj.img?.map((item, index) => (
                     <LabPicIcon
                       key={"labpicitem" + index}
                       labFile={item}
@@ -96,9 +110,10 @@ function LabModal({
                         })
                       }
                       deletePic={(deletedPic) =>
-                        setListPic((prev) => {
-                          return prev.filter((item) => item !== deletedPic);
-                        })
+                        changeLabObj(
+                          "img",
+                          labObj.img.filter((item) => item !== deletedPic)
+                        )
                       }
                     />
                   ))}
@@ -116,13 +131,12 @@ function LabModal({
               className="d-none"
               ref={fileEl}
               onChange={(e) => {
+                console.dir(e.target.files);
+                console.dir(e.target.files[0].name);
                 if (e.target.files?.length > 0) {
-                  setListPic((prev) => {
-                    return [...prev, ...e.target.files];
-                  });
+                  changeLabObj("img", [...labObj.img, ...e.target.files]);
                 }
-              }}
-            ></input>
+              }}></input>
             <button>Take Photo</button>
           </div>
         </div>
@@ -132,29 +146,19 @@ function LabModal({
           onClick={
             editLab
               ? () => {
-                  editLab(labItem, {
-                    name: labName,
-                    status: labStatus,
-                    des: labDes,
-                    img: listPic,
-                  });
+                  editLab(labItem, labObj);
+                  resetLabObj();
                   onClose();
                 }
               : () => {
-                  createNewLabItem({
-                    name: labName,
-                    status: labStatus,
-                    des: labDes,
-                    img: listPic,
-                  });
-                  if (listPic.length > 0) {
-                    setListPic([]);
+                  createNewLabItem(labObj);
+                  if (labObj.img.length > 0) {
                     fileEl.current.value = "";
                   }
+                  resetLabObj();
                   onClose();
                 }
-          }
-        >
+          }>
           {editLab ? "Edit" : "Add"}
         </button>
         <button>Clear</button>

@@ -6,10 +6,9 @@ import { io } from "socket.io-client";
 import { useEffect, useState } from "react";
 
 function PtWaitPage() {
-  const [status, setStatus] = useState("");
   const { user } = useAuth();
-  const { waitCase } = useHomePt();
-  const { navigate, editOpdCard, cancelCard } = useHomePt();
+  const { navigate, input, editOpdCard, cancelCard } = useHomePt();
+  const [status, setStatus] = useState(input.status || "waiting");
 
   const [socket, setSocket] = useState(null);
 
@@ -23,8 +22,8 @@ function PtWaitPage() {
   }, []);
 
   useEffect(() => {
-    socket?.emit("newPatient", waitCase.patientId);
-  }, [socket, waitCase.patientId]);
+    socket?.emit("newPatient", input.patientId);
+  }, [socket, input.patientId]);
 
   useEffect(() => {
     socket?.on("changeStatus", (status) => {
@@ -37,13 +36,22 @@ function PtWaitPage() {
         <div>{"เปิดบัตรสำเร็จ"}</div>
         <div>{`ID : ${user.id}`}</div>
       </div>
-      <div className="pt-show-item">{`status : ${
-        status || waitCase.status
-      }`}</div>
-      <div className="pt-waitaction">
-        <button onClick={handleEdit}>Edit</button>
-        <button onClick={() => cancelCard(waitCase.id)}>Cancel</button>
-      </div>
+      <div className="pt-show-item">{`status : ${status}`}</div>
+      {status === "inprogress" ? (
+        <div className={`pt-waitaction`}>
+          <button onClick={handleEdit} disabled>
+            Edit
+          </button>
+          <button onClick={() => cancelCard(input.id)} disabled>
+            Cancel
+          </button>
+        </div>
+      ) : (
+        <div className={`pt-waitaction`}>
+          <button onClick={handleEdit}>Edit</button>
+          <button onClick={() => cancelCard(input.id)}>Cancel</button>
+        </div>
+      )}
     </div>
   );
 }

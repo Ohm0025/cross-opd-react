@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef } from "react";
 import PePicIcon from "./pePicIcon/PePicIcon";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
@@ -14,9 +14,7 @@ function ModalPic({ updateRecord, initialList }) {
 
   const fileEl = useRef();
 
-  // useEffect(() => {
-  //   updateRecord(listPic);
-  // }, [listPic]);
+  console.log(initialList);
 
   return isCam ? (
     <ModalCamera
@@ -26,23 +24,8 @@ function ModalPic({ updateRecord, initialList }) {
   ) : !picSrc ? (
     <div className="pe-pic-container">
       <div className="pe-pic-list">
-        {initialList.length > 0 ? (
+        {initialList?.length > 0 ? (
           <>
-            {/* {listPic?.map((item, index) => {
-              return (
-                <PePicIcon
-                  peFile={item}
-                  key={"picicon" + index}
-                  openPic={(file) => setPicSrc(file)}
-                  deletePic={(deletedPic) =>
-                    setListPic((prev) =>
-                      prev.filter((item) => item !== deletedPic)
-                    )
-                  }
-                />
-              );
-            })} */}
-
             {initialList?.map((item, index) => {
               return (
                 <PePicIcon

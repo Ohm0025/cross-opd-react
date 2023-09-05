@@ -31,8 +31,7 @@ function LabContextProvider({ children }) {
         createNewLabItem,
         deletedLab,
         editLab,
-      }}
-    >
+      }}>
       {children}
     </LabContext.Provider>
   );

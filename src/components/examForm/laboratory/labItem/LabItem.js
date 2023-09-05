@@ -9,6 +9,7 @@ import { useLab } from "../../../../contexts/LabContext";
 function LabItem({ item }) {
   const [isEdit, setIsEdit] = useState(false);
   const { deletedLab, editLab } = useLab();
+
   return (
     <>
       <div className="lab-list-item">
@@ -29,15 +30,10 @@ function LabItem({ item }) {
       <Modal
         title="Laboratory"
         isOpen={isEdit}
-        onClose={() => setIsEdit(false)}
-      >
+        onClose={() => setIsEdit(false)}>
         <LabModal
           onClose={() => setIsEdit(false)}
           labItem={item}
-          labname={item.name}
-          labstatus={item.status}
-          labdes={item.des}
-          labimg={item.img}
           editLab={editLab}
         />
       </Modal>

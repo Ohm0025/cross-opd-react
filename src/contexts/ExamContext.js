@@ -97,8 +97,7 @@ function ExamContextProvider({ children }) {
     const fetchCurrentCase = async () => {
       try {
         const res = await examService.fetchCurrentPt(caseId, currentId);
-
-        //changeId(res.data.currentCase.patientId);
+        console.log(res.data.currentCase);
 
         setRecordObj((prev) => {
           return {
@@ -109,7 +108,7 @@ function ExamContextProvider({ children }) {
               ...prev.pe,
               ...res.data.currentCase.PhysicalExam,
               examImg: formatStringToArr(
-                res.data.currentCase.PhysicalExam.examImg,
+                res.data.currentCase.PhysicalExam.examImg || "",
                 " "
               ),
             },
@@ -117,6 +116,8 @@ function ExamContextProvider({ children }) {
             diag: res.data.currentCase.Diagnoses.map((item) =>
               item.diagName ? item.diagName : ""
             ),
+            lab: JSON.parse(res.data.currentCase.LabOrder.labArray || "[]"),
+            img: JSON.parse(res.data.currentCase.Imaging.imgArray || "[]"),
             ad: { ...prev.ad, ...res.data.currentCase.Advice },
             fu: { ...prev.fu, ...res.data.currentCase.FollowUp },
           };

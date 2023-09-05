@@ -151,4 +151,12 @@ export const getOtherObj = (err, cb) => {
       };
     });
   }
+  if (err.response.data.message === "not found patientId") {
+    cb((prev) => {
+      return {
+        ...prev,
+        searchBar: { ...prev.searchBar, other: err.response.data.message },
+      };
+    });
+  }
 };
