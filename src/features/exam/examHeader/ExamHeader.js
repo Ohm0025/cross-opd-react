@@ -3,22 +3,38 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowDown } from "@fortawesome/free-solid-svg-icons";
 import IconName from "../../../components/iconName/IconName";
 import { useExam } from "../../../contexts/ExamContext";
+import { formatTagPtName } from "../../../utility/formatString";
+import { io } from "socket.io-client";
+import { useEffect, useState } from "react";
 
 function ExamHeader() {
-  const { handleRecord } = useExam();
+  const { handleRecord, patientObj } = useExam();
+  const [socket, setSocket] = useState(null);
+
+  useEffect(() => {
+    setSocket(io("http://localhost:8008"));
+  }, []);
+
   return (
     <div className="exam-header">
       <div className="header-left">
-        <IconName char={"M"} radius="45px" />
+        <IconName char={patientObj?.firstName[0].toUpperCase()} radius="45px" />
         <div className="pt-tag">
-          Mr.Mashalo Salamanga Age 23 yr<small>Id : 23113</small>
+          {patientObj && formatTagPtName(patientObj)}
+          <small>{`id : ${patientObj?.id}`}</small>
         </div>
         <button className="pt-button">
           <FontAwesomeIcon icon={faArrowDown} />
         </button>
       </div>
       <div className="header-right">
-        <button onClick={handleRecord}>Finish</button>
+        <button
+          onClick={() => {
+            handleRecord();
+            socket?.emit("finishCase", patientObj.patientId);
+          }}>
+          Finish
+        </button>
         <button>Pending</button>
         <button>Cancel</button>
       </div>

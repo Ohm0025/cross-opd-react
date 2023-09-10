@@ -3,23 +3,20 @@ import { formatCreatedAt } from "../../../utility/formatDataTime";
 import "./PastNav.css";
 
 function PastNav() {
-  const { listAllPast } = usePastHx();
+  const { listAllPast, changeSelectedCase } = usePastHx();
 
   return (
     <div className="ph-navBar">
-      {listAllPast.map((item, index) => {
+      {listAllPast?.map((item, index) => {
         return (
           <div
             className="ph-nav-item"
             key={"ph-navbar" + index}
-            onClick={() => console.log(item.id)}
-          >
+            onClick={() => changeSelectedCase(item.id)}>
             {formatCreatedAt(item.updatedAt)}
           </div>
         );
       })}
-      <div className="ph-nav-item">{"10/10/66"}</div>
-      <div className="ph-nav-item">{"20/20/66"}</div>
     </div>
   );
 }

@@ -28,3 +28,18 @@ export const formatStringToArr = (str, spliter) => {
   let result = str?.trim().split(spliter);
   return result;
 };
+
+export const formatTagPtName = ({ firstName, lastName, birthDate, gender }) => {
+  const today = new Date();
+  const birth = new Date(birthDate);
+  let preflix = gender?.toLowerCase() === "male" ? "Mr." : "Mrs.";
+  let firstname = firstName[0].toUpperCase() + firstName.slice(1);
+  let lasename = lastName[0].toUpperCase() + lastName.slice(1);
+  let age =
+    today.getFullYear() -
+    birth.getFullYear() -
+    (today.getMonth() < birth.getMonth() ||
+      (today.getMonth() === birth.getMonth() &&
+        today.getDate() < birth.getDate()));
+  return preflix + firstname + " " + lasename + " age " + age + " yr";
+};

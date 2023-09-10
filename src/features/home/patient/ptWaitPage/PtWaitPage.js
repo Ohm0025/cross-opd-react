@@ -29,6 +29,12 @@ function PtWaitPage() {
     socket?.on("changeStatus", (status) => {
       setStatus(status);
     });
+    socket?.on("closeStatus", (command) => {
+      if (command === "closeCase") {
+        alert("case finish");
+        window.location.reload();
+      }
+    });
   }, [socket]);
   return (
     <div className="pt-waitpage">

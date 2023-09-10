@@ -3,7 +3,15 @@ import TreatmentItem from "./treatmentItem/TreatmentItem";
 import { useDiag } from "../../../contexts/DiagContext";
 
 function Treatment() {
-  const { diagList } = useDiag();
+  const {
+    diagList,
+    txObj,
+    handleSubmitTx,
+    updateTxObj,
+    editTxObj,
+    deleteTxObj,
+  } = useDiag();
+
   return (
     <div className="tx-box">
       <label htmlFor="tx_btn">Treatment</label>
@@ -12,7 +20,15 @@ function Treatment() {
         {diagList.length > 0 ? (
           <ul className="list-group">
             {diagList.map((item, index) => (
-              <TreatmentItem diagTitle={item} key={"txitem" + index} />
+              <TreatmentItem
+                diagTitle={item}
+                key={"txitem" + index}
+                txList={txObj[item]}
+                handleSubmitTx={handleSubmitTx}
+                updateTxObj={updateTxObj}
+                editTxObj={editTxObj}
+                deleteTxObj={deleteTxObj}
+              />
             ))}
           </ul>
         ) : (
@@ -26,3 +42,14 @@ function Treatment() {
 }
 
 export default Treatment;
+
+//{diag01:[
+//   {title:"" ,type:"" ,detail:""},
+//   {title:""}
+// ] , diag02:[
+//   {},
+//   {}
+// ]}
+
+//if drug - {title:"paracetamol" , type:"drug" , detail:"1 tab po pc # 20}
+//if proceduce - {title:"appendectomy" , type:"proceduce" , detail:"appendex size ... , no complicate"}

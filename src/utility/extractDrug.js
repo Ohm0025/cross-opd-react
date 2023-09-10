@@ -39,3 +39,8 @@ export const extractDate = (list) => {
   });
   return date_arr;
 };
+
+//txObj = {diag1 : [{},{}] ,diag2 : [{},{}]}
+// export const convertTxObjToArr = (txObj) => {
+
+// }

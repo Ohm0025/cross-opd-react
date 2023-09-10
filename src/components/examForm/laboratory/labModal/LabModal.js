@@ -9,8 +9,6 @@ import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 function LabModal({ onClose, editLab, labItem }) {
   const { createNewLabItem } = useLab();
 
-  console.log(editLab);
-
   const [labObj, setLabObj] = useState({
     name: editLab ? labItem?.name : "",
     status: editLab ? labItem?.status : "pending",

@@ -36,8 +36,26 @@ function PastHxContextProvider({ children }) {
     fetchPast();
   }, [decodeParams, typeaccount, user.id]);
 
+  console.log(selectedCase);
+
+  const changeSelectedCase = async (caseId) => {
+    try {
+      const res = await pastHxService.fetchSelectedPast(caseId);
+      console.log(res.data);
+      setSelectedCase((prev) => {
+        return {
+          ...res.data?.selectedPastCase,
+          UserDoctor: { ...res.data?.doctorObj },
+        };
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
-    <PastHxContext.Provider value={{ listAllPast, selectedCase }}>
+    <PastHxContext.Provider
+      value={{ listAllPast, selectedCase, changeSelectedCase }}>
       {children}
     </PastHxContext.Provider>
   );

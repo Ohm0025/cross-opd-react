@@ -14,8 +14,6 @@ function ModalPic({ updateRecord, initialList }) {
 
   const fileEl = useRef();
 
-  console.log(initialList);
-
   return isCam ? (
     <ModalCamera
       updateListPic={(value) => updateRecord([...initialList, value])}

@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { Outlet, useParams } from "react-router-dom";
+import { Outlet, useNavigate, useParams } from "react-router-dom";
 
 import * as examService from "../api/examApi";
 import { formatStringToArr } from "../utility/formatString";
@@ -10,7 +10,11 @@ const ExamContext = createContext();
 function ExamContextProvider({ children }) {
   const [currentId, setCurrentId] = useState(0); //ptId
 
+  const navigate = useNavigate();
+
   const { caseId } = useParams();
+
+  const [patientObj, setPatientObj] = useState(null);
 
   const [recordObj, setRecordObj] = useState({
     cc: { title: "" },
@@ -24,6 +28,7 @@ function ExamContextProvider({ children }) {
       detail: "",
     },
     diag: [],
+    tx: {},
     img: [],
     lab: [],
     ad: {
@@ -93,11 +98,67 @@ function ExamContextProvider({ children }) {
     });
   };
 
+  const updateTxObj = (diagName, newObj) => {
+    setRecordObj((prev) => {
+      recordObj.tx[diagName] = recordObj.tx[diagName]
+        ? [...recordObj.tx[diagName], newObj]
+        : [newObj];
+      return {
+        ...prev,
+        tx: {
+          ...recordObj.tx,
+          [diagName]: recordObj.tx[diagName],
+        },
+      };
+    });
+  };
+
+  const changeDiagName = (newDiagName, oldDiagName) => {
+    setRecordObj((prev) => {
+      return {
+        ...prev,
+        tx: { ...prev.tx, [newDiagName]: [...prev.tx[oldDiagName]] },
+      };
+    });
+    delete recordObj.tx[oldDiagName];
+  };
+
+  const editTxObj = (selectDiagName, selectItem, newObj) => {
+    setRecordObj((prev) => {
+      return {
+        ...prev,
+        tx: {
+          ...prev.tx,
+          [selectDiagName]: prev.tx[selectDiagName].map((item) => {
+            return item === selectItem ? newObj : item;
+          }),
+        },
+      };
+    });
+  };
+
+  const deleteTxObj = (selectDiagName, selectItem) => {
+    setRecordObj((prev) => {
+      return {
+        ...prev,
+        tx: {
+          ...prev.tx,
+          [selectDiagName]: prev.tx[selectDiagName].filter(
+            (item) => item !== selectItem
+          ),
+        },
+      };
+    });
+  };
   useEffect(() => {
     const fetchCurrentCase = async () => {
       try {
         const res = await examService.fetchCurrentPt(caseId, currentId);
         console.log(res.data.currentCase);
+
+        setPatientObj((prev) => {
+          return { ...res.data.patientObj };
+        });
 
         setRecordObj((prev) => {
           return {
@@ -113,9 +174,8 @@ function ExamContextProvider({ children }) {
               ),
             },
             detailDx: { ...prev.detailDx, ...res.data.currentCase.DetailDiag },
-            diag: res.data.currentCase.Diagnoses.map((item) =>
-              item.diagName ? item.diagName : ""
-            ),
+            diag: JSON.parse(res.data.currentCase.Diagnosis.diagName || "[]"),
+            tx: JSON.parse(res.data.currentCase.Treatment.txList || "{}"),
             lab: JSON.parse(res.data.currentCase.LabOrder.labArray || "[]"),
             img: JSON.parse(res.data.currentCase.Imaging.imgArray || "[]"),
             ad: { ...prev.ad, ...res.data.currentCase.Advice },
@@ -138,6 +198,7 @@ function ExamContextProvider({ children }) {
         detailDrug,
         detailProcedure
       );
+      navigate("/");
     } catch (err) {
       console.log(err);
     }
@@ -157,6 +218,11 @@ function ExamContextProvider({ children }) {
         detailProcedure,
         updateDetailDrug,
         updateDetailProceduce,
+        updateTxObj,
+        editTxObj,
+        deleteTxObj,
+        changeDiagName,
+        patientObj,
       }}>
       <Outlet />
     </ExamContext.Provider>

@@ -8,11 +8,16 @@ function DiagContextProvider({ children }) {
     recordObj: {
       diag: diagList,
       detailDx: { detail },
+      tx: txObj,
     },
     updateList,
     editList,
     deleteList,
     updateRecordObj,
+    updateTxObj,
+    editTxObj,
+    deleteTxObj,
+    changeDiagName,
   } = useExam();
 
   const addDiagList = (newDiag) => {
@@ -23,26 +28,38 @@ function DiagContextProvider({ children }) {
 
   const editDiagList = (selectDiag, newValue) => {
     editList(selectDiag, newValue, "diag");
+    changeDiagName(newValue, selectDiag);
   };
 
   const removeDiag = (selectDiag) => {
     deleteList(selectDiag, "diag");
+    delete txObj[selectDiag];
   };
 
   const changeDDX = (newvalue) => {
     updateRecordObj("detailDx", "detail", newvalue);
   };
+
+  //treatment obj handle
+  const handleSubmitTx = (diagName, inputTxArr) => {
+    updateRecordObj("tx", diagName, inputTxArr);
+  };
+
   return (
     <DiagContext.Provider
       value={{
         diagList,
+        txObj,
         addDiagList,
         editDiagList,
         removeDiag,
         detail,
         changeDDX,
-      }}
-    >
+        handleSubmitTx,
+        updateTxObj,
+        editTxObj,
+        deleteTxObj,
+      }}>
       {children}
     </DiagContext.Provider>
   );
