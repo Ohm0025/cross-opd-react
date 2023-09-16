@@ -2,7 +2,13 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { Outlet, useNavigate, useParams } from "react-router-dom";
 
 import * as examService from "../api/examApi";
+import * as underlyService from "../api/underlyApi";
 import { formatStringToArr } from "../utility/formatString";
+import { useAuth } from "../contexts/AuthContext";
+import {
+  validateAddUd,
+  validateEditUd,
+} from "../utility/validate/validateUnderly";
 // import * as testService from "../api/testApi";
 
 const ExamContext = createContext();
@@ -12,9 +18,17 @@ function ExamContextProvider({ children }) {
 
   const navigate = useNavigate();
 
+  const { user } = useAuth();
   const { caseId } = useParams();
 
-  const [patientObj, setPatientObj] = useState(null);
+  const [patientObj, setPatientObj] = useState({
+    firstName: "",
+    lastName: "",
+    birthDate: "",
+    underlying: [],
+    gender: "",
+    id: "",
+  });
 
   const [recordObj, setRecordObj] = useState({
     cc: { title: "" },
@@ -154,10 +168,18 @@ function ExamContextProvider({ children }) {
     const fetchCurrentCase = async () => {
       try {
         const res = await examService.fetchCurrentPt(caseId, currentId);
-        console.log(res.data.currentCase);
+        console.log(res.data);
 
         setPatientObj((prev) => {
-          return { ...res.data.patientObj };
+          return {
+            ...prev,
+            firstName: res.data.patientObj.firstName,
+            lastName: res.data.patientObj.lastName,
+            birthDate: res.data.patientObj.birthDate,
+            underlying: JSON.parse(res.data.patientObj.underlying || "[]"),
+            gender: res.data.patientObj.gender,
+            id: res.data.patientObj.id,
+          };
         });
 
         setRecordObj((prev) => {
@@ -180,6 +202,7 @@ function ExamContextProvider({ children }) {
             img: JSON.parse(res.data.currentCase.Imaging.imgArray || "[]"),
             ad: { ...prev.ad, ...res.data.currentCase.Advice },
             fu: { ...prev.fu, ...res.data.currentCase.FollowUp },
+            location: res.data.currentCase.location,
           };
         });
       } catch (err) {
@@ -204,9 +227,81 @@ function ExamContextProvider({ children }) {
     }
   };
 
+  const addUnderly = async (newUdtitle) => {
+    const newUdObj = {
+      udTitle: newUdtitle,
+      udUpdater: `${user.firstName + " " + user.lastName}`,
+      udLocation: recordObj.location,
+      udDate: new Date(),
+    };
+    //validate underly
+    let resultValidate = validateAddUd(patientObj?.underlying, newUdtitle);
+    if (resultValidate) {
+      return resultValidate;
+    }
+    await underlyService.updateUnderly(patientObj.id, [
+      ...patientObj.underlying,
+      newUdObj,
+    ]);
+    setPatientObj((prev) => {
+      return {
+        ...prev,
+        underlying: [...prev.underlying, newUdObj],
+      };
+    });
+  };
+
+  const editUnderly = async (selectUdTitle, newEditName) => {
+    const newEditObj = {
+      udTitle: newEditName,
+      udUpdater: `${user.firstName + " " + user.lastName}`,
+      udLocation: recordObj.location,
+      udDate: new Date(),
+    };
+    //validate underly
+    let resultValidate = validateEditUd(
+      patientObj?.underlying,
+      newEditName,
+      selectUdTitle
+    );
+    if (resultValidate) {
+      return resultValidate;
+    }
+    await underlyService.updateUnderly(
+      patientObj.id,
+      patientObj.underlying.map((item) =>
+        item.udTitle === selectUdTitle ? newEditObj : item
+      )
+    );
+    setPatientObj((prev) => {
+      return {
+        ...prev,
+        underlying: prev.underlying.map((item) =>
+          item.udTitle === selectUdTitle ? newEditObj : item
+        ),
+      };
+    });
+  };
+
+  const removeUnderly = async (selectTitle) => {
+    await underlyService.updateUnderly(
+      patientObj.id,
+      patientObj.underlying.filter((item) => item.udTitle !== selectTitle)
+    );
+    setPatientObj((prev) => {
+      return {
+        ...prev,
+        underlying: prev.underlying.filter(
+          (item) => item.udTitle !== selectTitle
+        ),
+      };
+    });
+  };
+
   return (
     <ExamContext.Provider
       value={{
+        navigate,
         changeId,
         recordObj,
         updateList,
@@ -223,6 +318,9 @@ function ExamContextProvider({ children }) {
         deleteTxObj,
         changeDiagName,
         patientObj,
+        addUnderly,
+        editUnderly,
+        removeUnderly,
       }}>
       <Outlet />
     </ExamContext.Provider>

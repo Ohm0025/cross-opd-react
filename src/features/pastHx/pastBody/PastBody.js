@@ -47,8 +47,8 @@ function PastBody() {
       {"Lab : "}
       <br />
       {selectedCase &&
-        JSON.parse(selectedCase?.LabOrder?.labArray).map((item1, index1) => {
-          return item1.img.map((item2, index2) => {
+        JSON.parse(selectedCase?.LabOrder?.labArray)?.map((item1, index1) => {
+          return item1.img?.map((item2, index2) => {
             return (
               <button
                 className="past-file-button"

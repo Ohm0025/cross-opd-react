@@ -2,6 +2,9 @@
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
+  position: fixed;
+  z-index: 90;
+  width: 100%;
 }
 .header-left {
   padding: 0 0 0 13px;
@@ -24,6 +27,10 @@
   border: none;
   background-color: #f4fff3;
 }
+.pt-button:hover {
+  background-color: #c9c9c9;
+  color: white;
+}
 .header-right {
   display: flex;
   align-items: center;
@@ -40,4 +47,33 @@
 .header-right button:hover {
   background-color: #5f8d4e;
   color: white;
+}
+
+.exam-dropdown {
+  position: absolute;
+  left: 0;
+  top: 4.3rem;
+  z-index: 90;
+}
+
+.exam-dropdown ul {
+  width: 23rem;
+  margin: 0;
+  padding: 0;
+}
+
+.exam-dropdown ul li {
+  font-size: 1.2rem;
+  text-align: center;
+  padding: 0.7rem 0;
+  background-color: #eaeaea;
+  color: #b8b8b8;
+}
+.exam-dropdown ul li:hover {
+  cursor: pointer;
+  color: white;
+  background-color: #5f8d4e;
+}
+.exam-dropdown ul li:not(:last-child) {
+  border-bottom: 1px solid #ffffff;
 }

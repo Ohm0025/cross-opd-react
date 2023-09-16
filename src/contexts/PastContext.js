@@ -14,6 +14,8 @@ function PastHxContextProvider({ children }) {
 
   const decodeParams = encodeParams && decodeURIComponent(encodeParams);
 
+  console.log(encodeParams);
+
   useEffect(() => {
     const fetchPast = async () => {
       try {

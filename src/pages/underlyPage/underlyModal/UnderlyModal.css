@@ -1,0 +1,30 @@
+.underly-modal input {
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.underly-modal .error-ud {
+  border: 1px solid red;
+}
+
+.underly-modal small {
+  color: red;
+}
+
+.underly-modal-action {
+  display: flex;
+  margin-top: 1rem;
+  gap: 1px;
+}
+
+.underly-modal-action button {
+  width: 100%;
+  border: none;
+  background-color: gray;
+  color: white;
+  padding: 0.5rem 0;
+}
+
+.underly-modal-action button:hover {
+  background-color: #5f8d4e;
+}

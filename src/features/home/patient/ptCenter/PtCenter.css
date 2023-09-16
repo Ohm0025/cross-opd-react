@@ -1,37 +1,16 @@
-.pt-center {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  flex-grow: 2;
-  min-width: 60vw;
-  min-height: 60vh;
-  max-width: 70vw;
+.pt-center-nav-button {
+  text-align: center;
 }
-
-.pt-center div {
-  min-width: 70vw;
-}
-
-.pt-center textarea {
-  min-width: 70vw;
-}
-
-.pt-center-button {
-  color: white;
-  background-color: #285430;
+.pt-center-nav-button button {
+  padding: 0.5rem;
+  width: 50%;
   border: none;
-  padding: 0.3rem;
-  border-radius: 0.8rem;
-  min-width: 70vw;
 }
-
-.pt-center-button:hover {
+.pt-center-nav-button button:hover {
+  background-color: gray;
+  color: white;
+}
+.pt-center-nav-button .selected {
   background-color: #5f8d4e;
-}
-
-@media only screen and (max-width: 768px) {
-  .pt-center {
-    max-width: 31.25rem;
-    margin: auto;
-  }
+  color: white;
 }

@@ -1,0 +1,8 @@
+.underly-nav-action button {
+  border: none;
+  padding: 0.5rem;
+  background: none;
+}
+.underly-nav-action button:hover {
+  color: #5f8d4e;
+}

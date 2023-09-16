@@ -11,6 +11,10 @@
   cursor: pointer;
 }
 
+.ph-nav-selected {
+  background-color: #c9c9c9;
+}
+
 .ph-navBar {
   border-right: solid 1px black;
 

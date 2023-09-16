@@ -25,6 +25,12 @@ axios.interceptors.response.use(
       removeAccessToken();
       return window.location.replace("/");
     }
+    if (
+      err.response.status === 400 &&
+      err.response.data.message === "have no this patient."
+    ) {
+      return window.location.replace("/error");
+    }
 
     return Promise.reject(err);
   }

@@ -25,8 +25,7 @@ function Router() {
       {user ? (
         <Route
           path="/"
-          element={<HomeLayout user={user} typeaccount={typeaccount} />}
-        >
+          element={<HomeLayout user={user} typeaccount={typeaccount} />}>
           {typeaccount === PATIENT ? (
             <>
               <Route path="/" element={<PtHomePage />}></Route>
@@ -35,7 +34,7 @@ function Router() {
             </>
           ) : typeaccount === DOCTOR ? (
             <Route element={<ExamContextProvider />}>
-              <Route path="exam/:caseId" element={<ExamPage />} />
+              <Route path="exam/:caseId/*" element={<ExamPage />} />
               <Route element={<CaseDoctorContextProvider />}>
                 <Route path="/" element={<DrHomePage />} />
                 <Route path="*" element={<NotFoundPage />} />

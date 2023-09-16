@@ -1,0 +1,35 @@
+.pt-fu-item {
+  margin: 2rem;
+}
+.pt-fu-empty {
+  text-align: center;
+  margin-top: 10rem;
+}
+.pt-fu-item small {
+  text-align: center;
+  display: block;
+}
+.pt-fu-subItem {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
+.pt-fu-detail {
+  padding: 0 1rem;
+}
+.pt-fu-action {
+  display: flex;
+  gap: 0.3rem;
+  margin-top: 0.4rem;
+}
+.pt-fu-action button {
+  border: none;
+  background: none;
+  background-color: gray;
+  color: white;
+  padding: 0.4rem;
+  width: 100%;
+}
+.pt-fu-action button:hover {
+  background-color: #5f8d4e;
+}

@@ -24,13 +24,11 @@ function Modal({ title, isOpen, onClose, children }) {
       tabIndex="-1"
       ref={modalEl}
       onClick={onClose}
-      onContextMenu={onClose}
-    >
+      onContextMenu={onClose}>
       <div
         className="modal-dialog modal-dialog-centered modal-lg"
         onClick={(e) => e.stopPropagation()} //เมื่อมีการ click ใน child element นี้จะหยุด propagate ที่ element นี้
-        onContextMenu={(e) => e.stopPropagation()}
-      >
+        onContextMenu={(e) => e.stopPropagation()}>
         <div className="modal-content">
           <div className="modal-header">
             <button className="btn-close invisible"></button>
@@ -38,8 +36,7 @@ function Modal({ title, isOpen, onClose, children }) {
             <button
               type="button"
               className="btn-close"
-              onClick={onClose}
-            ></button>
+              onClick={onClose}></button>
           </div>
           <div className="modal-body">{children}</div>
         </div>
