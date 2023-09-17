@@ -80,7 +80,7 @@ function HomePtContextProvider({ children }) {
   //function edit card ไว้เปิด UI ในการแก้ไข opd card ซึ่งถ้ายังไม่ inprogress ก็สามารถแก้ได้
   const editOpdCard = () => {
     //check status ของ case ว่าเป็น inprogress ไหม
-    if (input.status !== "inprogress") {
+    if (input.status === "waiting") {
       //ถ้า status เป็น inprogress ก็จะ set ออกจาก wait state
       setIsWait(false);
       //แล้ว set edit state

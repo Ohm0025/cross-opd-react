@@ -16,7 +16,7 @@ function DrUnfinishCase({ unfinishCaseList }) {
     .slice(
       paginateIndex(amount, page).startIndex,
       paginateIndex(amount, page).endIndex
-    );
+    ); //ควรทำให้เป็น useEffect ไหม เพื่อการ re-render เมื่อ list เปลี่ยน
 
   return (
     <div className="unfinish-table">
@@ -28,21 +28,12 @@ function DrUnfinishCase({ unfinishCaseList }) {
       {unfinishCaseList.length ? (
         finalUnfinishCaseList.map((item, index) => (
           <DrUnFinishItem
-            keyItem={index + "unfinishCase"}
             itemId={item.patientId}
             itemTime={item.updatedAt}
             key={"unfinishCase" + index}
           />
         ))
       ) : (
-        // unfinishCaseList.map((item, index) => (
-        //   <DrUnFinishItem
-        //     keyItem={index + "unfinishCase"}
-        //     itemId={item.patientId}
-        //     itemTime={item.updatedAt}
-        //     key={"unfinishCase" + index}
-        //   />
-        // ))
         <b style={{ textAlign: "center", fontSize: "1.4rem", padding: "1rem" }}>
           ยังไม่มีเคสที่ตรวจไปแล้ว
         </b>

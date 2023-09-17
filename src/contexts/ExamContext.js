@@ -9,6 +9,7 @@ import {
   validateAddUd,
   validateEditUd,
 } from "../utility/validate/validateUnderly";
+import { useLoading } from "../contexts/LoadingContext";
 // import * as testService from "../api/testApi";
 
 const ExamContext = createContext();
@@ -18,6 +19,7 @@ function ExamContextProvider({ children }) {
 
   const navigate = useNavigate();
 
+  const { startLoading, stopLoading } = useLoading();
   const { user } = useAuth();
   const { caseId } = useParams();
 
@@ -214,6 +216,7 @@ function ExamContextProvider({ children }) {
 
   const handleRecord = async () => {
     try {
+      startLoading();
       await examService.recordExam(
         caseId,
         currentId,
@@ -224,6 +227,8 @@ function ExamContextProvider({ children }) {
       navigate("/");
     } catch (err) {
       console.log(err);
+    } finally {
+      stopLoading();
     }
   };
 

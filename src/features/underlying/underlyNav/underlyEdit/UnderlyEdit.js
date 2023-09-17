@@ -26,8 +26,8 @@ function UnderlyEdit({ oldName, handleEdit, onClosed }) {
           }}>
           <FontAwesomeIcon icon={faCheck} />
         </button>
-        <button className="btn btn-secondary">
-          <FontAwesomeIcon icon={faXmark} onClick={onClosed} />
+        <button className="btn btn-secondary" onClick={onClosed}>
+          <FontAwesomeIcon icon={faXmark} />
         </button>
       </div>
       <small className="text-danger">{isError}</small>

@@ -10,6 +10,7 @@ import { useExam } from "../../contexts/ExamContext";
 
 function UnderlyPage() {
   const [isOpen, setIsOpen] = useState(false);
+  const [selectUd, setSelectUd] = useState({});
   const { patientObj, addUnderly, editUnderly, removeUnderly } = useExam();
 
   return (
@@ -21,8 +22,13 @@ function UnderlyPage() {
             addUnderly={addUnderly}
             editUnderly={editUnderly}
             removeUnderly={removeUnderly}
+            handleSelectUd={(item) =>
+              setSelectUd((prev) => {
+                return { ...prev, ...item };
+              })
+            }
           />
-          <UnderlyBody />
+          <UnderlyBody selectUd={selectUd} />
         </div>
       ) : (
         <div className="underly-empty">

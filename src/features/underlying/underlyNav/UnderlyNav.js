@@ -6,13 +6,15 @@ import Modal from "../../../components/Modal";
 import UnderlyModal from "../../../pages/underlyPage/underlyModal/UnderlyModal";
 import { useState } from "react";
 
-function UnderlyNav({ listUnderly, addUnderly, editUnderly, removeUnderly }) {
+function UnderlyNav({
+  listUnderly,
+  addUnderly,
+  editUnderly,
+  removeUnderly,
+  handleSelectUd,
+}) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectItem, setSelectItem] = useState("");
-
-  const handleSelectItem = (item) => {
-    setSelectItem(item);
-  };
 
   return (
     <div className="underly-nav">
@@ -21,11 +23,14 @@ function UnderlyNav({ listUnderly, addUnderly, editUnderly, removeUnderly }) {
           <UnderlyItem
             key={"unItem" + index}
             udName={item.udTitle}
-            handleSelectItem={() => handleSelectItem(item)}
+            handleSelectItem={() => setSelectItem(item)}
             isSelected={selectItem === item}
             onClosed={() => setSelectItem("")}
             handleEdit={(editName) => editUnderly(selectItem.udTitle, editName)}
-            handleRemove={() => removeUnderly(item.udTitle)}
+            handleRemove={() => {
+              removeUnderly(item.udTitle);
+            }}
+            handleSelectUd={() => handleSelectUd(item)}
           />
         );
       })}

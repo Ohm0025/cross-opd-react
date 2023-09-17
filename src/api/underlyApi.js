@@ -8,3 +8,6 @@ export const updateUnderly = (patientId, newListUnderly) =>
     patientId,
     newListUnderly: JSON.stringify(newListUnderly),
   });
+
+export const fetchUnderlyTreat = (patientId, underlyTitle) =>
+  axios.post("/underly/getTx");

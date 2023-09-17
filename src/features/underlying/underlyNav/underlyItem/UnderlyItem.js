@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./UnderlyItem.css";
 import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState, useRef } from "react";
 import { useClickOutside } from "../../../../hooks/useClickOutside";
 import UnderlyEdit from "../underlyEdit/UnderlyEdit";
 
@@ -12,10 +12,27 @@ function UnderlyItem({
   handleEdit,
   onClosed,
   handleRemove,
+  handleSelectUd,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const closeDropDown = useCallback(() => setIsOpen(false), []);
   const dropdownEl = useClickOutside(closeDropDown);
+
+  const udItemEl = useRef();
+
+  useEffect(() => {
+    const handleClickItem = (e) => {
+      if (
+        udItemEl.current?.contains(e.target) &&
+        !dropdownEl.current.contains(e.target)
+      ) {
+        console.log("click target");
+        handleSelectUd();
+      }
+    };
+    document.addEventListener("mousedown", handleClickItem);
+    return () => document.removeEventListener("mousedown", handleClickItem);
+  }, [handleSelectUd, dropdownEl]);
   return (
     <>
       {isSelected ? (
@@ -25,8 +42,9 @@ function UnderlyItem({
           onClosed={onClosed}
         />
       ) : (
-        <div className="underly-item">
+        <div className="underly-item" role="button" ref={udItemEl}>
           <span>{udName}</span>
+
           <div className="dropdown" ref={dropdownEl}>
             <button
               className="underly-item-button"

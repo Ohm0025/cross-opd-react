@@ -1,7 +1,9 @@
 import "./UnderlyBody.css";
+import { useEffect } from "react";
 
-function UnderlyBody() {
-  return <div>this is underlyBody</div>;
+function UnderlyBody({ selectUd }) {
+  useEffect(() => {}, []);
+  return <div className="ud-body-container">{selectUd.udTitle}</div>;
 }
 
 export default UnderlyBody;
