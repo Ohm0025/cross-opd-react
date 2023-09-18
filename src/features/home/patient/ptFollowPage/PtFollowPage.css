@@ -9,6 +9,11 @@
   text-align: center;
   display: block;
 }
+.pt-fu-item-date {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+}
 .pt-fu-subItem {
   display: flex;
   justify-content: space-between;
@@ -21,6 +26,12 @@
   display: flex;
   gap: 0.3rem;
   margin-top: 0.4rem;
+}
+.pt-fu-action .unable-button {
+  background-color: #b6b6b6;
+}
+.pt-fu-action .unable-button:hover {
+  background-color: #b6b6b6;
 }
 .pt-fu-action button {
   border: none;

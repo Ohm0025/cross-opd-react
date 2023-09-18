@@ -126,17 +126,29 @@ function HomePtContextProvider({ children }) {
     });
   };
 
+  const fetchInputFollowUp = (followObj) => {
+    setInput({
+      chiefComplaintFirst: followObj?.chiefComplaintFirst,
+      presentIllnessFirst: followObj?.presentIllnessFirst,
+      location: followObj?.location,
+      patientId: followObj?.patientId,
+      status: followObj?.status,
+    });
+  };
+
   return (
     <HomePtContext.Provider
       value={{
         isEdit,
         isWait,
         input,
+        patientId: user.id,
         handleChangeInput,
         openCard,
         editOpdCard,
         sendEditCard,
         cancelCard,
+        fetchInputFollowUp,
         navigate,
       }}>
       {children}
