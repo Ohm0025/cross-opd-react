@@ -33,6 +33,5 @@ export const validateEditUd = (listUd, editTitle, oldTitle) => {
       return;
     }
   });
-  console.log(errorMessage);
   return errorMessage;
 };

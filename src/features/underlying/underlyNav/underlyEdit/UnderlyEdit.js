@@ -19,7 +19,6 @@ function UnderlyEdit({ oldName, handleEdit, onClosed }) {
           className="btn btn-success"
           onClick={() => {
             handleEdit(editName).then((errTitle) => {
-              console.log(errTitle);
               setIsError(errTitle);
               errTitle || onClosed();
             });

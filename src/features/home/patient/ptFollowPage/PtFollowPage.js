@@ -8,8 +8,6 @@ import {
 function PtFollowPage() {
   const { listFu, activateFollowUp } = useFollowUp();
 
-  console.log(listFu);
-
   return (
     <div className="pt-fu-container">
       {listFu.length > 0 ? (

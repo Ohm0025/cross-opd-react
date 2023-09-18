@@ -9,8 +9,6 @@ import UnderlyPage from "../underlyPage/UnderlyPage";
 import { useExam } from "../../contexts/ExamContext";
 
 function ExamPage() {
-  const { patientObj } = useExam();
-  console.log(patientObj);
   return (
     <Routes>
       <Route path="/" element={<ExamHeader />}>

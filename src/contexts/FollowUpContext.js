@@ -27,7 +27,6 @@ function FollowUpContextProvider({ children }) {
       const res = await followUpService.activateFollowUp(fuId);
       if (res.data?.waitCase) {
         fetchInputFollowUp({ ...res.data?.waitCase });
-        console.log("activate fu success");
       }
     } catch (err) {
       console.log(err);

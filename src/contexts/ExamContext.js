@@ -170,7 +170,6 @@ function ExamContextProvider({ children }) {
     const fetchCurrentCase = async () => {
       try {
         const res = await examService.fetchCurrentPt(caseId, currentId);
-        console.log(res.data);
 
         setPatientObj((prev) => {
           return {

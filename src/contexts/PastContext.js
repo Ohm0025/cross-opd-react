@@ -14,8 +14,6 @@ function PastHxContextProvider({ children }) {
 
   const decodeParams = encodeParams && decodeURIComponent(encodeParams);
 
-  console.log(encodeParams);
-
   useEffect(() => {
     const fetchPast = async () => {
       try {
@@ -38,12 +36,9 @@ function PastHxContextProvider({ children }) {
     fetchPast();
   }, [decodeParams, typeaccount, user.id]);
 
-  console.log(selectedCase);
-
   const changeSelectedCase = async (caseId) => {
     try {
       const res = await pastHxService.fetchSelectedPast(caseId);
-      console.log(res.data);
       setSelectedCase((prev) => {
         return {
           ...res.data?.selectedPastCase,

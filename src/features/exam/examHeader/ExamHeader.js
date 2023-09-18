@@ -31,7 +31,6 @@ function ExamHeader() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
-  console.log(patientObj);
   return (
     <>
       <div className="exam-header">

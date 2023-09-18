@@ -9,6 +9,8 @@ function DrContainer() {
   const { handleSearchCard, finishCaseList, unfinishCaseList, errorObj } =
     useCaseDoctor();
 
+  console.log(finishCaseList);
+
   return (
     <div>
       <DrSearchBox handleSearchCard={handleSearchCard} errorObj={errorObj} />

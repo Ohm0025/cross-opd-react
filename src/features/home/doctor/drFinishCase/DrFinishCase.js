@@ -9,7 +9,7 @@ import DrUnFinishItem from "../drUnfinishCase/drUnfinishItem/DrUnfinishItem";
 
 function DrFinishCase({ finishCaseList }) {
   const [amount, setAmount] = useState(5);
-  const [page, setPage] = useState(finishCaseList.length ? 1 : 0);
+  const [page, setPage] = useState(1);
   const [displayAmount, setDisplayAmount] = useState(5);
 
   const finalFinishCaseList = finishCaseList

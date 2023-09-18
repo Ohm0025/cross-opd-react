@@ -7,6 +7,8 @@ import DrUnFinishItem from "./drUnfinishItem/DrUnfinishItem";
 import DrUnfinishFooter from "./drUnfinishFooter/DrUnfinishFooter";
 
 function DrUnfinishCase({ unfinishCaseList }) {
+  console.log(unfinishCaseList);
+
   const [amount, setAmount] = useState(5);
   const [displayAmount, setDisplayAmount] = useState(5);
   const [page, setPage] = useState(1);

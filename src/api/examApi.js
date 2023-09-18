@@ -19,8 +19,6 @@ export const recordExam = async (
 
   const formData = new FormData();
 
-  console.log(inputData);
-
   formData.append("inputData", JSON.stringify(inputData));
   formData.append("patientId", patientId);
   formData.append("detailDrug", detailDrug);
@@ -42,7 +40,6 @@ export const recordExam = async (
   inputData?.lab?.forEach((item1, index1) => {
     // listLabImg.push({ ...item1, img: [] });
     listLabImg = [...listLabImg, { ...item1, img: [] }];
-    //console.log(item1.img);
     item1?.img &&
       item1?.img?.forEach((item2) => {
         if (typeof item2 === "string") {
