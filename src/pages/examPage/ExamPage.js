@@ -6,7 +6,6 @@ import ExamHeader from "../../features/exam/examHeader/ExamHeader";
 import ExamContainer from "../../features/exam/examContainer/ExamContainer";
 import PastHxPage from "../pastHxPage/PastHxPage";
 import UnderlyPage from "../underlyPage/UnderlyPage";
-import { useExam } from "../../contexts/ExamContext";
 
 function ExamPage() {
   return (

@@ -6,4 +6,7 @@ export const fetchFollowUp = (patientId) =>
 export const activateFollowUp = (fuId) =>
   axios.post("/followUp/ptActivate", { fuId });
 
-export const cancelFollowUp = () => {};
+export const cancelFollowUp = (fuId) =>
+  axios.patch("/follow/ptCancel", { fuId });
+
+export const finishFu = (fuId) => axios.patch("/follow/finishFu", { fuId });

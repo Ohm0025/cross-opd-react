@@ -28,7 +28,7 @@ function DrFinishCase({ finishCaseList }) {
       {finishCaseList.length ? (
         finalFinishCaseList.map((item, index) => (
           <DrUnFinishItem
-            keyItem={index + "finishCase"}
+            key={index + "finishCase"}
             itemId={item.patientId}
             itemTime={item.updatedAt}
           />

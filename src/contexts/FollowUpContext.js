@@ -32,8 +32,17 @@ function FollowUpContextProvider({ children }) {
       console.log(err);
     }
   };
+
+  const cancelFollowUp = async (fuId) => {
+    try {
+      await followUpService.cancelFollowUp(fuId);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   return (
-    <FollowUpContext.Provider value={{ listFu, activateFollowUp }}>
+    <FollowUpContext.Provider
+      value={{ listFu, activateFollowUp, cancelFollowUp }}>
       {children}
     </FollowUpContext.Provider>
   );

@@ -133,6 +133,7 @@ function HomePtContextProvider({ children }) {
       location: followObj?.location,
       patientId: followObj?.patientId,
       status: followObj?.status,
+      type: "followUp",
     });
   };
 

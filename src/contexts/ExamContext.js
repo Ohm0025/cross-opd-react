@@ -221,7 +221,8 @@ function ExamContextProvider({ children }) {
         currentId,
         recordObj,
         detailDrug,
-        detailProcedure
+        detailProcedure,
+        "finish"
       );
       navigate("/");
     } catch (err) {
@@ -302,6 +303,30 @@ function ExamContextProvider({ children }) {
     });
   };
 
+  const pendingOpdCard = async () => {
+    try {
+      startLoading();
+      await examService.recordExam(
+        caseId,
+        currentId,
+        recordObj,
+        detailDrug,
+        detailProcedure,
+        "pending"
+      );
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    } finally {
+      stopLoading();
+    }
+  };
+
+  const cancelOpdCard = async () => {
+    const res = await examService.cancelOpdCard(+caseId, +patientObj.id);
+    navigate("/");
+  };
+
   return (
     <ExamContext.Provider
       value={{
@@ -325,6 +350,8 @@ function ExamContextProvider({ children }) {
         addUnderly,
         editUnderly,
         removeUnderly,
+        pendingOpdCard,
+        cancelOpdCard,
       }}>
       <Outlet />
     </ExamContext.Provider>

@@ -8,12 +8,16 @@ export const fetchMyCase = () => axios.get("/exam/myCase");
 export const fetchCurrentPt = (caseId, patientId) =>
   axios.post("/exam/" + caseId, { patientId });
 
+export const cancelOpdCard = (caseId, patientId) =>
+  axios.post("/exam/cancel", { caseId, patientId });
+
 export const recordExam = async (
   caseId,
   patientId,
   inputData,
   detailDrug,
-  detailProcedure
+  detailProcedure,
+  typeStatus
 ) => {
   //check correct case correct doctor correct patient
 
@@ -23,6 +27,7 @@ export const recordExam = async (
   formData.append("patientId", patientId);
   formData.append("detailDrug", detailDrug);
   formData.append("detailProceduce", detailProcedure);
+  formData.append("typeStatus", typeStatus);
 
   let oldPhotoString = "";
 

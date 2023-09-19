@@ -33,6 +33,9 @@ function PtWaitPage() {
       if (command === "closeCase") {
         alert("case finish");
         window.location.reload();
+      } else if (command === "cancelOpdCard") {
+        alert("case cancel");
+        window.location.reload();
       }
     });
   }, [socket]);

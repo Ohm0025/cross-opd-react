@@ -6,7 +6,7 @@ import {
 } from "../../../../utility/formatDataTime";
 
 function PtFollowPage() {
-  const { listFu, activateFollowUp } = useFollowUp();
+  const { listFu, activateFollowUp, cancelFollowUp } = useFollowUp();
 
   return (
     <div className="pt-fu-container">
@@ -14,7 +14,7 @@ function PtFollowPage() {
         <div>
           {listFu.map((item, index) => {
             return (
-              <div className="pt-fu-item">
+              <div className="pt-fu-item" key={"pt-fu-item" + index}>
                 <div className="pt-fu-item-date">
                   <small>{formatCreatedAt(item.FollowUp.fuDate)}</small>
                   <small>
@@ -40,7 +40,9 @@ function PtFollowPage() {
                       <button disabled className="unable-button">
                         Activate
                       </button>
-                      <button>Cancel</button>
+                      <button onClick={() => cancelFollowUp(item.FollowUp.id)}>
+                        Cancel
+                      </button>
                     </>
                   ) : (
                     <>
@@ -50,7 +52,9 @@ function PtFollowPage() {
                         }}>
                         Activate
                       </button>
-                      <button>Cancel</button>
+                      <button onClick={() => cancelFollowUp(item.FollowUp.id)}>
+                        Cancel
+                      </button>
                     </>
                   )}
                 </div>

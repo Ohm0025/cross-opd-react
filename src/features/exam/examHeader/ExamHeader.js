@@ -9,7 +9,8 @@ import { useEffect, useRef, useState } from "react";
 import { Outlet, useParams } from "react-router-dom";
 
 function ExamHeader() {
-  const { handleRecord, patientObj, navigate } = useExam();
+  const { handleRecord, patientObj, cancelOpdCard, navigate, pendingOpdCard } =
+    useExam();
   const [socket, setSocket] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
   const dropdownEl = useRef();
@@ -83,8 +84,19 @@ function ExamHeader() {
             }}>
             Finish
           </button>
-          <button>Pending</button>
-          <button>Cancel</button>
+          <button
+            onClick={() => {
+              pendingOpdCard();
+            }}>
+            Pending
+          </button>
+          <button
+            onClick={() => {
+              cancelOpdCard();
+              socket?.emit("cancelCase", patientObj.patientId);
+            }}>
+            Cancel
+          </button>
         </div>
       </div>
       <div style={{ height: "5rem" }}></div>

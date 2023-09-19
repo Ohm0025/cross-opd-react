@@ -24,7 +24,7 @@ function FollowUpModal({ item, updateFu, closeModal }) {
               <FontAwesomeIcon icon={faArrowRight} />
             </span>
             <span>{formatCreatedAt(date)}</span>
-            <span>{caldiffDate(date, currentDate) + " วัน"}</span>
+            <span>{caldiffDate(currentDate, date) + " วัน"}</span>
           </div>
         </div>
         <div className="location-section">
