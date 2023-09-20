@@ -1,5 +1,5 @@
 import "./FollowUpModal.css";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "react-calendar/dist/Calendar.css";
 import Calendar from "react-calendar";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -9,22 +9,61 @@ import {
   formatCreatedAt,
 } from "../../../../utility/formatDataTime";
 
-function FollowUpModal({ item, updateFu, closeModal }) {
+function FollowUpModal({ item, closeModal, updateFollowUp }) {
+  console.log(item);
+
+  // const defaultDate = item.fuDate ? new Date(item.fuDate) : "";
+  // const [date, setDate] = useState(currentDate);
   const currentDate = new Date();
-  const [date, setDate] = useState(currentDate);
+  const [newFollowObj, setNewFollowObj] = useState({
+    fuHos: "",
+    fuDetail: item.fuDetail || "",
+    fuOPD: item.fuOPD || "",
+    fuDate: item.fuDate || "",
+  });
+
+  useEffect(() => {
+    setNewFollowObj((prev) => {
+      return {
+        fuHos: item.fuHos || "",
+        fuDetail: item.fuDetail || "",
+        fuOPD: item.fuOPD || "",
+        fuDate: item.fuDate || "",
+      };
+    });
+  }, [item]);
+
+  const handleChangeFollowObj = (e) => {
+    setNewFollowObj((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
+  const handleChangeDate = (e) => {
+    setNewFollowObj((prev) => {
+      return { ...prev, fuDate: e };
+    });
+  };
 
   return (
     <div className="fu-modal">
       <div className="fu-modal-top">
         <div className="calendar-section">
-          <Calendar value={date} onChange={setDate} minDate={currentDate} />
+          <Calendar
+            value={newFollowObj.fuDate || currentDate}
+            onChange={handleChangeDate}
+            minDate={currentDate}
+          />
           <div className="date-section">
             <span>{formatCreatedAt(currentDate)}</span>
             <span>
               <FontAwesomeIcon icon={faArrowRight} />
             </span>
-            <span>{formatCreatedAt(date)}</span>
-            <span>{caldiffDate(currentDate, date) + " วัน"}</span>
+            <span>{formatCreatedAt(newFollowObj.fuDate) || ""}</span>
+            <span>
+              {caldiffDate(currentDate, new Date(newFollowObj.fuDate)) || ""}{" "}
+              {" วัน"}
+            </span>
           </div>
         </div>
         <div className="location-section">
@@ -33,8 +72,9 @@ function FollowUpModal({ item, updateFu, closeModal }) {
             <input
               type="text"
               className="form-control"
-              value={item.fuHos || ""}
-              onChange={(e) => updateFu("fuHos", e.target.value)}
+              value={newFollowObj.fuHos}
+              name="fuHos"
+              onChange={handleChangeFollowObj}
             />
           </div>
           <div className="location-department">
@@ -42,29 +82,33 @@ function FollowUpModal({ item, updateFu, closeModal }) {
             <input
               type="text"
               className="form-control"
-              value={item.fuOPD || ""}
-              onChange={(e) => updateFu("fuOPD", e.target.value)}
+              value={newFollowObj.fuOPD}
+              name="fuOPD"
+              onChange={handleChangeFollowObj}
             />
           </div>
           <div className="location-detail">
             <textarea
               placeholder="add detail about follow up"
-              name=""
               id=""
               cols="10"
               rows="3"
               className="form-control"
-              value={item.fuDetail || ""}
-              onChange={(e) => updateFu("fuDetail", e.target.value)}></textarea>
+              value={newFollowObj.fuDetail}
+              name="fuDetail"
+              onChange={handleChangeFollowObj}></textarea>
           </div>
           <div className="location-button">
             <button
-              className="btn btn-danger"
+              className="btn btn-success"
               onClick={() => {
                 closeModal();
-                updateFu("fuDate", date);
+                updateFollowUp(newFollowObj);
               }}>
               ENTER
+            </button>
+            <button className="btn btn-danger" onClick={() => {}}>
+              CLEAR
             </button>
           </div>
         </div>

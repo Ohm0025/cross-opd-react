@@ -55,11 +55,18 @@ function ExamContextProvider({ children }) {
       fuOPD: "",
       fuDetail: "",
       fuDate: "",
+      id: "",
     },
   });
 
   const [detailDrug, setDetailDrug] = useState([]);
   const [detailProcedure, setDetailProcedure] = useState([]);
+
+  const updateFollowUp = (newFollowObj) => {
+    setRecordObj((prev) => {
+      return { ...prev, fu: newFollowObj };
+    });
+  };
 
   const updateDetailDrug = ({ title, use, amount, diagTitle }) => {
     setDetailDrug((prev) => [...prev, { title, use, amount, diagTitle }]);
@@ -323,7 +330,7 @@ function ExamContextProvider({ children }) {
   };
 
   const cancelOpdCard = async () => {
-    const res = await examService.cancelOpdCard(+caseId, +patientObj.id);
+    await examService.cancelOpdCard(+caseId, +patientObj.id);
     navigate("/");
   };
 
@@ -352,6 +359,7 @@ function ExamContextProvider({ children }) {
         removeUnderly,
         pendingOpdCard,
         cancelOpdCard,
+        updateFollowUp,
       }}>
       <Outlet />
     </ExamContext.Provider>

@@ -26,6 +26,7 @@ function FollowUpContextProvider({ children }) {
     try {
       const res = await followUpService.activateFollowUp(fuId);
       if (res.data?.waitCase) {
+        console.log(res.data.waitCase);
         fetchInputFollowUp({ ...res.data?.waitCase });
       }
     } catch (err) {
@@ -40,6 +41,7 @@ function FollowUpContextProvider({ children }) {
       console.log(err);
     }
   };
+
   return (
     <FollowUpContext.Provider
       value={{ listFu, activateFollowUp, cancelFollowUp }}>

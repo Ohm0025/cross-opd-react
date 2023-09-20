@@ -10,3 +10,5 @@ export const cancelFollowUp = (fuId) =>
   axios.patch("/follow/ptCancel", { fuId });
 
 export const finishFu = (fuId) => axios.patch("/follow/finishFu", { fuId });
+
+export const deleteFu = (fuId) => axios.patch("/followUp/deleteFu", { fuId });
