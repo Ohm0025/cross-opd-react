@@ -8,7 +8,7 @@ export const validateAddUd = (listUd, newTitle) => {
   //check in list underly
   listUd.forEach((item) => {
     if (newTitle?.toLowerCase() === item.udTitle?.toLowerCase()) {
-      errorMessage = "this underlying already exist.";
+      errorMessage = "this underlying is already exist.";
       return;
     }
   });

@@ -60,7 +60,13 @@ function ExamHeader() {
               role="button">
               {"Underlying disease"} <br /> {"COPD"}
             </li>
-            <li>
+            <li
+              onClick={() => {
+                navigate(`exam/${caseId}/allergy/${patientObj?.id}`);
+                console.log(caseId);
+                console.log(patientObj.id);
+                setIsOpen(false);
+              }}>
               {"Drug allergy"} <br /> {"Pennicilin"}
             </li>
             <li

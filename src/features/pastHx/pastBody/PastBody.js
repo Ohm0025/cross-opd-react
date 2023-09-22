@@ -7,10 +7,8 @@ import { formatStringToArr } from "../../../utility/formatString";
 import { formatCreatedAt } from "../../../utility/formatDataTime";
 import Modal from "../../../components/Modal";
 
-function PastBody() {
-  const { selectedCase } = usePastHx();
+function PastBody({ selectedCase }) {
   const [openImg, setOpenImg] = useState("");
-  console.log(selectedCase && JSON.parse(selectedCase?.Treatment?.txList));
   return (
     <div className="ph-body">
       {"Chief Complaint : "}
@@ -66,36 +64,43 @@ function PastBody() {
       {"Imaging : "}
       <br />
       {selectedCase &&
-        JSON.parse(selectedCase?.Imaging?.imgArray).map((item1, index1) => {
-          return item1.img.map((item2, index2) => {
-            return (
-              <button
-                className="past-file-button"
-                key={"phimg-img" + index1 + " " + index2}
-                onClick={() => setOpenImg(item2)}>
-                <FontAwesomeIcon icon={faFile} style={{ fontSize: "2.5rem" }} />
-                <br />
-                <small>{item1.name + index2}</small>
-              </button>
-            );
-          });
-        })}
+        JSON.parse(selectedCase?.Imaging?.imgArray || "[]").map(
+          (item1, index1) => {
+            return item1.img.map((item2, index2) => {
+              return (
+                <button
+                  className="past-file-button"
+                  key={"phimg-img" + index1 + " " + index2}
+                  onClick={() => setOpenImg(item2)}>
+                  <FontAwesomeIcon
+                    icon={faFile}
+                    style={{ fontSize: "2.5rem" }}
+                  />
+                  <br />
+                  <small>{item1.name + index2}</small>
+                </button>
+              );
+            });
+          }
+        )}
       <br />
       <br />
       {"Diagnosis : "}
       <br />
       {selectedCase &&
-        JSON.parse(selectedCase?.Diagnosis?.diagName).map((item, index) => {
-          return (
-            <div key={"diagName" + index}>
-              <span>
-                {index + 1 + ". "}
-                {item}
-              </span>
-              <br />
-            </div>
-          );
-        })}
+        JSON.parse(selectedCase?.Diagnosis?.diagName || "[]").map(
+          (item, index) => {
+            return (
+              <div key={"diagName" + index}>
+                <span>
+                  {index + 1 + ". "}
+                  {item}
+                </span>
+                <br />
+              </div>
+            );
+          }
+        )}
       <br />
       {"Detail : "}
       <br />
@@ -105,17 +110,17 @@ function PastBody() {
       {"Treatment : "}
       <br />
       {selectedCase &&
-        Object.keys(JSON.parse(selectedCase?.Treatment?.txList))?.map(
+        Object.keys(JSON.parse(selectedCase?.Treatment?.txList || "[]"))?.map(
           (item1, index1) => {
-            return JSON.parse(selectedCase?.Treatment?.txList)[item1].map(
-              (item2, index2) => {
-                return (
-                  <div key={"txlistItem" + index1 + "" + index2}>
-                    {item2.title + " " + item2.detail}
-                  </div>
-                );
-              }
-            );
+            return JSON.parse(selectedCase?.Treatment?.txList || "[]")[
+              item1
+            ].map((item2, index2) => {
+              return (
+                <div key={"txlistItem" + index1 + "" + index2}>
+                  {item2.title + " " + item2.detail}
+                </div>
+              );
+            });
           }
         )}
       <br />

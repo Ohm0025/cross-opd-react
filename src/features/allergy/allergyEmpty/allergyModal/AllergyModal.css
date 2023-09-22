@@ -1,0 +1,29 @@
+.allergy-modal input {
+  text-align: center;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.allergy-modal textarea {
+  margin-bottom: 1rem;
+}
+
+.allergy-modal .error-aller {
+  border: 1px solid red;
+}
+
+.allergy-modal small {
+  color: red;
+}
+
+.allergy-modal button {
+  width: 100%;
+  border: none;
+  background-color: gray;
+  color: white;
+  padding: 0.5rem 0;
+}
+
+.allergy-modal button:hover {
+  background-color: #5f8d4e;
+}

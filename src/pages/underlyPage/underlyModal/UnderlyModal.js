@@ -12,8 +12,6 @@ function UnderlyModal({ addUnderly, closeModal, isDestroy }) {
     }
   }, [isDestroy]);
 
-  console.log(isDestroy);
-
   return (
     <div className="underly-modal">
       <input

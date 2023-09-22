@@ -1,6 +1,5 @@
 import PastHxContextProvider from "../../contexts/PastContext";
-import PastBody from "../../features/pastHx/pastBody/PastBody";
-import PastFooter from "../../features/pastHx/pastFooter/PastFooter";
+import PastCenter from "../../features/pastHx/pastCenter/PastCenter";
 import PastNav from "../../features/pastHx/pastNav/PastNav";
 import "./PastHxPage.css";
 
@@ -9,10 +8,7 @@ function PastHxPage() {
     <PastHxContextProvider>
       <div className="ph-page">
         <PastNav />
-        <div className="ph-page-container">
-          <PastBody />
-          <PastFooter />
-        </div>
+        <PastCenter />
       </div>
     </PastHxContextProvider>
   );

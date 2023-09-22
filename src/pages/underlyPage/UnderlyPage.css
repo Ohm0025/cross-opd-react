@@ -3,7 +3,10 @@
 }
 .underly-empty {
   text-align: center;
-  margin-top: 5rem;
+  position: fixed;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%);
 }
 
 .underly-empty-action button {
@@ -19,4 +22,12 @@
 
 .underly-empty-action button:hover {
   background-color: #c9c9c9;
+}
+
+.underlypage-empty {
+  position: fixed;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%);
+  /* background-color: #c9c9c9; */
 }

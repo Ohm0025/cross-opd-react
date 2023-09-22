@@ -3,6 +3,7 @@ import * as allergyService from "../api/allergyApi";
 import { useAuth } from "./AuthContext";
 import { DOCTOR, PATIENT } from "../config/constant";
 import { useParams } from "react-router-dom";
+import { validateAllergyAdd } from "../utility/validate/validateAllergy";
 
 const AllergyContext = createContext();
 
@@ -17,6 +18,7 @@ function AllergyContextProvider({ children }) {
         let res;
         if (typeaccount === PATIENT) {
           res = await allergyService.fetchAllergy(user.id);
+          console.log([...JSON.parse(res.data.allergyObjList || "[]")]);
         } else if (typeaccount === DOCTOR) {
           res = await allergyService.fetchAllergy(decodeParams);
         }
@@ -30,13 +32,28 @@ function AllergyContextProvider({ children }) {
     fetchAllergy();
   }, [decodeParams, user.id, typeaccount]);
 
-  //newAllergyObj : {name,type(drug,food),editor,dateAt}
+  //newAllergyObj : {name,symp,editor,dateAt}
   const addAllergy = async (newAllergyObj) => {
+    //validate allergyObj
+    let resultValidate = validateAllergyAdd(allergyObjList, newAllergyObj);
+    if (resultValidate.name || resultValidate.symp) {
+      console.log(resultValidate);
+      return resultValidate;
+    }
     try {
+      const upLoadObj = {
+        ...newAllergyObj,
+        dateAt: new Date(),
+        allerEditor: user.firstName + " " + user.lastName,
+      };
       setAllergyObjList((prev) => {
-        return [...prev, newAllergyObj];
+        return [...prev, upLoadObj];
       });
-      await allergyService.editAllergy(decodeParams, allergyObjList);
+      await allergyService.editAllergy(decodeParams, [
+        ...allergyObjList,
+        upLoadObj,
+      ]);
+      console.log(upLoadObj);
     } catch (err) {
       console.log(err);
     }
@@ -65,7 +82,13 @@ function AllergyContextProvider({ children }) {
   };
   return (
     <AllergyContext.Provider
-      value={{ allergyObjList, addAllergy, removeAllergy, editAllergy }}>
+      value={{
+        allergyObjList,
+        addAllergy,
+        removeAllergy,
+        editAllergy,
+        typeaccount,
+      }}>
       {children}
     </AllergyContext.Provider>
   );

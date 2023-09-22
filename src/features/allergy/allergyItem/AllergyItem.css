@@ -1,0 +1,13 @@
+.allergy-item {
+  background-color: #c9c9c9;
+  color: white;
+  font-size: 1.3rem;
+  margin: 1rem;
+  padding: 1rem;
+  min-width: 31.25rem;
+  max-width: 31.25rem;
+}
+
+.allergy-item div {
+  overflow: hidden;
+}
