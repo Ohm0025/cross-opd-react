@@ -1,6 +1,6 @@
 import "./DrugFilter.css";
 
-function DrugFilter() {
+function DrugFilter({ selecType, changeSelecType }) {
   return (
     <div className="nav-item drug-filter">
       <b>Filter Drug</b>
@@ -10,7 +10,9 @@ function DrugFilter() {
           type="radio"
           name="flexRadioDefault"
           id="flexRadioDefault1"
-          defaultChecked
+          value={"all"}
+          checked={selecType === "all"}
+          onChange={changeSelecType}
         />
         <label className="form-check-label" htmlFor="flexRadioDefault1">
           All drug type
@@ -22,6 +24,9 @@ function DrugFilter() {
           type="radio"
           name="flexRadioDefault"
           id="flexRadioDefault2"
+          value={"noUd"}
+          checked={selecType === "noUd"}
+          onChange={changeSelecType}
         />
         <label className="form-check-label" htmlFor="flexRadioDefault2">
           Only regular drug
@@ -33,6 +38,9 @@ function DrugFilter() {
           type="radio"
           name="flexRadioDefault"
           id="flexRadioDefault3"
+          value={"ud"}
+          checked={selecType === "ud"}
+          onChange={changeSelecType}
         />
         <label className="form-check-label" htmlFor="flexRadioDefault3">
           Only underlying drug

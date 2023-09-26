@@ -51,6 +51,7 @@ function UnderlyPage({ patientId }) {
           {patientObj?.underlying.length > 0 ? (
             <div className="underlypage-container">
               <UnderlyNav
+                patientId={patientId}
                 listUnderly={patientObj?.underlying}
                 addUnderly={addUnderly}
                 editUnderly={editUnderly}

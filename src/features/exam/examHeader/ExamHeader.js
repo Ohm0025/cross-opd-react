@@ -77,9 +77,28 @@ function ExamHeader() {
               role="button">
               ประวัติการรักษา
             </li>
-            <li>ประวัติการใช้ยา</li>
-            <li>ประวัติการสั่ง Lab</li>
-            <li>ประวัติการสั่ง Imaging</li>
+            <li
+              onClick={() => {
+                navigate(`exam/${caseId}/drug/${patientObj?.id}`);
+                setIsOpen(false);
+              }}
+              role="button">
+              ประวัติการใช้ยา
+            </li>
+            <li
+              onClick={() => {
+                navigate(`exam/${caseId}/labHx/${patientObj?.id}`);
+                setIsOpen(false);
+              }}>
+              ประวัติการสั่ง Lab
+            </li>
+            <li
+              onClick={() => {
+                navigate(`exam/${caseId}/imgHx/${patientObj?.id}`);
+                setIsOpen(false);
+              }}>
+              ประวัติการสั่ง Imaging
+            </li>
           </ul>
         </div>
         <div className="header-right">

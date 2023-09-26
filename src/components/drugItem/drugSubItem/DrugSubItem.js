@@ -1,15 +1,12 @@
-function DrugSubItem({ diag, list }) {
-  const list_filter = list.filter((item1) => item1[3] === diag);
-
-  return list_filter.map((item2, index) => {
-    return (
-      <li key={index + "subItem"}>
-        {item2[0] +
-          (item2[1] ? `(${item2[1]}) ` : " ") +
-          item2[2] +
-          (item2[4] ? ` # ${item2[4]}` : "")}
-      </li>
-    );
+function DrugSubItem({ list }) {
+  return list.map((item2, index) => {
+    return item2[1].map((item3, index2) => {
+      return (
+        <li key={"drugSubItem" + index + " " + index2}>
+          {item3.title} {item3.detail}
+        </li>
+      );
+    });
   });
 }
 

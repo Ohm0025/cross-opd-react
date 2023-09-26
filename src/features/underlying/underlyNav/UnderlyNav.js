@@ -12,6 +12,7 @@ function UnderlyNav({
   editUnderly,
   removeUnderly,
   handleSelectUd,
+  patientId,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectItem, setSelectItem] = useState("");
@@ -34,11 +35,15 @@ function UnderlyNav({
           />
         );
       })}
-      <div className="underly-nav-action">
-        <button onClick={() => setIsOpen(true)}>
-          <FontAwesomeIcon icon={faPlusCircle} /> {" Add New Underlying"}
-        </button>
-      </div>
+      {!patientId ? (
+        <></>
+      ) : (
+        <div className="underly-nav-action">
+          <button onClick={() => setIsOpen(true)}>
+            <FontAwesomeIcon icon={faPlusCircle} /> {" Add New Underlying"}
+          </button>
+        </div>
+      )}
       <Modal isOpen={isOpen} onClose={() => setIsOpen(false)}>
         <UnderlyModal
           addUnderly={addUnderly}

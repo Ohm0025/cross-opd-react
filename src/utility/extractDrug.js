@@ -7,8 +7,8 @@ export const extractList = (date, list) => {
     const dateMem = formatCreatedAt(element.createdAt);
     if (date === dateMem) {
       result_list.push([
-        element.drugName,
-        element.drugSize,
+        element.Treatment.txList.title,
+        element.Treatment.txList.title,
         element.drugUse,
         element.diagnosis,
         element.drugAmount,
@@ -20,11 +20,11 @@ export const extractList = (date, list) => {
 
 export const extractDiag = (list) => {
   const diag_arr = [];
-  list.forEach((item, index) => {
-    if (!diag_arr.includes(item[3])) {
-      diag_arr.push(item[3]);
-    }
-  });
+  // list.forEach((item, index) => {
+  //   if (!diag_arr.includes(item[3])) {
+  //     diag_arr.push(item[3]);
+  //   }
+  // });
 
   return diag_arr;
 };
