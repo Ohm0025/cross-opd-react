@@ -1,5 +1,6 @@
 .underlypage-container {
   display: flex;
+  justify-content: space-between;
 }
 .underly-empty {
   text-align: center;

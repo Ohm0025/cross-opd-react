@@ -1,0 +1,34 @@
+.ud-body-container {
+  margin: auto;
+}
+
+.ud-body-header {
+  padding: 1rem;
+  background-color: gray;
+  color: white;
+  margin: 1rem;
+}
+
+.ud-body-center {
+  display: flex;
+  gap: 1rem;
+}
+
+.ud-body-table {
+  border: 0.125rem solid forestgreen;
+  width: 50rem;
+  height: 12.5rem;
+}
+
+.ud-body-table th {
+  text-align: center;
+  border-bottom: 1px solid black;
+}
+
+.ud-body-table td {
+  text-align: center;
+}
+
+.ud-body-footer {
+  margin-top: 2rem;
+}

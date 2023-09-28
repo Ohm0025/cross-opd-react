@@ -10,4 +10,4 @@ export const updateUnderly = (patientId, newListUnderly) =>
   });
 
 export const fetchUnderlyTreat = (patientId, underlyTitle) =>
-  axios.post("/underly/getTx");
+  axios.post("/underly/getTx", { patientId, underlyTitle });

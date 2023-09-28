@@ -1,0 +1,50 @@
+.ud-show {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 5rem;
+  margin-bottom: 2rem;
+}
+
+.ud-show-display {
+  text-align: center;
+  margin: auto;
+}
+
+.ud-action-drug {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ud-action-drug-inputDrugObj {
+  display: flex;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.ud-action-drug-inputDrugObj input {
+  border-radius: 0.375rem;
+  border: 1px solid #ced4da;
+  text-align: center;
+  font-size: 1rem;
+  padding: 0.3rem;
+}
+
+.ud-action-drug-inputDrugObj textarea {
+  border-radius: 0.375rem;
+  border: 1px solid #ced4da;
+  text-align: center;
+  font-size: 1rem;
+  padding: 0.3rem;
+  margin: 0 1rem;
+}
+
+.button-remed {
+  padding: 1rem;
+  font-size: 1.5rem;
+}
+
+.ud-action-drug-button {
+  margin: 1rem;
+  height: 6rem;
+  width: 10rem;
+}

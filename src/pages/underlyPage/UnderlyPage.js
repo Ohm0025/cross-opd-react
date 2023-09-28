@@ -12,8 +12,16 @@ import * as underlyService from "../../api/underlyApi";
 function UnderlyPage({ patientId }) {
   const [isOpen, setIsOpen] = useState(false);
   const [selectUd, setSelectUd] = useState({});
-  const { patientObj, addUnderly, editUnderly, removeUnderly } =
-    useExam() || {};
+  const {
+    patientObj,
+    addUnderly,
+    editUnderly,
+    removeUnderly,
+    updateList,
+    updateRecordObj,
+    updateTxObj,
+    recordObj,
+  } = useExam() || {};
   const [listOfUnderly, setListOfUnderly] = useState([]);
 
   useEffect(() => {
@@ -22,9 +30,23 @@ function UnderlyPage({ patientId }) {
       setListOfUnderly((prev) => {
         return [...JSON.parse(res.data?.listOfUnderly?.underlying || "[]")];
       });
+      setSelectUd((prev) => {
+        return {
+          //...listOfUnderly[0],
+          ...[...JSON.parse(res.data?.listOfUnderly?.underlying || "[]")][0],
+        };
+      });
     };
-    patientId && fetchListUd();
-  }, [patientId]);
+
+    if (patientId) {
+      fetchListUd();
+    } else {
+      setSelectUd((prev) => {
+        return { ...patientObj?.underlying[0] };
+      });
+    }
+    // patientId && fetchListUd();
+  }, [patientId, patientObj]);
 
   return (
     <>
@@ -40,7 +62,7 @@ function UnderlyPage({ patientId }) {
                   })
                 }
               />
-              <UnderlyBody selectUd={selectUd} />
+              <UnderlyBody selectUd={selectUd} patientId={patientId} />
             </div>
           ) : (
             <h2 className="underlypage-empty">ไม่มีประวัติโรคประจำตัวมาก่อน</h2>
@@ -51,7 +73,7 @@ function UnderlyPage({ patientId }) {
           {patientObj?.underlying.length > 0 ? (
             <div className="underlypage-container">
               <UnderlyNav
-                patientId={patientId}
+                patientId={patientObj?.id}
                 listUnderly={patientObj?.underlying}
                 addUnderly={addUnderly}
                 editUnderly={editUnderly}
@@ -62,7 +84,15 @@ function UnderlyPage({ patientId }) {
                   })
                 }
               />
-              <UnderlyBody selectUd={selectUd} />
+              <UnderlyBody
+                selectUd={selectUd}
+                patientId={patientObj?.id}
+                isDoctor={true}
+                updateList={updateList}
+                updateRecordObj={updateRecordObj}
+                updateTxObj={updateTxObj}
+                recordObj={recordObj}
+              />
             </div>
           ) : (
             <div className="underly-empty">
