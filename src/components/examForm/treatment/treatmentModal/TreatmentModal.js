@@ -1,5 +1,6 @@
 import "./TreatmentModal.css";
 import { useEffect, useRef, useState } from "react";
+import validateTreatment from "../../../../utility/validate/validateTreatment";
 import TreatmentItemList from "./treatmentItemList/TreatmentItemList";
 
 function TreatmentModal({
@@ -8,6 +9,7 @@ function TreatmentModal({
   diagTitle,
   closeModal,
   updateTxObj,
+  deleteTx,
 }) {
   const dropdownEl = useRef();
   const [isOpen, setIsOpen] = useState(false);
@@ -34,13 +36,23 @@ function TreatmentModal({
       ? txList
       : txList?.filter((item) => item.type === filterType);
 
+  const [errObj, setErrObj] = useState({
+    drug: "",
+    proceduce: "",
+  });
+
   const handleSubmitButton = () => {
     if (typeInput === "drug") {
-      updateTxObj(diagTitle, {
-        title: txobj.title,
-        type: "drug",
-        detail: `${txobj.detail} # ${txobj.amount}`,
-      });
+      validateTreatment(txobj, (errText) =>
+        setErrObj((prev) => {
+          return { ...prev, drug: errText };
+        })
+      ) &&
+        updateTxObj(diagTitle, {
+          title: txobj.title,
+          type: "drug",
+          detail: `${txobj.detail} # ${txobj.amount}`,
+        });
     } else {
       updateTxObj(diagTitle, {
         title: txobj2.title,
@@ -60,7 +72,6 @@ function TreatmentModal({
       detail: "",
       type: "proceduce",
     });
-    closeModal();
   };
 
   useEffect(() => {
@@ -94,7 +105,11 @@ function TreatmentModal({
 
       {filterTxList?.length > 0 ? (
         filterTxList?.map((item, index) => (
-          <TreatmentItemList item={item} key={"treatmentitemlist" + index} />
+          <TreatmentItemList
+            item={item}
+            key={"treatmentitemlist" + index}
+            deleteTx={() => deleteTx(diagTitle, txList, item)}
+          />
         ))
       ) : (
         <h2 style={{ textAlign: "center" }}>
@@ -128,6 +143,9 @@ function TreatmentModal({
                   })
                 }
               />
+              {errObj.drug && (
+                <small className="text-danger">{errObj.drug}</small>
+              )}
               <input
                 type="number"
                 placeholder="amount"

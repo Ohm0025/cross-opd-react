@@ -1,4 +1,4 @@
-import { createContext, useContext } from "react";
+import { createContext, useContext, useState } from "react";
 import { useExam } from "./ExamContext";
 
 const DiagContext = createContext();
@@ -20,9 +20,22 @@ function DiagContextProvider({ children }) {
     changeDiagName,
   } = useExam();
 
+  const [errMessage, setErrMessage] = useState("");
+
   const addDiagList = (newDiag) => {
-    if (!diagList.includes(newDiag)) {
-      updateList("diag", newDiag);
+    if (newDiag.trim() === "") {
+      setErrMessage("diagTitle is required.");
+    } else {
+      if (
+        !diagList
+          .map((item) => item.toLowerCase())
+          .includes(newDiag.toLowerCase())
+      ) {
+        updateList("diag", newDiag);
+        setErrMessage("");
+      } else {
+        setErrMessage("this diag already exist.");
+      }
     }
   };
 
@@ -45,6 +58,14 @@ function DiagContextProvider({ children }) {
     updateRecordObj("tx", diagName, inputTxArr);
   };
 
+  const deleteTx = (diagName, inputTxArr, selectItem) => {
+    updateRecordObj(
+      "tx",
+      diagName,
+      inputTxArr.filter((item) => item !== selectItem)
+    );
+  };
+
   return (
     <DiagContext.Provider
       value={{
@@ -56,9 +77,11 @@ function DiagContextProvider({ children }) {
         detail,
         changeDDX,
         handleSubmitTx,
+        deleteTx,
         updateTxObj,
         editTxObj,
         deleteTxObj,
+        errMessage,
       }}>
       {children}
     </DiagContext.Provider>

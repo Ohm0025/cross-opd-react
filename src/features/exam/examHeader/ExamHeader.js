@@ -58,7 +58,7 @@ function ExamHeader() {
                 setIsOpen(false);
               }}
               role="button">
-              {"Underlying disease"} <br /> {"COPD"}
+              {"Underlying disease"}
             </li>
             <li
               onClick={() => {
@@ -67,7 +67,7 @@ function ExamHeader() {
                 console.log(patientObj.id);
                 setIsOpen(false);
               }}>
-              {"Drug allergy"} <br /> {"Pennicilin"}
+              {"Drug allergy"}
             </li>
             <li
               onClick={() => {
@@ -101,6 +101,19 @@ function ExamHeader() {
             </li>
           </ul>
         </div>
+
+        {window.location.pathname !== `/exam/${caseId}` && (
+          <div
+            className={`${
+              window.location.pathname !== `/exam/${caseId}` && ""
+            } header-center`}
+            onClick={() => {
+              navigate(`exam/${caseId}`);
+            }}>
+            <button>Return to Exam</button>
+          </div>
+        )}
+
         <div className="header-right">
           <button
             onClick={() => {

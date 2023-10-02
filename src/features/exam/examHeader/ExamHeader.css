@@ -7,23 +7,23 @@
   width: 100%;
 }
 .header-left {
-  padding: 0 0 0 13px;
+  padding: 0 0 0 0.813rem;
   background-color: #5f8d4e;
   display: flex;
   align-items: center;
   justify-content: space-around;
-  gap: 10px;
+  gap: 0.625rem;
 }
 .pt-tag {
   color: white;
-  font-size: 15px;
+  font-size: 0.938rem;
   display: flex;
   text-align: start;
   flex-direction: column;
 }
 .pt-button {
   display: block;
-  padding: 20px;
+  padding: 1.25rem;
   border: none;
   background-color: #f4fff3;
 }
@@ -39,12 +39,32 @@
 
 .header-right button {
   display: block;
-  padding: 20px;
+  padding: 1rem;
   border: none;
   background-color: #f4fff3;
 }
 
+.header-right button:nth-child(1) {
+  border-radius: 0 0 0 1.8rem;
+}
+
+.header-right button:nth-child(3) {
+  border-radius: 0 0 1.8rem 0;
+}
+
 .header-right button:hover {
+  background-color: #5f8d4e;
+  color: white;
+}
+
+.header-center button {
+  display: block;
+  padding: 1rem;
+  border: none;
+  background-color: #f4fff3;
+  border-radius: 0 0 1.8rem 1.8rem;
+}
+.header-center button:hover {
   background-color: #5f8d4e;
   color: white;
 }

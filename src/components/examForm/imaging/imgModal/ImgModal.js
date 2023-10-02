@@ -4,27 +4,42 @@ import "./ImgModal.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
 import ImgPicItem from "./imgPicItem/ImgPicItem";
+import { formatStringToArr } from "../../../../utility/formatString";
+import validateImg from "../../../../utility/validate/validateImg";
 
-function ImgModal({
-  onClose,
-  imgname,
-  imgstatus,
-  imgdes,
-  imgimg,
-  editImg,
-  imgItem,
-}) {
+function ImgModal({ onClose, editImg, imgItem }) {
   const { createNewImgItem } = useImg();
   const [openPic, setOpenPic] = useState({
     switch: false,
     picSrc: "",
   });
-  const [imgName, setImgName] = useState(imgname || "");
-  const [imgStatus, setImgStatus] = useState(imgstatus || "pending");
-  const [imgDes, setImgDes] = useState(imgdes || "");
-  const [listPic, setListPic] = useState(imgimg || []);
+
+  const [imgObj, setImgObj] = useState({
+    name: editImg ? imgItem?.name : "",
+    status: editImg ? imgItem?.status : "pending",
+    des: editImg ? imgItem?.des : "",
+    img: editImg ? formatStringToArr(imgItem?.img, " ") : "",
+  });
+
+  const resetImgObj = () => {
+    setImgObj({
+      name: "",
+      status: "pending",
+      des: "",
+      img: "",
+    });
+  };
+
+  const changeImgObj = (key, value) => {
+    setImgObj((prev) => {
+      return { ...prev, [key]: value };
+    });
+  };
+
+  const [errMessage, setErrMessage] = useState("");
 
   const fileEl = useRef();
+
   return openPic.switch ? (
     <div className="img-home-img">
       <button onClick={() => setOpenPic({ switch: false, picSrc: "" })}>
@@ -49,20 +64,21 @@ function ImgModal({
         <label htmlFor="img-name">Imaging Name</label>
         <input
           type="text"
-          className="form-control"
+          className={`form-control ${errMessage && "isError"}`}
           id="img-name"
-          value={imgName}
-          onChange={(e) => setImgName(e.target.value)}
+          value={imgObj.name}
+          onChange={(e) => changeImgObj("name", e.target.value)}
         />
       </div>
+      {errMessage && <small className="text-danger">{errMessage}</small>}
       <div className="img-status input-group">
         <label htmlFor="img-status">Imaging Status</label>
         <select
           name=""
           id="img-status"
           className="form-select"
-          value={imgStatus}
-          onChange={(e) => setImgStatus(e.target.value)}>
+          value={imgObj.status}
+          onChange={(e) => changeImgObj("status", e.target.value)}>
           <option className="lab-status-option" value="pending">
             Pending
           </option>
@@ -71,7 +87,7 @@ function ImgModal({
           </option>
         </select>
       </div>
-      {imgStatus === "complete" && (
+      {imgObj.status === "complete" && (
         <div className="img-result">
           <div className="lab-result-input">
             <textarea
@@ -79,12 +95,12 @@ function ImgModal({
               className="form-control"
               cols="40"
               rows="5"
-              value={imgDes}
-              onChange={(e) => setImgDes(e.target.value)}></textarea>
+              value={imgObj.des}
+              onChange={(e) => changeImgObj("des", e.target.value)}></textarea>
             <div className="img-pic-list">
-              {listPic.length > 0 && (
+              {imgObj.img.length > 0 && (
                 <>
-                  {listPic.map((item, index) => {
+                  {imgObj.img?.map((item, index) => {
                     return (
                       <ImgPicItem
                         key={"imgpicitem" + index}
@@ -95,9 +111,10 @@ function ImgModal({
                           })
                         }
                         deletePic={(deletedPic) =>
-                          setListPic((prev) => {
-                            return prev.filter((item) => item !== deletedPic);
-                          })
+                          changeImgObj(
+                            "img",
+                            imgObj.img.filter((item) => item !== deletedPic)
+                          )
                         }
                       />
                     );
@@ -115,9 +132,7 @@ function ImgModal({
               ref={fileEl}
               onChange={(e) => {
                 if (e.target.files?.length > 0) {
-                  setListPic((prev) => {
-                    return [...prev, ...e.target.files];
-                  });
+                  changeImgObj("img", [...imgObj.img, ...e.target.files]);
                 }
               }}
             />
@@ -130,26 +145,26 @@ function ImgModal({
           onClick={
             editImg
               ? () => {
-                  editImg(imgItem, {
-                    name: imgName,
-                    status: imgStatus,
-                    des: imgDes,
-                    img: listPic,
-                  });
-                  onClose();
+                  if (
+                    validateImg(imgObj, (errText) => setErrMessage(errText))
+                  ) {
+                    editImg(imgItem, imgObj);
+                    resetImgObj();
+                    setErrMessage("");
+                    onClose();
+                  }
                 }
               : () => {
-                  createNewImgItem({
-                    name: imgName,
-                    status: imgStatus,
-                    des: imgDes,
-                    img: listPic,
-                  });
-                  if (listPic.length > 0) {
-                    setListPic([]);
-                    fileEl.current.value = "";
+                  if (
+                    validateImg(imgObj, (errText) => setErrMessage(errText))
+                  ) {
+                    createNewImgItem(imgObj);
+                    if (imgObj.img.length > 0) {
+                      fileEl.current.value = "";
+                    }
+                    resetImgObj();
+                    onClose();
                   }
-                  onClose();
                 }
           }>
           {editImg ? "Edit" : "Add"}

@@ -5,9 +5,14 @@ import { useLab } from "../../../../contexts/LabContext";
 import { formatStringToArr } from "../../../../utility/formatString";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowRightFromBracket } from "@fortawesome/free-solid-svg-icons";
+import validateLab from "../../../../utility/validate/validateLab";
 
 function LabModal({ onClose, editLab, labItem }) {
   const { createNewLabItem } = useLab();
+  const [openPic, setOpenPic] = useState({
+    switch: false,
+    picSrc: "",
+  });
 
   const [labObj, setLabObj] = useState({
     name: editLab ? labItem?.name : "",
@@ -31,10 +36,7 @@ function LabModal({ onClose, editLab, labItem }) {
     });
   };
 
-  const [openPic, setOpenPic] = useState({
-    switch: false,
-    picSrc: "",
-  });
+  const [errMessage, setErrMessage] = useState("");
 
   const fileEl = useRef();
 
@@ -59,15 +61,16 @@ function LabModal({ onClose, editLab, labItem }) {
   ) : (
     <div className="lab-modal">
       <div className="lab-name input-group">
-        <label htmlFor="lab-name">Lab Name </label>
+        <label htmlFor="lab-name">Lab Name</label>
         <input
           type="text"
-          className="form-control"
+          className={`form-control ${errMessage && "isError"}`}
           id="lab-name"
           value={labObj.name}
           onChange={(e) => changeLabObj("name", e.target.value)}
         />
       </div>
+      {errMessage && <small className="text-danger">{errMessage}</small>}
       <div className="lab-status input-group">
         <label htmlFor="lab-status">Lab Status </label>
         <select
@@ -129,8 +132,6 @@ function LabModal({ onClose, editLab, labItem }) {
               className="d-none"
               ref={fileEl}
               onChange={(e) => {
-                console.dir(e.target.files);
-                console.dir(e.target.files[0].name);
                 if (e.target.files?.length > 0) {
                   changeLabObj("img", [...labObj.img, ...e.target.files]);
                 }
@@ -144,17 +145,27 @@ function LabModal({ onClose, editLab, labItem }) {
           onClick={
             editLab
               ? () => {
-                  editLab(labItem, labObj);
-                  resetLabObj();
-                  onClose();
+                  if (
+                    validateLab(labObj, (errText) => setErrMessage(errText))
+                  ) {
+                    editLab(labItem, labObj);
+                    resetLabObj();
+                    setErrMessage("");
+                    onClose();
+                  }
                 }
               : () => {
-                  createNewLabItem(labObj);
-                  if (labObj.img.length > 0) {
-                    fileEl.current.value = "";
+                  if (
+                    validateLab(labObj, (errText) => setErrMessage(errText))
+                  ) {
+                    createNewLabItem(labObj);
+                    if (labObj.img.length > 0) {
+                      fileEl.current.value = "";
+                    }
+                    resetLabObj();
+                    setErrMessage("");
+                    onClose();
                   }
-                  resetLabObj();
-                  onClose();
                 }
           }>
           {editLab ? "Edit" : "Add"}

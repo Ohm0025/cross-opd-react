@@ -13,6 +13,11 @@
   border-radius: 0.6rem;
   width: 20rem;
 }
+
+.img-name .isError {
+  border-color: red;
+}
+
 .img-name input {
   text-align: center;
 }

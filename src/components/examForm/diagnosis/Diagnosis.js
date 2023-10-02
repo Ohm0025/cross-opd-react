@@ -7,8 +7,15 @@ import DiagEdit from "./diagEdit/DiagEdit";
 import { useDiag } from "../../../contexts/DiagContext";
 
 function Diagnosis() {
-  const { diagList, addDiagList, editDiagList, removeDiag, detail, changeDDX } =
-    useDiag();
+  const {
+    diagList,
+    addDiagList,
+    editDiagList,
+    removeDiag,
+    detail,
+    changeDDX,
+    errMessage,
+  } = useDiag();
 
   const [diagTitle, setDiagTitle] = useState("");
 
@@ -24,7 +31,7 @@ function Diagnosis() {
           type="text"
           value={diagTitle}
           onChange={(e) => setDiagTitle(e.target.value)}
-          className="form-control"
+          className={`${errMessage && "isError"} form-control`}
           id="diag_text"
           placeholder="diagnosis"
         />
@@ -37,6 +44,7 @@ function Diagnosis() {
           <FontAwesomeIcon icon={faPlus} />
         </button>
       </div>
+      {errMessage && <small className="text-danger">{errMessage}</small>}
       {diagList.length > 0 ? (
         <>
           <div className="diag-list">

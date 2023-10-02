@@ -17,6 +17,8 @@ function HomePtContextProvider({ children }) {
   //create state เพื่อใช้ดูว่าตอนนี้กำลัง edit อยู่หรือไม่
   const [isEdit, setIsEdit] = useState(false);
 
+  const [errMessage, setErrMessage] = useState("");
+
   //create state ที่ใช้เก็บค่า input ของ page นี้
   const [input, setInput] = useState({
     chiefComplaintFirst: "",
@@ -71,6 +73,9 @@ function HomePtContextProvider({ children }) {
       setIsWait(true);
     } catch (err) {
       toast.error(err.response.data.message);
+      if (err.response.data.message === "location is required.") {
+        setErrMessage("location is required.");
+      }
       console.log(err);
     } finally {
       stopLoading();
@@ -151,6 +156,7 @@ function HomePtContextProvider({ children }) {
         cancelCard,
         fetchInputFollowUp,
         navigate,
+        errMessage,
       }}>
       {children}
     </HomePtContext.Provider>

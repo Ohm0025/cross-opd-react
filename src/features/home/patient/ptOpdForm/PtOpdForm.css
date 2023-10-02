@@ -28,6 +28,10 @@
   background-color: #5f8d4e;
 }
 
+.pt-center .isError {
+  border-color: red;
+}
+
 @media only screen and (max-width: 768px) {
   .pt-center {
     max-width: 31.25rem;

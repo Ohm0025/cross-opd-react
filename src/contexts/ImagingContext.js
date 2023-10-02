@@ -22,12 +22,11 @@ function ImagingContextProvider({ children }) {
   };
 
   const deletedImg = (deleteImg) => {
-    deleteList(deletedImg, "img");
+    deleteList(deleteImg, "img");
   };
   return (
     <ImagingContext.Provider
-      value={{ listImg: recordObj.img, createNewImgItem, editImg, deletedImg }}
-    >
+      value={{ listImg: recordObj.img, createNewImgItem, editImg, deletedImg }}>
       {children}
     </ImagingContext.Provider>
   );

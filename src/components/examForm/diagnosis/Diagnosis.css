@@ -11,6 +11,10 @@
   margin: 0;
 }
 
+.diag-input .isError {
+  border-color: red;
+}
+
 .diag-list {
   display: flex;
   flex-direction: column;

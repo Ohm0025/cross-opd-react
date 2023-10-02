@@ -15,6 +15,10 @@
   width: 20rem;
 }
 
+.lab-name .isError {
+  border-color: red;
+}
+
 .lab-name input {
   text-align: center;
 }

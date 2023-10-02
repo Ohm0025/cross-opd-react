@@ -1,0 +1,10 @@
+.tx-item-list {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 1rem;
+  margin-bottom: 1rem;
+}
+
+.tx-item-list div button {
+  width: 5rem;
+}

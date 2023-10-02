@@ -10,6 +10,7 @@ function Treatment() {
     updateTxObj,
     editTxObj,
     deleteTxObj,
+    deleteTx,
   } = useDiag();
 
   return (
@@ -18,9 +19,10 @@ function Treatment() {
 
       <div className="tx-action">
         {diagList.length > 0 ? (
-          <ul className="list-group">
+          <div className="list-group">
             {diagList.map((item, index) => (
               <TreatmentItem
+                order={index + 1}
                 diagTitle={item}
                 key={"txitem" + index}
                 txList={txObj[item]}
@@ -28,9 +30,10 @@ function Treatment() {
                 updateTxObj={updateTxObj}
                 editTxObj={editTxObj}
                 deleteTxObj={deleteTxObj}
+                deleteTx={deleteTx}
               />
             ))}
-          </ul>
+          </div>
         ) : (
           <span className="tx-list-empty">
             - ยังไม่มีรายการรักษา โปรดเพิ่มรายการวินิจฉัยก่อน -

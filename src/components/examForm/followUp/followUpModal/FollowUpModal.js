@@ -10,8 +10,6 @@ import {
 } from "../../../../utility/formatDataTime";
 
 function FollowUpModal({ item, closeModal, updateFollowUp }) {
-  console.log(item);
-
   // const defaultDate = item.fuDate ? new Date(item.fuDate) : "";
   // const [date, setDate] = useState(currentDate);
   const currentDate = new Date();

@@ -2,8 +2,14 @@ import "./PtOpdForm.css";
 import { useHomePt } from "../../../../contexts/HomePtContext";
 
 function PtOpdForm() {
-  const { input, openCard, handleChangeInput, isEdit, sendEditCard } =
-    useHomePt();
+  const {
+    input,
+    openCard,
+    handleChangeInput,
+    isEdit,
+    sendEditCard,
+    errMessage,
+  } = useHomePt();
   return (
     <div className="pt-center">
       <div>
@@ -37,14 +43,14 @@ function PtOpdForm() {
         <label htmlFor="location">{"สถานที่ที่เข้าตรวจ"}</label>
         <textarea
           value={input.location}
-          // defaultValue={isEdit ? waitCase.location : ""}
-          className="form-control"
+          className={`${errMessage && "isError"} form-control`}
           id="locatioin"
           name="location"
           onChange={handleChangeInput}
           cols="50"
           rows="1"
         />
+        {errMessage && <small className="text-danger">{errMessage}</small>}
       </div>
 
       <button
