@@ -5,6 +5,7 @@ import { formatCreatedAt } from "../../../utility/formatDataTime";
 import UnderlyLast from "../underlyLast/UnderlyLast";
 import UnderlyAction from "./underlyAction/UnderlyAction";
 import UnderlyFollowUp from "./underlyFollowUp/UnderlyFollowUp";
+import UnderlyItem from "./underlyItem/UnderlyItem";
 
 function UnderlyBody({
   selectUd,
@@ -32,10 +33,7 @@ function UnderlyBody({
   }, [patientId, selectUd]);
 
   const handleClickAddUD = (udName, udDrugObj) => {
-    console.log(recordObj);
-    console.log(udName);
     if (!recordObj?.diag.includes(udName)) {
-      console.log("if route");
       updateList("diag", udName);
       updateTxObj(udName, {
         title: udDrugObj.title,
@@ -43,7 +41,6 @@ function UnderlyBody({
         detail: `${udDrugObj.detail} # ${udDrugObj.amount}`,
       });
     } else {
-      console.log("else route");
       updateTxObj(udName, {
         title: udDrugObj.title,
         type: "drug",
@@ -71,12 +68,11 @@ function UnderlyBody({
                   <td>
                     {item1.caseDetail}
                     {selectCase === item1 && (
-                      <ol>
+                      <div>
                         {item1.caseTreatment.map((item2, index2) => {
                           return item2[1].map((item3, index3) => {
-                            console.log(item3);
                             return (
-                              <li
+                              <UnderlyItem
                                 key={
                                   "ud-caseTx" +
                                   index1 +
@@ -84,13 +80,14 @@ function UnderlyBody({
                                   index2 +
                                   " " +
                                   index3
-                                }>
-                                {item3.title} {item3.detail} {item3.amount}
-                              </li>
+                                }
+                                item={item3}
+                                index={+index3}
+                              />
                             );
                           });
                         })}
-                      </ol>
+                      </div>
                     )}
                   </td>
                 </tr>
@@ -105,6 +102,9 @@ function UnderlyBody({
           <UnderlyAction
             handleClickAddUD={handleClickAddUD}
             udName={selectUd.udTitle}
+            drugOnTime={Object.entries(recordObj.tx).find(
+              (item) => item[0] === selectUd?.udTitle
+            )}
           />
           <UnderlyFollowUp />
         </div>

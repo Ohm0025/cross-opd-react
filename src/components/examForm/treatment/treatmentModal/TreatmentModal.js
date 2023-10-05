@@ -7,12 +7,15 @@ function TreatmentModal({
   txList,
   handleSubmitTx,
   diagTitle,
-  closeModal,
   updateTxObj,
   deleteTx,
+  settingCallBack,
+  editTxObj,
 }) {
   const dropdownEl = useRef();
   const [isOpen, setIsOpen] = useState(false);
+
+  const [isEdit, setIsEdit] = useState(null);
 
   const [filterType, setFilterType] = useState("all");
 
@@ -43,10 +46,22 @@ function TreatmentModal({
 
   const handleSubmitButton = () => {
     if (typeInput === "drug") {
-      validateTreatment(txobj, (errText) =>
-        setErrObj((prev) => {
-          return { ...prev, drug: errText };
-        })
+      validateTreatment(
+        txobj,
+        typeInput,
+        (errText) =>
+          setErrObj((prev) => {
+            return { ...prev, drug: errText };
+          }),
+        () => {
+          setTxObj({
+            title: "",
+            detail: "",
+            type: "drug",
+            amount: "",
+          });
+          return true;
+        }
       ) &&
         updateTxObj(diagTitle, {
           title: txobj.title,
@@ -54,13 +69,64 @@ function TreatmentModal({
           detail: `${txobj.detail} # ${txobj.amount}`,
         });
     } else {
-      updateTxObj(diagTitle, {
-        title: txobj2.title,
-        type: "proceduce",
-        detail: txobj2.detail,
-      });
+      validateTreatment(
+        txobj2,
+        typeInput,
+        (errText) =>
+          setErrObj((prev) => {
+            return { ...prev, proceduce: errText };
+          }),
+        () => {
+          setTxObj2({
+            title: "",
+            detail: "",
+            type: "proceduce",
+          });
+          return true;
+        }
+      ) &&
+        updateTxObj(diagTitle, {
+          title: txobj2.title,
+          type: "proceduce",
+          detail: txobj2.detail,
+        });
     }
+  };
 
+  useEffect(() => {
+    settingCallBack(() => {
+      setErrObj((prev) => {
+        return { drug: "", proceduce: "" };
+      });
+      if (isEdit) {
+        setTxObj({
+          title: "",
+          detail: "",
+          type: "drug",
+          amount: "",
+        });
+        setTxObj2({
+          title: "",
+          detail: "",
+          type: "proceduce",
+        });
+        setIsEdit(null);
+      }
+    });
+    const handleClickOutSide = (e) => {
+      if (!dropdownEl.current.contains(e.target)) {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutSide);
+    return () => document.removeEventListener("mousedown", handleClickOutSide);
+  }, [settingCallBack]);
+
+  useEffect(() => {
+    setErrObj((prev) => {
+      return { drug: "", proceduce: "" };
+    });
     setTxObj({
       title: "",
       detail: "",
@@ -72,17 +138,7 @@ function TreatmentModal({
       detail: "",
       type: "proceduce",
     });
-  };
-
-  useEffect(() => {
-    const handleClickOutSide = (e) => {
-      if (!dropdownEl.current.contains(e.target)) {
-        setIsOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutSide);
-    return () => document.removeEventListener("mousedown", handleClickOutSide);
-  }, []);
+  }, [typeInput]);
 
   return (
     <div className="tx-modal">
@@ -109,6 +165,23 @@ function TreatmentModal({
             item={item}
             key={"treatmentitemlist" + index}
             deleteTx={() => deleteTx(diagTitle, txList, item)}
+            isEdit={isEdit}
+            changeEdit={(selectItem) => {
+              setIsEdit((prev) => {
+                return { ...selectItem };
+              });
+
+              if (selectItem?.type === "drug") {
+                setTxObj((prev) => {
+                  return {
+                    title: selectItem?.title,
+                    detail: selectItem?.detail?.split("#")[0]?.trim(),
+                    type: "drug",
+                    amount: selectItem?.detail?.split("#")[1]?.trim(),
+                  };
+                });
+              }
+            }}
           />
         ))
       ) : (
@@ -135,7 +208,9 @@ function TreatmentModal({
               <input
                 type="text"
                 placeholder="drug name"
-                className="form-control w-75"
+                className={`${
+                  errObj.drug?.endsWith("title is required.") && "isError"
+                } form-control w-75`}
                 value={txobj.title}
                 onChange={(e) =>
                   setTxObj((prev) => {
@@ -143,13 +218,12 @@ function TreatmentModal({
                   })
                 }
               />
-              {errObj.drug && (
-                <small className="text-danger">{errObj.drug}</small>
-              )}
               <input
                 type="number"
                 placeholder="amount"
-                className="form-control w-25"
+                className={`${
+                  errObj.drug?.endsWith("amount is required.") && "isError"
+                } form-control w-25`}
                 value={txobj.amount}
                 onChange={(e) =>
                   setTxObj((prev) => {
@@ -158,6 +232,9 @@ function TreatmentModal({
                 }
               />
             </div>
+            {errObj.drug && (
+              <small className="text-danger">{errObj.drug}</small>
+            )}
             <input
               type="text"
               placeholder="detail"
@@ -175,7 +252,9 @@ function TreatmentModal({
             <input
               type="text"
               placeholder="proceduce name"
-              className="form-control d-block"
+              className={`${
+                errObj.proceduce?.endsWith("title is required.") && "isError"
+              } form-control d-block`}
               value={txobj2.title}
               onChange={(e) =>
                 setTxObj2((prev) => {
@@ -183,6 +262,9 @@ function TreatmentModal({
                 })
               }
             />
+            {errObj.proceduce && (
+              <small className="text-danger">{errObj.proceduce}</small>
+            )}
             <input
               type="text"
               placeholder="detail"
@@ -198,8 +280,27 @@ function TreatmentModal({
         )}
 
         <div>
-          <button className="btn" onClick={handleSubmitButton}>
-            Add
+          <button
+            className="btn"
+            onClick={
+              isEdit
+                ? () => {
+                    editTxObj(isEdit, {
+                      title: txobj.title,
+                      type: "drug",
+                      detail: `${txobj.detail} # ${txobj.amount}`,
+                    });
+                    setIsEdit(null);
+                    setTxObj({
+                      title: "",
+                      detail: "",
+                      type: "drug",
+                      amount: "",
+                    });
+                  }
+                : handleSubmitButton
+            }>
+            {isEdit ? "Edit" : "Add"}
           </button>
           <button className="btn">Clear</button>
         </div>

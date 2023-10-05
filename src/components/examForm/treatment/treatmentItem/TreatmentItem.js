@@ -18,7 +18,7 @@ function TreatmentItem({
   const [isOpen, setIsOpen] = useState(false);
   const [isDetail, setIsDetail] = useState(false);
 
-  console.log(txList);
+  const [callBack, setCallBack] = useState(null);
   return (
     <>
       <div className="list-group-item tx-list-item">
@@ -73,12 +73,15 @@ function TreatmentItem({
       <Modal
         title={`Treatment for ${diagTitle}`}
         isOpen={isOpen}
-        onClose={() => setIsOpen(false)}>
+        onClose={() => {
+          callBack && callBack();
+          setIsOpen(false);
+        }}>
         <TreatmentModal
           diagTitle={diagTitle}
           txList={txList}
           handleSubmitTx={handleSubmitTx}
-          closeModal={() => setIsOpen(false)}
+          settingCallBack={(cb) => setCallBack(cb)}
           updateTxObj={updateTxObj}
           editTxObj={editTxObj}
           deleteTxObj={deleteTxObj}

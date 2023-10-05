@@ -153,7 +153,9 @@ function ExamContextProvider({ children }) {
         tx: {
           ...prev.tx,
           [selectDiagName]: prev.tx[selectDiagName].map((item) => {
-            return item === selectItem ? newObj : item;
+            return JSON.stringify(item) === JSON.stringify(selectItem)
+              ? newObj
+              : item;
           }),
         },
       };

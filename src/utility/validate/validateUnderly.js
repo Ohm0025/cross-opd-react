@@ -35,3 +35,21 @@ export const validateEditUd = (listUd, editTitle, oldTitle) => {
   });
   return errorMessage;
 };
+
+export const validateDrugUd = (listDrug = [], drugObj) => {
+  console.log(listDrug);
+  console.log(drugObj);
+  let errorMessage = "";
+  if (drugObj?.title?.trim() === "") {
+    return (errorMessage = "drug title is required.");
+  }
+  if (
+    listDrug.find(
+      (item) =>
+        item?.toLowerCase().trim() === drugObj?.title?.toLowerCase().trim()
+    )
+  ) {
+    return (errorMessage = "this drug already exist.");
+  }
+  return errorMessage;
+};

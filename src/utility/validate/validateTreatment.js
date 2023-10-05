@@ -1,13 +1,13 @@
-module.exports = (txObj, cb) => {
+module.exports = (txObj, typeInput, cb1, cb2) => {
   if (txObj.title?.trim() === "") {
-    cb("treatment title is required.");
+    cb1(typeInput + " title is required.");
     return false;
   }
 
-  if (txObj.amount?.trim() === "") {
-    cb("drug amount is required.");
+  if (typeInput === "drug" && txObj.amount?.trim() === "") {
+    cb1("drug amount is required.");
     return false;
   }
 
-  return true;
+  return true && cb2();
 };
