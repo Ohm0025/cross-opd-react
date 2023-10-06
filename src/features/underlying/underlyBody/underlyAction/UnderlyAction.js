@@ -2,7 +2,7 @@ import { validateDrugUd } from "../../../../utility/validate/validateUnderly";
 import "./UnderlyAction.css";
 import { useState } from "react";
 
-function UnderlyAction({ handleClickAddUD, udName, drugOnTime }) {
+function UnderlyAction({ handleClickAddUD, udName, drugOnTime, deleteDrug }) {
   const [udObj, setUdObj] = useState({
     title: "",
     detail: "",
@@ -16,8 +16,20 @@ function UnderlyAction({ handleClickAddUD, udName, drugOnTime }) {
           <div className="ud-show-display">
             {drugOnTime[1]?.map((item, index) => {
               return (
-                <div key={"drugOnTime" + index}>
-                  {item?.title} {item?.detail}
+                <div
+                  key={"drugOnTime" + index}
+                  className="drugOnTime-container">
+                  <div>
+                    {item?.title} {item?.detail}
+                  </div>
+                  <div className="btn-group">
+                    <button className="btn btn-success">edit</button>
+                    <button
+                      className="btn btn-danger"
+                      onClick={() => deleteDrug(drugOnTime[1], index)}>
+                      delete
+                    </button>
+                  </div>
                 </div>
               );
             })}
@@ -25,7 +37,6 @@ function UnderlyAction({ handleClickAddUD, udName, drugOnTime }) {
         ) : (
           <h4 className="ud-show-display">- No drug prescript -</h4>
         )}
-        <button className="btn btn-secondary button-remed">Re-med</button>
       </div>
       <div className="ud-action-drug">
         <div className="ud-action-drug-input">

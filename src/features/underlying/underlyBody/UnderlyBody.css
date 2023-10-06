@@ -32,3 +32,9 @@
 .ud-body-footer {
   margin-top: 2rem;
 }
+
+.table-selectCase {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
