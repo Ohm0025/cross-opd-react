@@ -31,6 +31,7 @@
 
 .ud-body-footer {
   margin-top: 2rem;
+  display: flex;
 }
 
 .table-selectCase {

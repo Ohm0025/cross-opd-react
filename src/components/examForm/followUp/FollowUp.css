@@ -4,6 +4,9 @@
   align-items: center;
   margin-top: 0.625rem;
 }
+.fu-action-ud {
+  margin: 0.625rem auto 0;
+}
 .fu-list {
   margin-top: 0.625rem;
 }

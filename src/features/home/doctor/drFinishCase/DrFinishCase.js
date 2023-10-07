@@ -34,9 +34,7 @@ function DrFinishCase({ finishCaseList }) {
           />
         ))
       ) : (
-        <b style={{ textAlign: "center", fontSize: "1.4rem", padding: "1rem" }}>
-          ยังไม่มีเคสที่ตรวจไปแล้ว
-        </b>
+        <b className="finish-table-empty">ยังไม่มีเคสที่ตรวจไปแล้ว</b>
       )}
       <DrFinishFooter
         displayAmount={displayAmount}

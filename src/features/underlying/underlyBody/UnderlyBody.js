@@ -94,6 +94,15 @@ function UnderlyBody({
                         <ButtonReMed
                           handleOnClick={() => {
                             item1.caseTreatment[0][1].forEach((item) => {
+                              if (
+                                recordObj.tx[selectUd?.udTitle].find(
+                                  (findItem) => findItem.title === item.title
+                                )
+                              ) {
+                                console.log("fkpok");
+                                return;
+                              }
+
                               handleClickAddUD(
                                 selectUd?.udTitle,
                                 formatStrToObj(item)
@@ -123,13 +132,19 @@ function UnderlyBody({
               )
             }
             udName={selectUd.udTitle}
+            editTxObj={editTxObj}
             drugOnTime={Object.entries(recordObj.tx).find(
               (item) => item[0] === selectUd?.udTitle
             )}
+            fuDetail={recordObj.ad?.detail || ""}
+            handleChangeFuDetail={(inputText) =>
+              updateRecordObj("ad", "detail", inputText)
+            }
           />
-          <UnderlyFollowUp />
         </div>
       )}
+
+      <br />
     </div>
   );
 }

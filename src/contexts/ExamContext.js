@@ -146,16 +146,14 @@ function ExamContextProvider({ children }) {
     delete recordObj.tx[oldDiagName];
   };
 
-  const editTxObj = (selectDiagName, selectItem, newObj) => {
+  const editTxObj = (selectDiagName, selectIndex, newObj) => {
     setRecordObj((prev) => {
       return {
         ...prev,
         tx: {
           ...prev.tx,
-          [selectDiagName]: prev.tx[selectDiagName].map((item) => {
-            return JSON.stringify(item) === JSON.stringify(selectItem)
-              ? newObj
-              : item;
+          [selectDiagName]: prev.tx[selectDiagName].map((item, index) => {
+            return index === selectIndex ? newObj : item;
           }),
         },
       };

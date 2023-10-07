@@ -1,0 +1,19 @@
+.edit-drug-input {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 25rem;
+  background-color: aliceblue;
+}
+
+.edit-drug-input input {
+  overflow-x: scroll;
+  font-size: 0.8rem;
+}
+
+.edit-drug-input input:nth-child(1) {
+  width: 15rem;
+}
+
+.edit-drug-input input:nth-child(3) {
+  width: 10rem;
+}

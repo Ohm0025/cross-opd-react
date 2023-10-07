@@ -1,9 +1,10 @@
 .ud-show {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  gap: 1rem;
   align-items: center;
-  padding: 0 5rem;
-  margin-bottom: 2rem;
+  padding: 0 0.6rem;
+  margin: 0 auto 1rem;
 }
 
 .ud-show-display {

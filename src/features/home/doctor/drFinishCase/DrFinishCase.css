@@ -4,3 +4,19 @@
   max-width: 25rem;
   min-width: 18.75rem;
 }
+.finish-table-empty {
+  text-align: center;
+  font-size: 1.4rem;
+  padding: 1rem;
+}
+@media only screen and (max-width: 768px) {
+  .finish-table {
+    max-width: 20rem;
+    min-width: 15.75rem;
+  }
+  .finish-table-empty {
+    text-align: center;
+    font-size: 1rem;
+    padding: 0.5rem;
+  }
+}

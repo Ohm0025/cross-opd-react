@@ -21,6 +21,7 @@ function UnderlyPage({ patientId }) {
     updateRecordObj,
     updateTxObj,
     recordObj,
+    editTxObj,
   } = useExam() || {};
   const [listOfUnderly, setListOfUnderly] = useState([]);
 
@@ -92,6 +93,7 @@ function UnderlyPage({ patientId }) {
                 updateRecordObj={updateRecordObj}
                 updateTxObj={updateTxObj}
                 recordObj={recordObj}
+                editTxObj={editTxObj}
               />
             </div>
           ) : (

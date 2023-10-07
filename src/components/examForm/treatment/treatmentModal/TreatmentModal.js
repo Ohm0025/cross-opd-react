@@ -15,7 +15,7 @@ function TreatmentModal({
   const dropdownEl = useRef();
   const [isOpen, setIsOpen] = useState(false);
 
-  const [isEdit, setIsEdit] = useState(null);
+  const [isEdit, setIsEdit] = useState("");
 
   const [filterType, setFilterType] = useState("all");
 
@@ -98,7 +98,7 @@ function TreatmentModal({
       setErrObj((prev) => {
         return { drug: "", proceduce: "" };
       });
-      if (isEdit) {
+      if (isEdit >= 0) {
         setTxObj({
           title: "",
           detail: "",
@@ -110,7 +110,7 @@ function TreatmentModal({
           detail: "",
           type: "proceduce",
         });
-        setIsEdit(null);
+        setIsEdit("");
       }
     });
     const handleClickOutSide = (e) => {
@@ -165,10 +165,10 @@ function TreatmentModal({
             item={item}
             key={"treatmentitemlist" + index}
             deleteTx={() => deleteTx(diagTitle, txList, item)}
-            isEdit={isEdit}
+            isEdit={isEdit === index}
             changeEdit={(selectItem) => {
               setIsEdit((prev) => {
-                return { ...selectItem };
+                return index;
               });
 
               if (selectItem?.type === "drug") {
@@ -283,14 +283,14 @@ function TreatmentModal({
           <button
             className="btn"
             onClick={
-              isEdit
+              isEdit >= 0 && isEdit !== ""
                 ? () => {
                     editTxObj(isEdit, {
                       title: txobj.title,
                       type: "drug",
                       detail: `${txobj.detail} # ${txobj.amount}`,
                     });
-                    setIsEdit(null);
+                    setIsEdit("");
                     setTxObj({
                       title: "",
                       detail: "",
@@ -300,7 +300,7 @@ function TreatmentModal({
                   }
                 : handleSubmitButton
             }>
-            {isEdit ? "Edit" : "Add"}
+            {isEdit >= 0 && isEdit !== "" ? "Edit" : "Add"}
           </button>
           <button className="btn">Clear</button>
         </div>

@@ -5,13 +5,13 @@ import { useState } from "react";
 import FollowUpItem from "./followUpItem/FollowUpItem";
 import { useExam } from "../../../contexts/ExamContext";
 
-function FollowUp() {
+function FollowUp({ fromUd }) {
   const [isOpen, setIsOpen] = useState(false);
   const { recordObj, updateFollowUp } = useExam();
   return (
     <div className="fu-box">
-      <div className="fu-action">
-        <label htmlFor="fu_btn">Follow Up</label>
+      <div className={!fromUd ? "fu-action" : "fu-action-ud"}>
+        <label htmlFor="fu_btn">{!fromUd && "FollowUp"}</label>
         <button
           className="btn btn-secondary"
           onClick={() => setIsOpen((prev) => !prev)}>

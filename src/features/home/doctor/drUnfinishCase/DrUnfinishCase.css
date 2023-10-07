@@ -4,3 +4,10 @@
   max-width: 25rem;
   min-width: 18.75rem;
 }
+
+@media only screen and (max-width: 768px) {
+  .unfinish-table {
+    max-width: 20rem;
+    min-width: 15.75rem;
+  }
+}

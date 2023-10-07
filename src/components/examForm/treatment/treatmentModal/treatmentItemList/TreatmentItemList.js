@@ -6,11 +6,7 @@ function TreatmentItemList({ item, deleteTx, changeEdit, isEdit }) {
       <span>{item.title + item.detail}</span>
       <div className="btn-group">
         <button
-          className={`btn ${
-            JSON.stringify(isEdit) === JSON.stringify(item)
-              ? "btn-secondary"
-              : "btn-success"
-          }`}
+          className={`btn ${isEdit ? "btn-secondary" : "btn-success"}`}
           onClick={() => changeEdit(item)}>
           edit
         </button>

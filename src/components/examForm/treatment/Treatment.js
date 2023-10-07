@@ -28,10 +28,8 @@ function Treatment() {
                 txList={txObj[item]}
                 handleSubmitTx={handleSubmitTx}
                 updateTxObj={updateTxObj}
-                editTxObj={(selectItem, newObj) => {
-                  console.log(selectItem);
-                  console.log(newObj);
-                  editTxObj(item, selectItem, newObj);
+                editTxObj={(selectIndex, newObj) => {
+                  editTxObj(item, selectIndex, newObj);
                 }}
                 deleteTxObj={deleteTxObj}
                 deleteTx={deleteTx}

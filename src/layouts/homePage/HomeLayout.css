@@ -43,4 +43,7 @@
   .user-tag {
     font-size: 0.75rem;
   }
+  .header-user .user-tag {
+    font-size: 0.65rem;
+  }
 }

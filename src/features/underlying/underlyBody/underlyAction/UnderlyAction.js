@@ -1,14 +1,31 @@
+import EditDrugUd from "../../../../components/editDrugUd/EditDrugUd";
+import FollowUp from "../../../../components/examForm/followUp/FollowUp";
 import { validateDrugUd } from "../../../../utility/validate/validateUnderly";
 import "./UnderlyAction.css";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-function UnderlyAction({ handleClickAddUD, udName, drugOnTime, deleteDrug }) {
+function UnderlyAction({
+  handleClickAddUD,
+  udName,
+  drugOnTime,
+  deleteDrug,
+  editTxObj,
+  fuDetail,
+  handleChangeFuDetail,
+}) {
   const [udObj, setUdObj] = useState({
     title: "",
     detail: "",
     amount: "",
   });
   const [errMessage, setErrMessage] = useState("");
+  const [isEdit, setIsEdit] = useState("");
+
+  useEffect(() => {
+    setErrMessage("");
+    setIsEdit("");
+  }, [udName]);
+
   return (
     <div className="ud-action">
       <div className="ud-show">
@@ -19,11 +36,30 @@ function UnderlyAction({ handleClickAddUD, udName, drugOnTime, deleteDrug }) {
                 <div
                   key={"drugOnTime" + index}
                   className="drugOnTime-container">
-                  <div>
-                    {item?.title} {item?.detail}
-                  </div>
+                  {isEdit === index ? (
+                    <EditDrugUd
+                      inputObj={item}
+                      callBack={(inputObj) => {
+                        editTxObj(udName, index, inputObj);
+                        setIsEdit("");
+                      }}
+                    />
+                  ) : (
+                    <div className="drugOnTime-show">
+                      {item?.title} {item?.detail}{" "}
+                      {item?.amount ? "#" + item?.amount : ""}
+                    </div>
+                  )}
                   <div className="btn-group">
-                    <button className="btn btn-success">edit</button>
+                    <button
+                      className={`btn ${
+                        isEdit === index ? "btn-secondary" : "btn-success"
+                      }`}
+                      onClick={() =>
+                        setIsEdit((prev) => (isEdit === index ? "" : index))
+                      }>
+                      edit
+                    </button>
                     <button
                       className="btn btn-danger"
                       onClick={() => deleteDrug(drugOnTime[1], index)}>
@@ -37,6 +73,7 @@ function UnderlyAction({ handleClickAddUD, udName, drugOnTime, deleteDrug }) {
         ) : (
           <h4 className="ud-show-display">- No drug prescript -</h4>
         )}
+        <FollowUp fromUd={true} />
       </div>
       <div className="ud-action-drug">
         <div className="ud-action-drug-input">
@@ -76,11 +113,8 @@ function UnderlyAction({ handleClickAddUD, udName, drugOnTime, deleteDrug }) {
             />
           </div>
           {errMessage && <small className="text-danger">{errMessage}</small>}
-          <textarea
-            className="form-control"
-            rows={5}
-            placeholder="detail"></textarea>
         </div>
+
         <button
           className="ud-action-drug-button btn btn-success"
           onClick={() => {
@@ -88,7 +122,6 @@ function UnderlyAction({ handleClickAddUD, udName, drugOnTime, deleteDrug }) {
               (drugOnTime && drugOnTime[1])?.map((item) => item?.title),
               udObj
             );
-            console.log(errMess);
             if (errMess) {
               setErrMessage(errMess);
               return;
@@ -106,6 +139,12 @@ function UnderlyAction({ handleClickAddUD, udName, drugOnTime, deleteDrug }) {
           Add
         </button>
       </div>
+      <textarea
+        className="form-control"
+        rows={5}
+        value={fuDetail}
+        onChange={(e) => handleChangeFuDetail(e.target.value)}
+        placeholder="detail"></textarea>
     </div>
   );
 }

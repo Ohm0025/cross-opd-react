@@ -6,7 +6,11 @@ function UnderlyLast({ lastUd }) {
       <h3>ยาประจำตัวล่าสุด</h3>
       <div>
         {lastUd?.caseTreatment[0][1].map((item, index) => {
-          return <div key={"un-last-" + index}>{item.title}</div>;
+          return (
+            <div key={"un-last-" + index}>
+              {item.title} {item.detail}
+            </div>
+          );
         })}
       </div>
     </div>
