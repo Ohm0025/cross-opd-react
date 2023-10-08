@@ -11,3 +11,12 @@
 .allergy-item div {
   overflow: hidden;
 }
+@media only screen and (max-width: 768px) {
+  .allergy-item {
+    padding: 0.5rem;
+    width: 100%;
+    min-width: none;
+    max-width: none;
+    margin: 0.5rem auto;
+  }
+}

@@ -16,7 +16,21 @@
 }
 
 .ph-navBar {
-  border-right: solid 1px black;
-
   height: 100vh;
+}
+
+@media only screen and (max-width: 768px) {
+  .ph-navBar {
+    display: flex;
+    height: 3rem;
+    overflow-x: scroll;
+  }
+  .ph-nav-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 0.8rem;
+    padding: 0.5rem;
+  }
 }

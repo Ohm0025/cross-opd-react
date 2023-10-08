@@ -32,3 +32,9 @@
   transform: translate(50%);
   /* background-color: #c9c9c9; */
 }
+
+@media only screen and (max-width: 768px) {
+  .underlypage-container {
+    flex-direction: column;
+  }
+}

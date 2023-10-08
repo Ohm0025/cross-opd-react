@@ -24,11 +24,12 @@
 .pt-button {
   display: block;
   padding: 1.25rem;
-  border: none;
+  border: 1px solid #f4fff3;
   background-color: #f4fff3;
 }
 .pt-button:hover {
   background-color: #c9c9c9;
+  border-color: #c9c9c9;
   color: white;
 }
 .header-right {
@@ -96,4 +97,40 @@
 }
 .exam-dropdown ul li:not(:last-child) {
   border-bottom: 1px solid #ffffff;
+}
+
+@media only screen and (max-width: 768px) {
+  .exam-header {
+    align-items: center;
+    padding: 0;
+    flex-direction: column;
+  }
+  .header-right {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    border-radius: 0;
+  }
+  .header-right button {
+    justify-content: center;
+    display: flex;
+    border-radius: 0;
+    flex-grow: 1;
+  }
+  .header-right button:nth-child(1) {
+    border-radius: 0;
+  }
+
+  .header-right button:nth-child(3) {
+    border-radius: 0;
+  }
+
+  .header-left {
+    justify-content: space-between;
+    padding: 0;
+    width: 100%;
+  }
+  .pt-button {
+    margin: 0;
+  }
 }

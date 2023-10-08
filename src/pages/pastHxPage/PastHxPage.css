@@ -1,5 +1,6 @@
 .ph-page {
   display: flex;
+  flex-direction: column;
 }
 
 .ph-page-container {

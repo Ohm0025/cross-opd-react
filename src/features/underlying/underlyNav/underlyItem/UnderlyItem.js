@@ -13,6 +13,7 @@ function UnderlyItem({
   onClosed,
   handleRemove,
   handleSelectUd,
+  callBackSelect,
 }) {
   const [isOpen, setIsOpen] = useState(false);
   const closeDropDown = useCallback(() => setIsOpen(false), []);
@@ -40,6 +41,7 @@ function UnderlyItem({
           oldName={udName}
           handleEdit={handleEdit}
           onClosed={onClosed}
+          callBackSelect={callBackSelect}
         />
       ) : (
         <div className="underly-item" role="button" ref={udItemEl}>

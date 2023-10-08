@@ -140,7 +140,7 @@ function UnderlyAction({
         </button>
       </div>
       <textarea
-        className="form-control"
+        className="form-control ud-action-detail"
         rows={5}
         value={fuDetail}
         onChange={(e) => handleChangeFuDetail(e.target.value)}

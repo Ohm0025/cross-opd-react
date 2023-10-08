@@ -28,3 +28,9 @@
 .underly-modal-action button:hover {
   background-color: #5f8d4e;
 }
+/* @media only screen and (max-width: 768px) {
+  .underly-modal {
+    position: absolute;
+    left: 0;
+  }
+} */

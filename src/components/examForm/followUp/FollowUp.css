@@ -18,3 +18,8 @@
   font-size: 1rem;
   color: #a7a7a7;
 }
+@media only screen and (max-width: 768px) {
+  .fu-action-ud {
+    text-align: center;
+  }
+}

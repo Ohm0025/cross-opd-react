@@ -91,25 +91,27 @@ function UnderlyBody({
                             });
                           })}
                         </div>
-                        <ButtonReMed
-                          handleOnClick={() => {
-                            item1.caseTreatment[0][1].forEach((item) => {
-                              if (
-                                recordObj.tx[selectUd?.udTitle].find(
-                                  (findItem) => findItem.title === item.title
-                                )
-                              ) {
-                                console.log("fkpok");
-                                return;
-                              }
+                        {isDoctor && (
+                          <ButtonReMed
+                            handleOnClick={() => {
+                              item1.caseTreatment[0][1].forEach((item) => {
+                                if (
+                                  recordObj.tx[selectUd?.udTitle].find(
+                                    (findItem) => findItem.title === item.title
+                                  )
+                                ) {
+                                  console.log("fkpok");
+                                  return;
+                                }
 
-                              handleClickAddUD(
-                                selectUd?.udTitle,
-                                formatStrToObj(item)
-                              );
-                            });
-                          }}
-                        />
+                                handleClickAddUD(
+                                  selectUd?.udTitle,
+                                  formatStrToObj(item)
+                                );
+                              });
+                            }}
+                          />
+                        )}
                       </div>
                     )}
                   </td>

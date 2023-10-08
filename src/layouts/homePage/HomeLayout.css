@@ -43,6 +43,12 @@
   .user-tag {
     font-size: 0.75rem;
   }
+  .home-container {
+    margin-top: 3.1rem;
+  }
+  .header-user {
+    gap: 0.5rem;
+  }
   .header-user .user-tag {
     font-size: 0.65rem;
   }

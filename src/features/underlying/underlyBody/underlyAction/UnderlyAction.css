@@ -57,3 +57,40 @@
   gap: 2rem;
   margin-bottom: 0.8rem;
 }
+
+@media only screen and (max-width: 768px) {
+  .ud-action {
+    width: 100vw;
+  }
+  .ud-show {
+    flex-direction: column;
+  }
+  .ud-action-drug {
+    display: flex;
+    flex-direction: column;
+  }
+  .ud-action-drug-input {
+    margin: auto;
+  }
+  .ud-action-drug-inputDrugObj {
+    flex-direction: column;
+    margin: 0;
+  }
+  .ud-action-drug-inputDrugObj input {
+    width: 80vw;
+  }
+  .ud-action-drug-inputDrugObj textarea {
+    width: 80vw;
+    margin: 0.4rem 0;
+  }
+  .ud-action-drug-button {
+    height: fit-content;
+    width: 80vw;
+    margin: 0.4rem 0;
+  }
+  .ud-action-detail {
+    margin: 0 auto 30vh;
+
+    width: 80vw;
+  }
+}
