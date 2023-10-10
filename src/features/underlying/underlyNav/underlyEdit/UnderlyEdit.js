@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import "./UnderlyEdit.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { faCheck } from "@fortawesome/free-solid-svg-icons";
 
 function UnderlyEdit({ oldName, handleEdit, onClosed, callBackSelect }) {
   const [editName, setEditName] = useState(oldName || "");

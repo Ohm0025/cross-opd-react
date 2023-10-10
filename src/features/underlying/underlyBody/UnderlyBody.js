@@ -1,13 +1,10 @@
 import "./UnderlyBody.css";
 import * as underlyService from "../../../api/underlyApi";
 import { useEffect, useState } from "react";
-import { formatCreatedAt } from "../../../utility/formatDataTime";
 import UnderlyLast from "../underlyLast/UnderlyLast";
 import UnderlyAction from "./underlyAction/UnderlyAction";
-import UnderlyFollowUp from "./underlyFollowUp/UnderlyFollowUp";
-import UnderlyItem from "./underlyItem/UnderlyItem";
-import ButtonReMed from "../../../components/buttonRemed/ButtonReMed";
 import { formatStrToObj } from "../../../utility/formatUd";
+import UnderlyTable from "../../../components/underlyTable/UnderlyTable";
 
 function UnderlyBody({
   selectUd,
@@ -20,7 +17,6 @@ function UnderlyBody({
   updateRecordObj,
 }) {
   const [listCase, setListCase] = useState([]);
-  const [selectCase, setSelectCase] = useState(null);
 
   useEffect(() => {
     const fetchCase = async () => {
@@ -29,7 +25,6 @@ function UnderlyBody({
         selectUd.udTitle
       );
       setListCase((prev) => [...res.data?.sendingArr]);
-      setSelectCase([...res.data?.sendingArr][0]);
     };
     fetchCase();
   }, [patientId, selectUd]);
@@ -51,75 +46,28 @@ function UnderlyBody({
     }
   };
 
+  const handleClickRemed = (txArr) => {
+    txArr.forEach((item) => {
+      if (
+        recordObj.tx[selectUd?.udTitle]?.find(
+          (findItem) => findItem.title === item.title
+        )
+      ) {
+        return;
+      }
+      handleClickAddUD(selectUd?.udTitle, formatStrToObj(item));
+    });
+  };
+
   return (
     <div className="ud-body-container">
       <div className="ud-body-header">{selectUd.udTitle}</div>
       <div className="ud-body-center">
-        <table className="ud-body-table">
-          <tbody>
-            <tr>
-              <th>Date</th>
-              <th>Detail</th>
-            </tr>
-            {listCase.map((item1, index1) => {
-              return (
-                <tr key={"tr-ud" + index1}>
-                  <td role="button" onClick={() => setSelectCase(item1)}>
-                    {formatCreatedAt(item1.caseDate)}
-                  </td>
-                  <td>
-                    {item1.caseDetail}
-                    {selectCase === item1 && (
-                      <div className="table-selectCase">
-                        <div>
-                          {item1.caseTreatment.map((item2, index2) => {
-                            return item2[1].map((item3, index3) => {
-                              return (
-                                <UnderlyItem
-                                  key={
-                                    "ud-caseTx" +
-                                    index1 +
-                                    " " +
-                                    index2 +
-                                    " " +
-                                    index3
-                                  }
-                                  item={item3}
-                                  index={+index3}
-                                />
-                              );
-                            });
-                          })}
-                        </div>
-                        {isDoctor && (
-                          <ButtonReMed
-                            handleOnClick={() => {
-                              item1.caseTreatment[0][1].forEach((item) => {
-                                if (
-                                  recordObj.tx[selectUd?.udTitle].find(
-                                    (findItem) => findItem.title === item.title
-                                  )
-                                ) {
-                                  console.log("fkpok");
-                                  return;
-                                }
-
-                                handleClickAddUD(
-                                  selectUd?.udTitle,
-                                  formatStrToObj(item)
-                                );
-                              });
-                            }}
-                          />
-                        )}
-                      </div>
-                    )}
-                  </td>
-                </tr>
-              );
-            })}
-          </tbody>
-        </table>
+        <UnderlyTable
+          listCase={listCase}
+          isDoctor={isDoctor}
+          handleClickRemed={handleClickRemed}
+        />
         <UnderlyLast lastUd={listCase[0]} />
       </div>
       {isDoctor && (
