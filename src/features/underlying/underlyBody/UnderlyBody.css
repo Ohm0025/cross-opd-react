@@ -16,21 +16,6 @@
   gap: 0.5rem;
 }
 
-/* .ud-body-table {
-  border: 0.125rem solid forestgreen;
-  width: 50rem;
-  height: 12.5rem;
-}
-
-.ud-body-table th {
-  text-align: center;
-  border-bottom: 1px solid black;
-}
-
-.ud-body-table td {
-  text-align: center;
-} */
-
 .ud-body-footer {
   margin-top: 2rem;
   display: flex;

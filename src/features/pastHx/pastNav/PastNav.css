@@ -16,15 +16,34 @@
 }
 
 .ph-navBar {
-  height: 100vh;
+  height: 80vh;
+  overflow-y: scroll;
+  position: fixed;
+  left: 0;
 }
 
+.ph-navBar-container {
+  margin-right: 10rem;
+}
 @media only screen and (max-width: 768px) {
+  .ph-navBar-container {
+    margin-right: 0;
+    margin-top: 0.8rem;
+    width: 100%;
+  }
   .ph-navBar {
     display: flex;
     height: 3rem;
     overflow-x: scroll;
+    overflow-y: hidden;
+    bottom: 5vh;
+    width: 100%;
   }
+
+  .ph-navBar-defualt {
+    top: 6.1vh;
+  }
+
   .ph-nav-item {
     display: flex;
     flex-direction: column;

@@ -52,7 +52,7 @@ function PastHxContextProvider({ children }) {
 
   return (
     <PastHxContext.Provider
-      value={{ listAllPast, selectedCase, changeSelectedCase }}>
+      value={{ listAllPast, selectedCase, changeSelectedCase, typeaccount }}>
       {children}
     </PastHxContext.Provider>
   );

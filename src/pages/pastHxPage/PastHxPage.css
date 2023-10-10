@@ -1,11 +1,9 @@
 .ph-page {
   display: flex;
-  flex-direction: column;
 }
 
-.ph-page-container {
-  display: flex;
-  flex-direction: column;
-
-  margin: 2rem auto;
+@media only screen and (max-width: 768px) {
+  .ph-page {
+    flex-direction: column;
+  }
 }
