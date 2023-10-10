@@ -1,0 +1,9 @@
+.lh-body-item h5 {
+  background-color: #5f8d4e;
+  color: white;
+  width: fit-content;
+}
+
+.lh-body-item span {
+  background-color: #f4fff3;
+}

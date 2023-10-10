@@ -1,4 +1,4 @@
-.ph-page {
+.lh-page {
   display: flex;
 }
 
@@ -7,4 +7,10 @@
   flex-direction: column;
 
   margin: 2rem auto;
+}
+
+@media only screen and (max-width: 768px) {
+  .lh-page {
+    flex-direction: column;
+  }
 }

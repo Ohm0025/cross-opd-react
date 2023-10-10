@@ -4,3 +4,14 @@
   right: 50%;
   transform: translate(50%, 50%);
 }
+.lh-page-container {
+  margin-left: 9rem;
+  display: flex;
+  width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  .lh-page-container {
+    margin-left: 0;
+  }
+}

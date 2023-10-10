@@ -17,6 +17,7 @@ function ImgHxNav() {
       {listImg?.map((item, index) => {
         return (
           <div
+            role="button"
             className={`ih-nav-item ${
               selectedItemId === item?.id ? "ih-nav-selected" : ""
             }`}

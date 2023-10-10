@@ -1,0 +1,17 @@
+.ih-empty {
+  position: fixed;
+  top: 50%;
+  right: 50%;
+  transform: translate(50%, 50%);
+}
+.ih-page-container {
+  margin-left: 9rem;
+  display: flex;
+  width: 100%;
+}
+
+@media only screen and (max-width: 768px) {
+  .ih-page-container {
+    margin-left: 0;
+  }
+}

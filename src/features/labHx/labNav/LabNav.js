@@ -7,10 +7,8 @@ function LabNav() {
   const { listLab, changeSelectedLab } = useLabHx();
   const [selectedItemId, setSelectedItemId] = useState(listLab[0]?.id);
 
-  console.log(listLab);
   useEffect(() => {
     const lastItem = listLab[0];
-    console.log(lastItem);
     setSelectedItemId(lastItem?.id);
   }, [listLab]);
 
@@ -19,6 +17,7 @@ function LabNav() {
       {listLab?.map((item, index) => {
         return (
           <div
+            role="button"
             className={`lh-nav-item ${
               selectedItemId === item?.id ? "lh-nav-selected" : ""
             }`}

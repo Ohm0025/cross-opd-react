@@ -3,31 +3,39 @@ import "./LabBody.css";
 import { faFile } from "@fortawesome/free-solid-svg-icons";
 import { useState } from "react";
 import Modal from "../../../components/Modal";
+import LabBodyItem from "./labBodyItem/LabBodyItem";
 
 function LabBody({ selectLab }) {
   const [openImg, setOpenImg] = useState("");
-  console.log(selectLab);
   return (
     <div className="lh-body">
-      {"Lab"}
-      <br />
       {selectLab &&
         JSON.parse(selectLab?.LabOrder?.labArray)?.map((item1, index1) => {
-          return item1.img?.map((item2, index2) => {
-            return (
-              <button
-                className="lab-file-button"
-                key={"lhlab-img" + index1 + " " + index2}
-                onClick={() => {
-                  console.log(item2);
-                  setOpenImg(item2);
-                }}>
-                <FontAwesomeIcon icon={faFile} style={{ fontSize: "2.5rem" }} />
-                <br />
-                <small>{item1.name + index2}</small>
-              </button>
-            );
-          });
+          return (
+            <div
+              key={"lh-body-item" + index1}
+              className="lh-body-item-container">
+              <LabBodyItem labName={item1.name} labDes={item1.des} />
+              {item1.img?.map((item2, index2) => {
+                return (
+                  <button
+                    className="lab-file-button"
+                    key={"lhlab-img" + index1 + " " + index2}
+                    onClick={() => {
+                      console.log(item1);
+                      setOpenImg(item2);
+                    }}>
+                    <FontAwesomeIcon
+                      icon={faFile}
+                      style={{ fontSize: "2.5rem" }}
+                    />
+                    <br />
+                    <small>{item1.name + index2}</small>
+                  </button>
+                );
+              })}
+            </div>
+          );
         })}
       <Modal
         title="Lab History Image"

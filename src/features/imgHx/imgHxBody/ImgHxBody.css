@@ -1,0 +1,22 @@
+.ih-body {
+  background-color: #fafafa;
+  padding: 1rem;
+  margin: auto;
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  min-width: 500px;
+}
+.img-file-button {
+  border: none;
+  padding: 0.23rem;
+  background: none;
+  margin-right: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .ih-body {
+    min-width: 300px;
+    width: 100%;
+  }
+}

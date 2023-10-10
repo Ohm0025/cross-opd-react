@@ -1,0 +1,33 @@
+.ih-navBar {
+  height: 80vh;
+  overflow-y: scroll;
+  position: fixed;
+  left: 0;
+}
+
+.ih-nav-item {
+  background-color: #5f8d4e;
+  color: white;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.ih-nav-item:hover {
+  cursor: pointer;
+  background-color: #c9c9c9;
+}
+
+.ih-nav-selected {
+  background-color: gray;
+}
+
+@media only screen and (max-width: 768px) {
+  .ih-navBar {
+    display: flex;
+    height: 4rem;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    bottom: 5.6vh;
+    width: 100%;
+  }
+}
