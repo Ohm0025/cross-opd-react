@@ -10,8 +10,6 @@ function DrugCenter({ selecType }) {
   const { user, typeaccount } = useAuth();
   const { patientObj } = useExam() ?? {};
 
-  // const option = selecType; // "ud" , "all" , "noUd"
-
   let listUd = JSON.parse(user.underlying || "[]").reduce(
     (acc, cur) => [...acc, cur.udTitle],
     []

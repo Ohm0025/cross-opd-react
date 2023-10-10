@@ -6,8 +6,6 @@ import "./DrugContainer.css";
 function DrugContainer() {
   const [selecType, setSelecType] = useState("all");
 
-  console.log(selecType);
-
   const changeSelecType = (e) => {
     setSelecType(e.target.value);
   };

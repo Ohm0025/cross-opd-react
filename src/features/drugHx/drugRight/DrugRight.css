@@ -1,11 +1,20 @@
 .drug-right {
-  background-color: #f4fff3;
   position: fixed;
   right: 0;
-
+  z-index: 500;
   height: 100%;
+  display: flex;
 
+  justify-content: center;
+  background-color: #f4fff3;
+}
+.drug-right button {
+  border: none;
+  background-color: #aaffa2;
+}
+.drug-right-sub {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+}
+@media only screen and (max-width: 768px) {
 }

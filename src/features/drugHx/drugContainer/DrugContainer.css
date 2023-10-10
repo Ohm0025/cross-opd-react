@@ -1,3 +1,10 @@
 .drug-container {
   display: flex;
+  margin-top: 2rem;
 }
+
+/* @media only screen and (max-width: 768px) {
+  .drug-container {
+    flex-direction: column;
+  }
+} */
