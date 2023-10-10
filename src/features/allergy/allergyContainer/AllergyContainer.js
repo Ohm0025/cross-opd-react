@@ -7,7 +7,8 @@ import AllergyModal from "../allergyEmpty/allergyModal/AllergyModal";
 import { useState } from "react";
 
 function AllergyContainer() {
-  const { allergyObjList, addAllergy, typeaccount } = useAllergy();
+  const { allergyObjList, addAllergy, typeaccount, removeAllergy } =
+    useAllergy();
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className="allergy-container">
@@ -16,6 +17,7 @@ function AllergyContainer() {
           allergyObjList={allergyObjList}
           openModal={() => setIsOpen(true)}
           typeaccount={typeaccount}
+          removeAllergy={removeAllergy}
         />
       ) : (
         <AllergyEmpty

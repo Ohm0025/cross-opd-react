@@ -62,7 +62,7 @@ function AllergyContextProvider({ children }) {
   const removeAllergy = async (allergyName) => {
     try {
       setAllergyObjList((prev) => {
-        return prev.filter((item) => item.name !== allergyName);
+        return prev.filter((item) => item.allerName !== allergyName);
       });
       await allergyService.editAllergy(decodeParams, allergyObjList);
     } catch (err) {
