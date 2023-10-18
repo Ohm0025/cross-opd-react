@@ -9,6 +9,11 @@ export const formatCreatedAt = (dateInput) => {
     formatDateTime(date.getMonth() + 1) +
     "/" +
     formatDateTime(date.getFullYear()).slice(1);
+
+  if (date_member.includes("NaN")) {
+    return;
+  }
+
   return date_member;
 };
 

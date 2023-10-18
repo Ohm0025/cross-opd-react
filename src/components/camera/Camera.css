@@ -1,0 +1,34 @@
+.camera-container {
+  text-align: center;
+  margin: auto;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.camera-container button:hover {
+  cursor: pointer;
+}
+
+.camera-container .camera-closeButton {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  position: absolute;
+  border: none;
+  background: none;
+  color: gray;
+  right: 0.3rem;
+  top: 0;
+  font-size: 1.5rem;
+}
+
+.camera-container .camera-img {
+  border-bottom: 1rem;
+}
+
+.camera-container .camera-action1 {
+  display: flex;
+  justify-content: space-around;
+}

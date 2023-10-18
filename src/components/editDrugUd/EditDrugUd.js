@@ -15,7 +15,11 @@ function EditDrugUd({ inputObj, callBack }) {
   useEffect(() => {
     const handleClickOutside = (e) => {
       if (!inputBoxEl?.current?.contains(e.target)) {
-        callBack(objEdit);
+        callBack({
+          title: objEdit.title,
+          type: "drug",
+          detail: `${objEdit.detail} # ${objEdit.amount}`,
+        });
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
