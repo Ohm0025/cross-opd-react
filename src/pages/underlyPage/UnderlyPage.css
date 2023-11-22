@@ -30,11 +30,15 @@
   top: 50%;
   right: 50%;
   transform: translate(50%);
+  text-align: center;
   /* background-color: #c9c9c9; */
 }
 
 @media only screen and (max-width: 768px) {
   .underlypage-container {
     flex-direction: column;
+  }
+  .underlypage-empty {
+    font-size: 20px;
   }
 }

@@ -13,16 +13,16 @@ function AuthContextProvider({ children }) {
   const [typeaccount, setTypeAccount] = useState("");
   const [initialLoading, setInitialLoading] = useState(true);
 
-  const register = async (typeaccount, input) => {
-    const res = await authService.register(typeaccount, input);
-    addAccessToken(res.data.token);
-    await getme();
-  };
-
   const getme = async () => {
     const res = await authService.getme();
     setUser(res.data.user);
     setTypeAccount(res.data.typeaccount);
+  };
+
+  const register = async (typeaccount, input) => {
+    const res = await authService.register(typeaccount, input);
+    addAccessToken(res.data.token);
+    await getme();
   };
 
   const login = async (typeaccount, input) => {
@@ -53,8 +53,7 @@ function AuthContextProvider({ children }) {
 
   return (
     <AuthContext.Provider
-      value={{ user, typeaccount, register, logout, login, initialLoading }}
-    >
+      value={{ user, typeaccount, register, logout, login, initialLoading }}>
       {children}
     </AuthContext.Provider>
   );

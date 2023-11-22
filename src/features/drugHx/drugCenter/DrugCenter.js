@@ -49,18 +49,23 @@ function DrugCenter({ selecType }) {
   });
 
   return (
-    <div className="drug-center">
-      {finalList.map((item, index) => {
-        // console.log(JSON.parse(item.Treatment.txList || "{}"));
-        return (
-          <DrugItem
-            date={item[item.length - 1] ? item[item.length - 1][1] : []}
-            list={item}
-            key={"drugItem" + index}
-          />
-        );
-      })}
-    </div>
+    <>
+      {finalList.length === 0 && (
+        <h2 className="drug-center-empty">ไม่มีรายการยาที่เลือกไว้</h2>
+      )}
+      <div className="drug-center">
+        {finalList.map((item, index) => {
+          // console.log(JSON.parse(item.Treatment.txList || "{}"));
+          return (
+            <DrugItem
+              date={item[item.length - 1] ? item[item.length - 1][1] : []}
+              list={item}
+              key={"drugItem" + index}
+            />
+          );
+        })}
+      </div>
+    </>
   );
 }
 export default DrugCenter;

@@ -10,7 +10,9 @@
 }
 .drug-right button {
   border: none;
-  background-color: #aaffa2;
+  background-color: #5f8d4e;
+  color: white;
+  padding: 0 0.2rem;
 }
 .drug-right-sub {
   display: flex;

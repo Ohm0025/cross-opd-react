@@ -2,9 +2,10 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background-color: green;
+  background-color: #285430;
   color: white;
   padding: 1rem;
+  border-radius: 0.625rem 0.625rem 0 0;
 }
 @media only screen and (max-width: 768px) {
   .finish-header {

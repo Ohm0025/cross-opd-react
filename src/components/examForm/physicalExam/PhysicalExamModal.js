@@ -76,54 +76,42 @@ function PhysicalExamModal({ updateRecord }) {
             OpenIsRight={OpenIsRight}
             addPEList={addPEList}
             whichIs={whichIs}
-            listTemplate={[
-              "detail HEENT 1",
-              "detail HEENT 2",
-              "detail HEENT 3",
-            ]}
+            listTemplate={["normal", "injected pharynx", "enlarged tonsil"]}
           />
           <SubFormModal
             typePe={"Lung"}
             whichIs={whichIs}
             addPEList={addPEList}
             OpenIsRight={OpenIsRight}
-            listTemplate={["detail lung 1", "detail lung 2", "detail lung 3"]}
+            listTemplate={["normal", "wheezing", "crepitation"]}
           />
           <SubFormModal
             typePe={"Heart"}
             whichIs={whichIs}
             addPEList={addPEList}
             OpenIsRight={OpenIsRight}
-            listTemplate={[
-              "detail HEENT 1",
-              "detail HEENT 2",
-              "detail HEENT 3",
-            ]}
+            listTemplate={["normal", "murmur", "apex shift"]}
           />
           <SubFormModal
             typePe={"Abdomen"}
             whichIs={whichIs}
             addPEList={addPEList}
             OpenIsRight={OpenIsRight}
-            listTemplate={["detail lung 1", "detail lung 2", "detail lung 3"]}
+            listTemplate={["normal", "tenderness", "guarding"]}
           />
           <SubFormModal
             typePe={"Extremities"}
             whichIs={whichIs}
             addPEList={addPEList}
             OpenIsRight={OpenIsRight}
-            listTemplate={[
-              "detail HEENT 1",
-              "detail HEENT 2",
-              "detail HEENT 3",
-            ]}
+            listTemplate={["normal", "CRT > 2 sec", "Open wound"]}
           />
           <SubFormModal
             typePe={"Neuro"}
             whichIs={whichIs}
             addPEList={addPEList}
             OpenIsRight={OpenIsRight}
-            listTemplate={["detail lung 1", "detail lung 2", "detail lung 3"]}
+            listTemplate={["normal", "GCS drop", "unconcious"]}
           />
         </div>
         <div className="subPE-input-right">
@@ -137,13 +125,12 @@ function PhysicalExamModal({ updateRecord }) {
                 id=""
                 cols="35"
                 rows="5"
-              ></textarea>
+                placeholder={whichIs}></textarea>
               <button
                 onClick={() => {
                   addPEList(recordMore, whichIs);
                   setRecordMore("");
-                }}
-              >
+                }}>
                 <FontAwesomeIcon icon={faPlus} />
               </button>
             </div>
@@ -163,8 +150,7 @@ function PhysicalExamModal({ updateRecord }) {
             updateRecord(
               convertVitalSign(vitalRecord) + "\n" + convertToListString(listPE)
             )
-          }
-        >
+          }>
           Finish Record
         </button>
         <button
@@ -178,8 +164,7 @@ function PhysicalExamModal({ updateRecord }) {
               Extremities: [],
               Neuro: [],
             })
-          }
-        >
+          }>
           Clear Record
         </button>
       </div>
