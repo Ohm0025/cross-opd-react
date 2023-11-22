@@ -4,7 +4,9 @@ function ImgHxBodyItem({ imgName, imgDes }) {
   return (
     <div className="imgHx-body-item">
       <h5>{imgName}</h5>
-      <span>{imgDes}</span>
+      <p>
+        <span> Detail : {imgDes}</span>
+      </p>
     </div>
   );
 }

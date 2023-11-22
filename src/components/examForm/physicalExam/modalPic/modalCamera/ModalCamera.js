@@ -5,6 +5,7 @@ import "./ModalCamera.css";
 import Webcam from "react-webcam";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faArrowCircleLeft } from "@fortawesome/free-solid-svg-icons";
+import { convertBase64 } from "../../../../../utility/convertBase64";
 
 const videoConstraints = {
   height: 480,
@@ -12,7 +13,7 @@ const videoConstraints = {
   facingMode: "environment",
 };
 
-function ModalCamera({ updateListPic, closeCam }) {
+function ModalCamera({ updateListPic, closeCam, photoName }) {
   const camRef = useRef(null);
   const [url, setUrl] = useState(null);
   const capturePhoto = useCallback(async () => {
@@ -28,11 +29,13 @@ function ModalCamera({ updateListPic, closeCam }) {
       <div className="pe-screenImg-action">
         <button
           onClick={() => {
-            updateListPic(new FormData().append("File", url));
-            setUrl("");
-            closeCam();
-          }}
-        >
+            // updateListPic(new FormData().append("File", url));
+            // setUrl("");
+            // closeCam();
+            convertBase64(url, photoName)
+              .then((res) => updateListPic(res))
+              .then(() => closeCam());
+          }}>
           Save
         </button>
         <button onClick={() => setUrl("")}>Cancel</button>

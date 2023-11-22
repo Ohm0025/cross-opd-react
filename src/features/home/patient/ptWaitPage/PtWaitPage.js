@@ -26,19 +26,24 @@ function PtWaitPage() {
   }, [socket, input.patientId]);
 
   useEffect(() => {
-    socket?.on("changeStatus", (status) => {
-      setStatus(status);
+    socket?.on("changeStatus", ({ status, sendPatientId }) => {
+      console.log(status);
+      console.log(sendPatientId);
+      if (sendPatientId === user.id) setStatus(() => status);
     });
-    socket?.on("closeStatus", (command) => {
-      if (command === "closeCase") {
-        alert("case finish");
-        window.location.reload();
-      } else if (command === "cancelOpdCard") {
-        alert("case cancel");
+    socket?.on("closeStatus", ({ command, sendPatientId }) => {
+      if (sendPatientId === user.id && command === "cancelOpdCard") {
+        alert("การตรวจถูกยกเลิก");
+        setStatus(() => "waiting");
+      }
+    });
+    socket?.on("finishStatus", ({ command, sendPatientId }) => {
+      if (sendPatientId === user.id && command === "closeCase") {
+        // alert("การตรวจเสร็จสิ้น");
         window.location.reload();
       }
     });
-  }, [socket]);
+  }, [socket, user.id]);
   return (
     <div className="pt-waitpage">
       <div className="pt-show-item">

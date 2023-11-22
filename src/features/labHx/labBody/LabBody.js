@@ -22,7 +22,6 @@ function LabBody({ selectLab }) {
                     className="lab-file-button"
                     key={"lhlab-img" + index1 + " " + index2}
                     onClick={() => {
-                      console.log(item1);
                       setOpenImg(item2);
                     }}>
                     <FontAwesomeIcon

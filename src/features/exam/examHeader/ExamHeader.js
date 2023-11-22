@@ -118,7 +118,7 @@ function ExamHeader() {
           <button
             onClick={() => {
               handleRecord();
-              socket?.emit("finishCase", patientObj.patientId);
+              socket?.emit("finishCase", patientObj.id);
             }}>
             Finish
           </button>
@@ -131,7 +131,7 @@ function ExamHeader() {
           <button
             onClick={() => {
               cancelOpdCard();
-              socket?.emit("cancelCase", patientObj.patientId);
+              socket?.emit("cancelCase", patientObj.id);
             }}>
             Cancel
           </button>
