@@ -27,7 +27,7 @@ function DrSearchBox({ handleSearchCard, errorObj }) {
           className="btn search-button"
           onClick={() => {
             handleSearchCard(+patientId);
-            socket?.emit("activatedOpd", patientId);
+            socket?.emit("activatedOpd", +patientId);
           }}>
           <FontAwesomeIcon icon={faMagnifyingGlass} />
         </button>
