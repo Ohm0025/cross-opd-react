@@ -45,7 +45,11 @@ function LoginContextProvider({ children }) {
           toast.success("success login")
         ));
     } catch (err) {
-      toast.error(err.response.data.message);
+      toast.error(
+        err.response?.data?.message || err.message
+          ? "server is not running"
+          : ""
+      );
       getOtherObj(err, setErrorObj);
       console.log(err);
     } finally {
@@ -63,8 +67,7 @@ function LoginContextProvider({ children }) {
         navigate,
         typeLoginAccount,
         changeTypeLogin,
-      }}
-    >
+      }}>
       {children}
     </LoginContext.Provider>
   );

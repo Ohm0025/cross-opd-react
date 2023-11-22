@@ -127,7 +127,7 @@ export const checkError = (errObj) => {
 };
 
 export const getOtherObj = (err, cb) => {
-  if (err.response.data.message === "this citizen id has used.") {
+  if (err.response?.data?.message === "this citizen id has used.") {
     cb((prev) => {
       return {
         ...prev,
@@ -135,7 +135,7 @@ export const getOtherObj = (err, cb) => {
       };
     });
   }
-  if (err.response.data.message === "this email has been used.") {
+  if (err.response?.data?.message === "this email has been used.") {
     cb((prev) => {
       return {
         ...prev,
@@ -143,7 +143,7 @@ export const getOtherObj = (err, cb) => {
       };
     });
   }
-  if (err.response.data.message === "password is incorrect.") {
+  if (err.response?.data?.message === "password is incorrect.") {
     cb((prev) => {
       return {
         ...prev,
@@ -151,7 +151,7 @@ export const getOtherObj = (err, cb) => {
       };
     });
   }
-  if (err.response.data.message === "not found patientId") {
+  if (err.response?.data?.message === "not found patientId") {
     cb((prev) => {
       return {
         ...prev,
