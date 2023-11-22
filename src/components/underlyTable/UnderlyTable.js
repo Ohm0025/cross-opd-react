@@ -11,6 +11,7 @@ import ButtonReMed from "../../components/buttonRemed/ButtonReMed";
 function UnderlyTable({ listCase = [], isDoctor, handleClickRemed }) {
   const [dateOrder, setDateOrder] = useState(true);
   const [selectCase, setSelectCase] = useState(null);
+  const [selectedIndex, setSelectedIndex] = useState(0);
 
   useEffect(() => {
     setSelectCase((prev) => {
@@ -49,13 +50,15 @@ function UnderlyTable({ listCase = [], isDoctor, handleClickRemed }) {
           ).map((item1, index1) => {
             return (
               <div
+                className={`${selectedIndex === index1 && "text-success"}`}
                 key={"underly-body-header" + index1}
                 role="button"
-                onClick={() =>
+                onClick={() => {
                   setSelectCase((prev) => {
                     return { ...item1 };
-                  })
-                }>
+                  });
+                  setSelectedIndex(() => index1);
+                }}>
                 {formatCreatedAt(item1.caseDate)}
               </div>
             );
@@ -73,7 +76,7 @@ function UnderlyTable({ listCase = [], isDoctor, handleClickRemed }) {
                 );
               });
             })}
-          {isDoctor && (
+          {isDoctor && selectCase?.caseTreatment && (
             <ButtonReMed
               handleOnClick={() =>
                 handleClickRemed(selectCase?.caseTreatment[0][1])

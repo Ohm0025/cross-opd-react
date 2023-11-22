@@ -4,6 +4,7 @@ import { faEllipsisVertical } from "@fortawesome/free-solid-svg-icons";
 import { useCallback, useEffect, useState, useRef } from "react";
 import { useClickOutside } from "../../../../hooks/useClickOutside";
 import UnderlyEdit from "../underlyEdit/UnderlyEdit";
+import { useAuth } from "../../../../contexts/AuthContext";
 
 function UnderlyItem({
   udName,
@@ -20,6 +21,8 @@ function UnderlyItem({
   const dropdownEl = useClickOutside(closeDropDown);
 
   const udItemEl = useRef();
+  const { typeaccount } = useAuth();
+  console.log(typeaccount);
 
   useEffect(() => {
     const handleClickItem = (e) => {
@@ -48,12 +51,15 @@ function UnderlyItem({
           <span>{udName}</span>
 
           <div className="dropdown" ref={dropdownEl}>
-            <button
-              className="underly-item-button"
-              data-toggle="dropdown"
-              onClick={() => setIsOpen((prev) => !prev)}>
-              <FontAwesomeIcon icon={faEllipsisVertical} />
-            </button>
+            {typeaccount === "DOCTOR" && (
+              <button
+                className="underly-item-button"
+                data-toggle="dropdown"
+                onClick={() => setIsOpen((prev) => !prev)}>
+                <FontAwesomeIcon icon={faEllipsisVertical} />
+              </button>
+            )}
+
             <div
               className={`dropdown-menu underly-item-action ${
                 isOpen ? "d-block" : ""
