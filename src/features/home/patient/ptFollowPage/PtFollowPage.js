@@ -4,9 +4,12 @@ import {
   caldiffDate,
   formatCreatedAt,
 } from "../../../../utility/formatDataTime";
+import { toast } from "react-toastify";
+import { useLoading } from "../../../../contexts/LoadingContext";
 
 function PtFollowPage() {
   const { listFu, activateFollowUp, cancelFollowUp } = useFollowUp();
+  const { startLoading, stopLoading } = useLoading();
 
   return (
     <div className="pt-fu-container">
@@ -40,19 +43,29 @@ function PtFollowPage() {
                       <button disabled className="unable-button">
                         Activate
                       </button>
-                      <button onClick={() => cancelFollowUp(item.FollowUp.id)}>
+                      <button
+                        onClick={() => cancelFollowUp(item?.FollowUp?.id)}>
                         Cancel
                       </button>
                     </>
                   ) : (
                     <>
                       <button
-                        onClick={() => {
-                          activateFollowUp(item.FollowUp.id);
+                        onClick={async () => {
+                          try {
+                            startLoading();
+                            await activateFollowUp(item?.FollowUp?.id);
+                            window.location.reload();
+                          } catch (err) {
+                            toast.error(err);
+                          } finally {
+                            stopLoading();
+                          }
                         }}>
                         Activate
                       </button>
-                      <button onClick={() => cancelFollowUp(item.FollowUp.id)}>
+                      <button
+                        onClick={() => cancelFollowUp(item?.FollowUp?.id)}>
                         Cancel
                       </button>
                     </>

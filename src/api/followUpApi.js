@@ -7,8 +7,8 @@ export const activateFollowUp = (fuId) =>
   axios.post("/followUp/ptActivate", { fuId });
 
 export const cancelFollowUp = (fuId) =>
-  axios.patch("/follow/ptCancel", { fuId });
+  axios.patch("/followUp/ptCancel", { fuId });
 
-export const finishFu = (fuId) => axios.patch("/follow/finishFu", { fuId });
+export const finishFu = (fuId) => axios.patch("/followUp/finishFu", { fuId });
 
 export const deleteFu = (fuId) => axios.patch("/followUp/deleteFu", { fuId });

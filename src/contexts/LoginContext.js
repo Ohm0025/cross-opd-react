@@ -47,8 +47,8 @@ function LoginContextProvider({ children }) {
     } catch (err) {
       toast.error(
         err.response?.data?.message || err.message
-          ? "server is not running"
-          : ""
+          ? err.response?.data?.message || err.message
+          : "server is not running"
       );
       getOtherObj(err, setErrorObj);
       console.log(err);
